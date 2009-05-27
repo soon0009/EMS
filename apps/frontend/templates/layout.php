@@ -12,7 +12,21 @@
 </head>
 <body>
 
-<?php echo $sf_data->getRaw('sf_content') ?>
+  <div id="doc4">
+    <div id="header">
+      <div id="flinders_header">
+        <h1><?php // echo link_to('Event Management System', '@dashboard'); ?></a></h1>
+        <div id="event_header">
+          <ul class="header_buttons">
+            <li><?php // echo link_to('ADD EVENT', '@add_event'); ?></li>
+            <li id="header_admin"><?php // echo link_to('admin', '@admin'); ?></li>
+            <li><?php // echo link_to('logout', '@logout');?></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <?php echo $sf_data->getRaw('sf_content') ?>
+  </div>
 
 </body>
 </html>
