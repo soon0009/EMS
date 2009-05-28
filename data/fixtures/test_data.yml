@@ -1,0 +1,283 @@
+Status:
+  confirmed:
+    status: Confirmed
+  tentative:
+    status: Tentative
+  cancelled:
+    status: Cancelled
+
+Audience:
+  tba:
+    name: TBA
+  public:
+    name: Public
+  public_invite_only:
+    name: Public invite only
+  staff:
+    name: Staff
+  staff_invite_only:
+    name: Staff invite only
+  student:
+    name: Student
+  student_invite_only:
+    name: Student invite only
+  other:
+    name: Other
+
+Rsvp:
+  email:
+    name: Email
+  online:
+    name: Online
+  phone:
+    name: Phone
+
+Event:
+  e1:
+    title: Contemplating thinking about thinking
+    status_id: confirmed
+    published: false
+    description: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Just a mirror for the sun. Class aptent
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    notes: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Every day I love you less and less. Class 
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
+    organiser: School of FU
+    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
+
+  e2:
+    title: Trip to the moon
+    status_id: tentative
+    published: false
+    description: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Why are you running away? Class aptent
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    notes: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Take it slow, take it easy. Class 
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
+    organiser: School of FU
+    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
+
+  e3:
+    title: Setting up deck chairs on the Titanic
+    status_id: cancelled
+    published: false
+    description: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. They say Tayor was a good girl. Class aptent
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    notes: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Working on the night shift. Class 
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
+    organiser: School of FU
+    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
+
+  e4:
+    title: Puppet show
+    status_id: tentative
+    published: true
+    description: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. Sometimes he thinks he's on his way. Class 
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    notes: |
+      Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
+      laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
+      turpis. Praesent nec augue. Curabitur ligula quam, rutrum id, tempor sed, consequat
+      ac, dui. Vestibulum accumsan eros nec magna. Vestibulum vitae dui. Vestibulum nec
+      ligula et lorem consequat ullamcorper. He's somewhere else so far and clear. Class 
+      taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+      Phasellus eget nisl ut elit porta ullamcorper. Maecenas tincidunt velit quis orci.
+      Sed in dui. Nullam ut mauris eu mi mollis luctus. Class aptent taciti sociosqu ad
+      litora torquent per conubia nostra, per inceptos hymenaeos. Sed cursus cursus velit.
+      Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
+      erat libero, scelerisque et, porttitor et, varius a, leo.
+    image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
+    organiser: School of FU
+    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
+
+Etime:
+  et1:
+    event_id: e1
+    title: The contemplating part
+    start_date: 2009-05-30
+    end_date: 2009-05-30
+    start_time: 09:00
+    end_time: 15:00
+    all_day: false
+    description: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    notes: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    capacity: 100
+    has_fee: false
+    organiser: it's not me
+    interested_parties: ns@openradical.com
+
+  et2:
+    event_id: e2
+    title: Space landing
+    start_date: 2009-05-31
+    end_date: 2009-05-31
+    all_day: true
+    description: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    notes: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    capacity:
+    has_fee: true
+    organiser: NASA
+    interested_parties: ns@openradical.com
+
+  et3:
+    event_id: e2
+    title: Erect the flag
+    start_date: 2009-06-01
+    end_date: 2009-06-01
+    start_time: 12:00
+    end_time: 13:00
+    all_day: false
+    description: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    notes: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    capacity: 4
+    has_fee: false
+    organiser: The other guy
+    interested_parties: ns@openradical.com
+
+  et4:
+    event_id: e3
+    title: We're going down
+    start_date: 2009-05-31
+    end_date: 2009-05-31
+    all_day: true
+    description: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    notes: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    capacity: 100
+    has_fee: false
+    organiser: captain Ishmal
+    interested_parties: ns@openradical.com
+
+  et5:
+    event_id: e4
+    start_date: 2009-06-02
+    end_date: 2009-06-02
+    start_time: 18:00
+    end_time: 18:30
+    all_day: false
+    description: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    notes: |
+      Vivamus sit amet lorem posuere dui vulputate ornare.
+    capacity: 999
+    has_fee: false
+    organiser: The master of puppets
+    interested_parties: ns@openradical.com
+
+EtimeAudience:
+  a1:
+    etime_id: et1
+    audience_id: tba
+  a2:
+    etime_id: et2
+    audience_id: staff
+  a3:
+    etime_id: et3
+    audience_id: staff_invite_only
+  a4:
+    etime_id: et4
+    audience_id: student
+  a5:
+    etime_id: et5
+    audience_id: public
+  a6:
+    etime_id: et5
+    audience_id: student
+
+EtimeRsvp:
+  r1:
+    etime_id: et1
+    rsvp_id: online
+  r2:
+    etime_id: et2
+    rsvp_id: email
+  r3:
+    etime_id: et3
+    rsvp_id: phone
+  r4:
+    etime_id: et4
+    rsvp_id: email
+  r5:
+    etime_id: et5
+    rsvp_id: online
+  r6:
+    etime_id: et5
+    rsvp_id: email

@@ -45,10 +45,16 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 
 	
-	protected $created_at;
+	protected $updated_at;
 
 	
 	protected $aStatus;
+
+	
+	protected $collEtimes;
+
+	
+	protected $lastEtimeCriteria = null;
 
 	
 	protected $alreadyInSave = false;
@@ -120,17 +126,17 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getCreatedAt($format = 'Y-m-d H:i:s')
+	public function getUpdatedAt($format = 'Y-m-d H:i:s')
 	{
 
-		if ($this->created_at === null || $this->created_at === '') {
+		if ($this->updated_at === null || $this->updated_at === '') {
 			return null;
-		} elseif (!is_int($this->created_at)) {
-						$ts = strtotime($this->created_at);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [created_at] as date/time value: " . var_export($this->created_at, true));
+		} elseif (!is_int($this->updated_at)) {
+						$ts = strtotime($this->updated_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [updated_at] as date/time value: " . var_export($this->updated_at, true));
 			}
 		} else {
-			$ts = $this->created_at;
+			$ts = $this->updated_at;
 		}
 		if ($format === null) {
 			return $ts;
@@ -284,19 +290,19 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setCreatedAt($v)
+	public function setUpdatedAt($v)
 	{
 
 		if ($v !== null && !is_int($v)) {
 			$ts = strtotime($v);
-			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [created_at] from input: " . var_export($v, true));
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [updated_at] from input: " . var_export($v, true));
 			}
 		} else {
 			$ts = $v;
 		}
-		if ($this->created_at !== $ts) {
-			$this->created_at = $ts;
-			$this->modifiedColumns[] = EventPeer::CREATED_AT;
+		if ($this->updated_at !== $ts) {
+			$this->updated_at = $ts;
+			$this->modifiedColumns[] = EventPeer::UPDATED_AT;
 		}
 
 	} 
@@ -323,7 +329,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 			$this->interested_parties = $rs->getString($startcol + 8);
 
-			$this->created_at = $rs->getTimestamp($startcol + 9, null);
+			$this->updated_at = $rs->getTimestamp($startcol + 9, null);
 
 			$this->resetModified();
 
@@ -360,9 +366,9 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	
 	public function save($con = null)
 	{
-    if ($this->isNew() && !$this->isColumnModified(EventPeer::CREATED_AT))
+    if ($this->isModified() && !$this->isColumnModified(EventPeer::UPDATED_AT))
     {
-      $this->setCreatedAt(time());
+      $this->setUpdatedAt(time());
     }
 
 		if ($this->isDeleted()) {
@@ -410,6 +416,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 					$affectedRows += EventPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
+
+			if ($this->collEtimes !== null) {
+				foreach($this->collEtimes as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
 
 			$this->alreadyInSave = false;
 		}
@@ -460,6 +474,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			}
 
 
+				if ($this->collEtimes !== null) {
+					foreach($this->collEtimes as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
 
 			$this->alreadyInValidation = false;
 		}
@@ -506,7 +528,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				return $this->getInterestedParties();
 				break;
 			case 9:
-				return $this->getCreatedAt();
+				return $this->getUpdatedAt();
 				break;
 			default:
 				return null;
@@ -527,7 +549,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			$keys[6] => $this->getImageUrl(),
 			$keys[7] => $this->getOrganiser(),
 			$keys[8] => $this->getInterestedParties(),
-			$keys[9] => $this->getCreatedAt(),
+			$keys[9] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -571,7 +593,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				$this->setInterestedParties($value);
 				break;
 			case 9:
-				$this->setCreatedAt($value);
+				$this->setUpdatedAt($value);
 				break;
 		} 	}
 
@@ -589,7 +611,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[6], $arr)) $this->setImageUrl($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setOrganiser($arr[$keys[7]]);
 		if (array_key_exists($keys[8], $arr)) $this->setInterestedParties($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setCreatedAt($arr[$keys[9]]);
+		if (array_key_exists($keys[9], $arr)) $this->setUpdatedAt($arr[$keys[9]]);
 	}
 
 	
@@ -606,7 +628,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EventPeer::IMAGE_URL)) $criteria->add(EventPeer::IMAGE_URL, $this->image_url);
 		if ($this->isColumnModified(EventPeer::ORGANISER)) $criteria->add(EventPeer::ORGANISER, $this->organiser);
 		if ($this->isColumnModified(EventPeer::INTERESTED_PARTIES)) $criteria->add(EventPeer::INTERESTED_PARTIES, $this->interested_parties);
-		if ($this->isColumnModified(EventPeer::CREATED_AT)) $criteria->add(EventPeer::CREATED_AT, $this->created_at);
+		if ($this->isColumnModified(EventPeer::UPDATED_AT)) $criteria->add(EventPeer::UPDATED_AT, $this->updated_at);
 
 		return $criteria;
 	}
@@ -653,8 +675,17 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 		$copyObj->setInterestedParties($this->interested_parties);
 
-		$copyObj->setCreatedAt($this->created_at);
+		$copyObj->setUpdatedAt($this->updated_at);
 
+
+		if ($deepCopy) {
+									$copyObj->setNew(false);
+
+			foreach($this->getEtimes() as $relObj) {
+				$copyObj->addEtime($relObj->copy($deepCopy));
+			}
+
+		} 
 
 		$copyObj->setNew(true);
 
@@ -706,6 +737,76 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aStatus;
+	}
+
+	
+	public function initEtimes()
+	{
+		if ($this->collEtimes === null) {
+			$this->collEtimes = array();
+		}
+	}
+
+	
+	public function getEtimes($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEtimes === null) {
+			if ($this->isNew()) {
+			   $this->collEtimes = array();
+			} else {
+
+				$criteria->add(EtimePeer::EVENT_ID, $this->getId());
+
+				EtimePeer::addSelectColumns($criteria);
+				$this->collEtimes = EtimePeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(EtimePeer::EVENT_ID, $this->getId());
+
+				EtimePeer::addSelectColumns($criteria);
+				if (!isset($this->lastEtimeCriteria) || !$this->lastEtimeCriteria->equals($criteria)) {
+					$this->collEtimes = EtimePeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastEtimeCriteria = $criteria;
+		return $this->collEtimes;
+	}
+
+	
+	public function countEtimes($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(EtimePeer::EVENT_ID, $this->getId());
+
+		return EtimePeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addEtime(Etime $l)
+	{
+		$this->collEtimes[] = $l;
+		$l->setEvent($this);
 	}
 
 } 

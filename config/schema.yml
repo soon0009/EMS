@@ -12,9 +12,48 @@ propel:
     image_url:          { type: varchar(255) }
     organiser:          { type: longvarchar }
     interested_parties: { type: longvarchar }
-    created_at:         ~
+    updated_at:         ~
 
   status:
     _attributes: { phpName: Status, idMethod: native }
     id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
     status:      { type: varchar(16) }
+
+  etime: 
+    _attributes:        { phpName: Etime, idMethod: native }
+    id:                 { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    event_id:           { type: integer, foreignTable: event, foreignReference: id, required: true }
+    title:              { type: varchar(255) }
+    start_date:         { type: date, required: true }
+    end_date:           { type: date, required: true }
+    start_time:         { type: time }
+    end_time:           { type: time }
+    all_day:            { type: boolean, required: true, default: false }
+    description:        { type: longvarchar }
+    notes:              { type: longvarchar }
+    capacity:           { type: integer }
+    has_fee:            { type: boolean, required: true, default: false }
+    organiser:          { type: longvarchar }
+    interested_parties: { type: longvarchar }
+    updated_at:         ~
+
+  audience:
+    _attributes: { phpName: Audience, idMethod: native }
+    id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    name:        { type: varchar(50) }
+
+  etime_audience_key:
+    _attributes: { phpName: EtimeAudience, idMethod: native }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
+    audience_id: { type: integer, foreignTable: audience, foreignReference: id, primaryKey: true }
+
+  rsvp:
+    _attributes: { phpName: Rsvp, idMethod: native }
+    id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    name:        { type: varchar(50) }
+
+  etime_rsvp_key:
+    _attributes: { phpName: EtimeRsvp, idMethod: native }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
+    rsvp_id:     { type: integer, foreignTable: rsvp, foreignReference: id, primaryKey: true }
+
