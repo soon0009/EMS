@@ -1,7 +1,16 @@
+# Event
+add_event:
+  url: /add_event
+  param: { module: event, action: create }
+
+show_event:
+  url: /event/:slug
+  param: { module: event, action: show }
+
 # default rules
 homepage:
   url:   /
-  param: { module: default, action: index }
+  param: { module: event, action: list }
 
 default_symfony:
   url:   /symfony/:action/*

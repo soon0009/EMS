@@ -14,6 +14,7 @@ CREATE TABLE event
 (
 	id INTEGER  NOT NULL,
 	title VARCHAR(255)  NOT NULL,
+	slug VARCHAR(255),
 	status_id INTEGER,
 	published BOOLEAN default 'f' NOT NULL,
 	description TEXT,
@@ -22,7 +23,8 @@ CREATE TABLE event
 	organiser TEXT,
 	interested_parties TEXT,
 	updated_at TIMESTAMP,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	CONSTRAINT unique_slug UNIQUE (slug)
 );
 
 COMMENT ON TABLE event IS '';

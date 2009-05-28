@@ -5,6 +5,7 @@ propel:
     _attributes:        { phpName: Event, idMethod: native }
     id:                 { type: integer, required: true, primaryKey: true, autoIncrement: true }
     title:              { type: varchar(255), required: true }
+    slug:               { type: varchar(255) }
     status_id:          { type: integer, foreignTable: status, foreignReference: id }
     published:          { type: boolean, required: true, default: false }
     description:        { type: longvarchar }
@@ -13,6 +14,7 @@ propel:
     organiser:          { type: longvarchar }
     interested_parties: { type: longvarchar }
     updated_at:         ~
+    _uniques: { unique_slug: [slug] }
 
   status:
     _attributes: { phpName: Status, idMethod: native }

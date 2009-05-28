@@ -38,6 +38,8 @@ class EventMapBuilder {
 
 		$tMap->addColumn('TITLE', 'Title', 'string', CreoleTypes::VARCHAR, true, 255);
 
+		$tMap->addColumn('SLUG', 'Slug', 'string', CreoleTypes::VARCHAR, false, 255);
+
 		$tMap->addForeignKey('STATUS_ID', 'StatusId', 'int', CreoleTypes::INTEGER, 'status', 'ID', false, null);
 
 		$tMap->addColumn('PUBLISHED', 'Published', 'boolean', CreoleTypes::BOOLEAN, true, null);

@@ -13,7 +13,7 @@ abstract class BaseEventPeer {
 	const CLASS_DEFAULT = 'lib.model.Event';
 
 	
-	const NUM_COLUMNS = 10;
+	const NUM_COLUMNS = 11;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -24,6 +24,9 @@ abstract class BaseEventPeer {
 
 	
 	const TITLE = 'event.TITLE';
+
+	
+	const SLUG = 'event.SLUG';
 
 	
 	const STATUS_ID = 'event.STATUS_ID';
@@ -55,18 +58,18 @@ abstract class BaseEventPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'StatusId', 'Published', 'Description', 'Notes', 'ImageUrl', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID, EventPeer::TITLE, EventPeer::STATUS_ID, EventPeer::PUBLISHED, EventPeer::DESCRIPTION, EventPeer::NOTES, EventPeer::IMAGE_URL, EventPeer::ORGANISER, EventPeer::INTERESTED_PARTIES, EventPeer::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'status_id', 'published', 'description', 'notes', 'image_url', 'organiser', 'interested_parties', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Slug', 'StatusId', 'Published', 'Description', 'Notes', 'ImageUrl', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
+		BasePeer::TYPE_COLNAME => array (EventPeer::ID, EventPeer::TITLE, EventPeer::SLUG, EventPeer::STATUS_ID, EventPeer::PUBLISHED, EventPeer::DESCRIPTION, EventPeer::NOTES, EventPeer::IMAGE_URL, EventPeer::ORGANISER, EventPeer::INTERESTED_PARTIES, EventPeer::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'slug', 'status_id', 'published', 'description', 'notes', 'image_url', 'organiser', 'interested_parties', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'StatusId' => 2, 'Published' => 3, 'Description' => 4, 'Notes' => 5, 'ImageUrl' => 6, 'Organiser' => 7, 'InterestedParties' => 8, 'UpdatedAt' => 9, ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID => 0, EventPeer::TITLE => 1, EventPeer::STATUS_ID => 2, EventPeer::PUBLISHED => 3, EventPeer::DESCRIPTION => 4, EventPeer::NOTES => 5, EventPeer::IMAGE_URL => 6, EventPeer::ORGANISER => 7, EventPeer::INTERESTED_PARTIES => 8, EventPeer::UPDATED_AT => 9, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'status_id' => 2, 'published' => 3, 'description' => 4, 'notes' => 5, 'image_url' => 6, 'organiser' => 7, 'interested_parties' => 8, 'updated_at' => 9, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Slug' => 2, 'StatusId' => 3, 'Published' => 4, 'Description' => 5, 'Notes' => 6, 'ImageUrl' => 7, 'Organiser' => 8, 'InterestedParties' => 9, 'UpdatedAt' => 10, ),
+		BasePeer::TYPE_COLNAME => array (EventPeer::ID => 0, EventPeer::TITLE => 1, EventPeer::SLUG => 2, EventPeer::STATUS_ID => 3, EventPeer::PUBLISHED => 4, EventPeer::DESCRIPTION => 5, EventPeer::NOTES => 6, EventPeer::IMAGE_URL => 7, EventPeer::ORGANISER => 8, EventPeer::INTERESTED_PARTIES => 9, EventPeer::UPDATED_AT => 10, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'slug' => 2, 'status_id' => 3, 'published' => 4, 'description' => 5, 'notes' => 6, 'image_url' => 7, 'organiser' => 8, 'interested_parties' => 9, 'updated_at' => 10, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
 	);
 
 	
@@ -123,6 +126,8 @@ abstract class BaseEventPeer {
 		$criteria->addSelectColumn(EventPeer::ID);
 
 		$criteria->addSelectColumn(EventPeer::TITLE);
+
+		$criteria->addSelectColumn(EventPeer::SLUG);
 
 		$criteria->addSelectColumn(EventPeer::STATUS_ID);
 
