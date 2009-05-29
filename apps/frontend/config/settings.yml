@@ -18,6 +18,17 @@ test:
     no_script_name:         off
     etag:                   off
 
+all:
+  .actions:
+    login_module: sfGuardAuth
+    login_action: signin
+
+    secure_module: sfGuardAuth
+    secure_action: secure
+
+  .settings:
+    enabled_modules: [default, sfGuardGroup, sfGuardUser, sfGuardPermission, sfGuardAuth]
+
 #all:
 #  .actions:
 #    default_module:         default   # Default module and action to be called when

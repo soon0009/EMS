@@ -20,7 +20,7 @@
           <ul class="header_buttons">
             <li><?php echo link_to('ADD EVENT', '@add_event'); ?></li>
             <li id="header_admin"><?php // echo link_to('admin', '@admin'); ?></li>
-            <li><?php // echo link_to('logout', '@logout');?></li>
+            <li><?php echo link_to('logout', '@sf_guard_signout');?></li>
           </ul>
         </div>
       </div>
