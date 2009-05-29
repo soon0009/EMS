@@ -1,0 +1,2 @@
+default:
+  stylesheets: ["http://www.flinders.edu.au/flinders/app_templates/flinderstemplates/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css", main, login]
