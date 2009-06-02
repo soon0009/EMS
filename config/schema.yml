@@ -31,6 +31,7 @@ propel:
     start_time:         { type: time }
     end_time:           { type: time }
     all_day:            { type: boolean, required: true, default: false }
+    location:           { type: longvarchar }
     description:        { type: longvarchar }
     notes:              { type: longvarchar }
     capacity:           { type: integer }

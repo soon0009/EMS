@@ -50,6 +50,8 @@ class EtimeMapBuilder {
 
 		$tMap->addColumn('ALL_DAY', 'AllDay', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('LOCATION', 'Location', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
 		$tMap->addColumn('DESCRIPTION', 'Description', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('NOTES', 'Notes', 'string', CreoleTypes::LONGVARCHAR, false, null);

@@ -9,6 +9,10 @@
  */ 
 class Event extends BaseEvent
 {
+  public function __toString() {
+    return $this->getTitle();
+  }
+
   public function setTitle($v) {
     parent::setTitle($v);
     $this->setSlug(myTools::stripText($v));

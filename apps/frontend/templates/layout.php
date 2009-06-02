@@ -25,7 +25,9 @@
         </div>
       </div>
     </div>
-    <?php echo $sf_data->getRaw('sf_content') ?>
+    <div id="bd">
+      <?php echo $sf_data->getRaw('sf_content') ?>
+    </div>
   </div>
 
 </body>

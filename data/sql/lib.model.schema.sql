@@ -76,6 +76,7 @@ CREATE TABLE etime
 	start_time TIME,
 	end_time TIME,
 	all_day BOOLEAN default 'f' NOT NULL,
+	location TEXT,
 	description TEXT,
 	notes TEXT,
 	capacity INTEGER,

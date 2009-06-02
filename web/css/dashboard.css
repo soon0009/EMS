@@ -1,0 +1,46 @@
+div.eventrecords {
+  margin: 1em;
+}
+#eventlist li {
+}
+#eventlist li div.eventdate {
+  background-color: #F7F3E5;
+  padding: 0.5em;
+}
+#eventlist li div.eventdate strong {
+  padding: 0 0.5em;
+}
+#eventlist li div.eventdate span {
+  padding: 0 0.5em;
+}
+ul.dashboard_view_buttons {
+  margin-top: 0;
+}
+.dashboard_view_buttons li {
+  display:inline;
+}
+.dashboard_view_buttons, #filter_events, #dashboard_entries {
+  margin: 2em 2em 2em 0;
+}
+.record {
+  margin-bottom: 1em;
+}
+.date_range {
+  position: relative;
+}
+#date_from_to_go {
+  background: transparent url(../img/calendar.gif) no-repeat scroll right top;
+  padding: 6px 28px 5px 5px;
+}
+#interval_cal {
+  display:none;
+  position:absolute;
+  left:10px;
+  top:20px;
+  z-index:2;
+  width:387px;
+}
+.dashboard_view_buttons li {
+  padding-left: 15px;
+  background: transparent url(../img/arrow.gif) no-repeat scroll 5px 5px;
+}

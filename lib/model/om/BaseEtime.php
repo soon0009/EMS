@@ -41,6 +41,10 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 
 	
+	protected $location;
+
+
+	
 	protected $description;
 
 
@@ -202,6 +206,13 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 	{
 
 		return $this->all_day;
+	}
+
+	
+	public function getLocation()
+	{
+
+		return $this->location;
 	}
 
 	
@@ -399,6 +410,22 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setLocation($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->location !== $v) {
+			$this->location = $v;
+			$this->modifiedColumns[] = EtimePeer::LOCATION;
+		}
+
+	} 
+	
 	public function setDescription($v)
 	{
 
@@ -526,25 +553,27 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 			$this->all_day = $rs->getBoolean($startcol + 7);
 
-			$this->description = $rs->getString($startcol + 8);
+			$this->location = $rs->getString($startcol + 8);
 
-			$this->notes = $rs->getString($startcol + 9);
+			$this->description = $rs->getString($startcol + 9);
 
-			$this->capacity = $rs->getInt($startcol + 10);
+			$this->notes = $rs->getString($startcol + 10);
 
-			$this->has_fee = $rs->getBoolean($startcol + 11);
+			$this->capacity = $rs->getInt($startcol + 11);
 
-			$this->organiser = $rs->getString($startcol + 12);
+			$this->has_fee = $rs->getBoolean($startcol + 12);
 
-			$this->interested_parties = $rs->getString($startcol + 13);
+			$this->organiser = $rs->getString($startcol + 13);
 
-			$this->updated_at = $rs->getTimestamp($startcol + 14, null);
+			$this->interested_parties = $rs->getString($startcol + 14);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 15, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 15; 
+						return $startcol + 16; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Etime object", $e);
 		}
@@ -750,24 +779,27 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				return $this->getAllDay();
 				break;
 			case 8:
-				return $this->getDescription();
+				return $this->getLocation();
 				break;
 			case 9:
-				return $this->getNotes();
+				return $this->getDescription();
 				break;
 			case 10:
-				return $this->getCapacity();
+				return $this->getNotes();
 				break;
 			case 11:
-				return $this->getHasFee();
+				return $this->getCapacity();
 				break;
 			case 12:
-				return $this->getOrganiser();
+				return $this->getHasFee();
 				break;
 			case 13:
-				return $this->getInterestedParties();
+				return $this->getOrganiser();
 				break;
 			case 14:
+				return $this->getInterestedParties();
+				break;
+			case 15:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -788,13 +820,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 			$keys[5] => $this->getStartTime(),
 			$keys[6] => $this->getEndTime(),
 			$keys[7] => $this->getAllDay(),
-			$keys[8] => $this->getDescription(),
-			$keys[9] => $this->getNotes(),
-			$keys[10] => $this->getCapacity(),
-			$keys[11] => $this->getHasFee(),
-			$keys[12] => $this->getOrganiser(),
-			$keys[13] => $this->getInterestedParties(),
-			$keys[14] => $this->getUpdatedAt(),
+			$keys[8] => $this->getLocation(),
+			$keys[9] => $this->getDescription(),
+			$keys[10] => $this->getNotes(),
+			$keys[11] => $this->getCapacity(),
+			$keys[12] => $this->getHasFee(),
+			$keys[13] => $this->getOrganiser(),
+			$keys[14] => $this->getInterestedParties(),
+			$keys[15] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -835,24 +868,27 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				$this->setAllDay($value);
 				break;
 			case 8:
-				$this->setDescription($value);
+				$this->setLocation($value);
 				break;
 			case 9:
-				$this->setNotes($value);
+				$this->setDescription($value);
 				break;
 			case 10:
-				$this->setCapacity($value);
+				$this->setNotes($value);
 				break;
 			case 11:
-				$this->setHasFee($value);
+				$this->setCapacity($value);
 				break;
 			case 12:
-				$this->setOrganiser($value);
+				$this->setHasFee($value);
 				break;
 			case 13:
-				$this->setInterestedParties($value);
+				$this->setOrganiser($value);
 				break;
 			case 14:
+				$this->setInterestedParties($value);
+				break;
+			case 15:
 				$this->setUpdatedAt($value);
 				break;
 		} 	}
@@ -870,13 +906,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[5], $arr)) $this->setStartTime($arr[$keys[5]]);
 		if (array_key_exists($keys[6], $arr)) $this->setEndTime($arr[$keys[6]]);
 		if (array_key_exists($keys[7], $arr)) $this->setAllDay($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setDescription($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setNotes($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setCapacity($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setHasFee($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setOrganiser($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setInterestedParties($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setUpdatedAt($arr[$keys[14]]);
+		if (array_key_exists($keys[8], $arr)) $this->setLocation($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setDescription($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setNotes($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setCapacity($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setHasFee($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setOrganiser($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setInterestedParties($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setUpdatedAt($arr[$keys[15]]);
 	}
 
 	
@@ -892,6 +929,7 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EtimePeer::START_TIME)) $criteria->add(EtimePeer::START_TIME, $this->start_time);
 		if ($this->isColumnModified(EtimePeer::END_TIME)) $criteria->add(EtimePeer::END_TIME, $this->end_time);
 		if ($this->isColumnModified(EtimePeer::ALL_DAY)) $criteria->add(EtimePeer::ALL_DAY, $this->all_day);
+		if ($this->isColumnModified(EtimePeer::LOCATION)) $criteria->add(EtimePeer::LOCATION, $this->location);
 		if ($this->isColumnModified(EtimePeer::DESCRIPTION)) $criteria->add(EtimePeer::DESCRIPTION, $this->description);
 		if ($this->isColumnModified(EtimePeer::NOTES)) $criteria->add(EtimePeer::NOTES, $this->notes);
 		if ($this->isColumnModified(EtimePeer::CAPACITY)) $criteria->add(EtimePeer::CAPACITY, $this->capacity);
@@ -942,6 +980,8 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		$copyObj->setEndTime($this->end_time);
 
 		$copyObj->setAllDay($this->all_day);
+
+		$copyObj->setLocation($this->location);
 
 		$copyObj->setDescription($this->description);
 

@@ -20,6 +20,11 @@ show_event:
   url: /event/:slug
   param: { module: event, action: show }
 
+#Event times
+list_times:
+  url: /show_times
+  param: { module: etime, action: list }
+
 # default rules
 homepage:
   url:   /
