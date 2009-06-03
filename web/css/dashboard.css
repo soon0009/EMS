@@ -1,3 +1,4 @@
+/* Dashboard */
 div.eventrecords {
   margin: 1em;
 }
@@ -43,4 +44,41 @@ ul.dashboard_view_buttons {
 .dashboard_view_buttons li {
   padding-left: 15px;
   background: transparent url(../img/arrow.gif) no-repeat scroll 5px 5px;
+}
+
+/* Event details */
+#event_heading {
+  margin-bottom: 20px;
+}
+#event_title {
+  float: left;
+  width: 50%;
+  margin: 0;
+}
+#event_details #add_button {
+  float: right;
+  width: 50%;
+  text-align: right;
+}
+#event_details .label {
+  float: left;
+  width: 20%;
+  text-align: right;
+}
+#event_details .value {
+  float: right;
+  width: 79%;
+  padding-left: 1%;
+}
+#event_details #when {
+  margin-top: 1em;
+}
+#event_details #times_heading {
+  color: #5C5C5C;
+}
+#event_details .when_item {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid #EEE;
 }
