@@ -61,6 +61,12 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	protected $lastEtimeCriteria = null;
 
 	
+	protected $collEventTags;
+
+	
+	protected $lastEventTagCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -454,6 +460,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collEventTags !== null) {
+				foreach($this->collEventTags as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -505,6 +519,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 				if ($this->collEtimes !== null) {
 					foreach($this->collEtimes as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collEventTags !== null) {
+					foreach($this->collEventTags as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -725,6 +747,10 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				$copyObj->addEtime($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getEventTags() as $relObj) {
+				$copyObj->addEventTag($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -847,6 +873,111 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	{
 		$this->collEtimes[] = $l;
 		$l->setEvent($this);
+	}
+
+	
+	public function initEventTags()
+	{
+		if ($this->collEventTags === null) {
+			$this->collEventTags = array();
+		}
+	}
+
+	
+	public function getEventTags($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEventTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEventTags === null) {
+			if ($this->isNew()) {
+			   $this->collEventTags = array();
+			} else {
+
+				$criteria->add(EventTagPeer::EVENT_ID, $this->getId());
+
+				EventTagPeer::addSelectColumns($criteria);
+				$this->collEventTags = EventTagPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(EventTagPeer::EVENT_ID, $this->getId());
+
+				EventTagPeer::addSelectColumns($criteria);
+				if (!isset($this->lastEventTagCriteria) || !$this->lastEventTagCriteria->equals($criteria)) {
+					$this->collEventTags = EventTagPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastEventTagCriteria = $criteria;
+		return $this->collEventTags;
+	}
+
+	
+	public function countEventTags($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseEventTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(EventTagPeer::EVENT_ID, $this->getId());
+
+		return EventTagPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addEventTag(EventTag $l)
+	{
+		$this->collEventTags[] = $l;
+		$l->setEvent($this);
+	}
+
+
+	
+	public function getEventTagsJoinTag($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEventTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEventTags === null) {
+			if ($this->isNew()) {
+				$this->collEventTags = array();
+			} else {
+
+				$criteria->add(EventTagPeer::EVENT_ID, $this->getId());
+
+				$this->collEventTags = EventTagPeer::doSelectJoinTag($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(EventTagPeer::EVENT_ID, $this->getId());
+
+			if (!isset($this->lastEventTagCriteria) || !$this->lastEventTagCriteria->equals($criteria)) {
+				$this->collEventTags = EventTagPeer::doSelectJoinTag($criteria, $con);
+			}
+		}
+		$this->lastEventTagCriteria = $criteria;
+
+		return $this->collEventTags;
 	}
 
 } 

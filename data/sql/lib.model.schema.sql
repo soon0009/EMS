@@ -180,3 +180,73 @@ SET search_path TO public;
 ALTER TABLE etime_rsvp_key ADD CONSTRAINT etime_rsvp_key_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id);
 
 ALTER TABLE etime_rsvp_key ADD CONSTRAINT etime_rsvp_key_FK_2 FOREIGN KEY (rsvp_id) REFERENCES rsvp (id);
+
+-----------------------------------------------------------------------------
+-- tag
+-----------------------------------------------------------------------------
+
+DROP TABLE tag CASCADE;
+
+DROP SEQUENCE tag_seq;
+
+CREATE SEQUENCE tag_seq;
+
+
+CREATE TABLE tag
+(
+	id INTEGER  NOT NULL,
+	tag VARCHAR(100)  NOT NULL,
+	normalized_tag VARCHAR(100),
+	created_at TIMESTAMP,
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE tag IS '';
+
+
+SET search_path TO public;
+CREATE INDEX tag_normalized_tag_index ON tag (normalized_tag);
+
+-----------------------------------------------------------------------------
+-- event_tag
+-----------------------------------------------------------------------------
+
+DROP TABLE event_tag CASCADE;
+
+
+CREATE TABLE event_tag
+(
+	event_id INTEGER  NOT NULL,
+	tag_id INTEGER  NOT NULL,
+	PRIMARY KEY (event_id,tag_id)
+);
+
+COMMENT ON TABLE event_tag IS '';
+
+
+SET search_path TO public;
+ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_1 FOREIGN KEY (event_id) REFERENCES event (id);
+
+ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id);
+
+-----------------------------------------------------------------------------
+-- etime_tag
+-----------------------------------------------------------------------------
+
+DROP TABLE etime_tag CASCADE;
+
+
+CREATE TABLE etime_tag
+(
+	etime_id INTEGER  NOT NULL,
+	tag_id INTEGER  NOT NULL,
+	PRIMARY KEY (etime_id,tag_id)
+);
+
+COMMENT ON TABLE etime_tag IS '';
+
+
+SET search_path TO public;
+ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id);
+
+ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id);

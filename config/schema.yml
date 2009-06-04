@@ -60,3 +60,19 @@ propel:
     etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
     rsvp_id:     { type: integer, foreignTable: rsvp, foreignReference: id, primaryKey: true }
 
+  tag:
+    _attributes:    { phpName: Tag, idMethod: native }
+    id:             { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    tag:            { type: varchar(100), required: true }
+    normalized_tag: { type: varchar(100), unique: true, index: true }
+    created_at:     ~
+  
+  event_tag:
+    _attributes: { phpName: EventTag, idMethod: native }
+    event_id:    { type: integer, foreignTable: event, foreignReference: id, primaryKey: true }
+    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true }
+
+  etime_tag:
+    _attributes: { phpName: EtimeTag, idMethod: native }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
+    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true }

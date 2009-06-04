@@ -87,6 +87,12 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 	protected $lastEtimeRsvpCriteria = null;
 
 	
+	protected $collEtimeTags;
+
+	
+	protected $lastEtimeTagCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -671,6 +677,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collEtimeTags !== null) {
+				foreach($this->collEtimeTags as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -730,6 +744,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 				if ($this->collEtimeRsvps !== null) {
 					foreach($this->collEtimeRsvps as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collEtimeTags !== null) {
+					foreach($this->collEtimeTags as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -1009,6 +1031,10 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				$copyObj->addEtimeRsvp($relObj->copy($deepCopy));
 			}
 
+			foreach($this->getEtimeTags() as $relObj) {
+				$copyObj->addEtimeTag($relObj->copy($deepCopy));
+			}
+
 		} 
 
 		$copyObj->setNew(true);
@@ -1271,6 +1297,111 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		$this->lastEtimeRsvpCriteria = $criteria;
 
 		return $this->collEtimeRsvps;
+	}
+
+	
+	public function initEtimeTags()
+	{
+		if ($this->collEtimeTags === null) {
+			$this->collEtimeTags = array();
+		}
+	}
+
+	
+	public function getEtimeTags($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimeTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEtimeTags === null) {
+			if ($this->isNew()) {
+			   $this->collEtimeTags = array();
+			} else {
+
+				$criteria->add(EtimeTagPeer::ETIME_ID, $this->getId());
+
+				EtimeTagPeer::addSelectColumns($criteria);
+				$this->collEtimeTags = EtimeTagPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(EtimeTagPeer::ETIME_ID, $this->getId());
+
+				EtimeTagPeer::addSelectColumns($criteria);
+				if (!isset($this->lastEtimeTagCriteria) || !$this->lastEtimeTagCriteria->equals($criteria)) {
+					$this->collEtimeTags = EtimeTagPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastEtimeTagCriteria = $criteria;
+		return $this->collEtimeTags;
+	}
+
+	
+	public function countEtimeTags($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimeTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(EtimeTagPeer::ETIME_ID, $this->getId());
+
+		return EtimeTagPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addEtimeTag(EtimeTag $l)
+	{
+		$this->collEtimeTags[] = $l;
+		$l->setEtime($this);
+	}
+
+
+	
+	public function getEtimeTagsJoinTag($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimeTagPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEtimeTags === null) {
+			if ($this->isNew()) {
+				$this->collEtimeTags = array();
+			} else {
+
+				$criteria->add(EtimeTagPeer::ETIME_ID, $this->getId());
+
+				$this->collEtimeTags = EtimeTagPeer::doSelectJoinTag($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(EtimeTagPeer::ETIME_ID, $this->getId());
+
+			if (!isset($this->lastEtimeTagCriteria) || !$this->lastEtimeTagCriteria->equals($criteria)) {
+				$this->collEtimeTags = EtimeTagPeer::doSelectJoinTag($criteria, $con);
+			}
+		}
+		$this->lastEtimeTagCriteria = $criteria;
+
+		return $this->collEtimeTags;
 	}
 
 } 

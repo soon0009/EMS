@@ -286,3 +286,41 @@ EtimeRsvp:
   r6:
     etime_id: et5
     rsvp_id: email
+
+Tag:
+  t1: { tag: 'sitting around' }
+  t2: { tag: 'quiet time' }
+  t3: { tag: philosophy }
+  t4: { tag: space }
+  t5: { tag: moon }
+  t6: { tag: 'rocketship apollo' }
+  t7: { tag: nasa }
+  t8: { tag: ceremony }
+  t9: { tag: tv }
+  t10: { tag: ship }
+  t11: { tag: ocean }
+  t12: { tag: sinking }
+  t13: { tag: 'pointless tasks' }
+  t14: { tag: 'Music' }
+  t15: { tag: Theater }
+  t16: { tag: Bali }
+
+EventTag:
+  etag1: { event_id: e1, tag_id: t1 }
+  etag2: { event_id: e1, tag_id: t3 }
+  etag3: { event_id: e2, tag_id: t4 }
+  etag4: { event_id: e2, tag_id: t7 }
+  etag5: { event_id: e3, tag_id: t10 }
+  etag6: { event_id: e3, tag_id: t11 }
+  etag7: { event_id: e4, tag_id: t14 }
+  etag8: { event_id: e4, tag_id: t15 }
+
+EtimeTag:
+  ettag1: { etime_id: et1, tag_id: t2 }
+  ettag2: { etime_id: et2, tag_id: t5 }
+  ettag3: { etime_id: et2, tag_id: t6 }
+  ettag4: { etime_id: et3, tag_id: t8 }
+  ettag5: { etime_id: et3, tag_id: t9 }
+  ettag6: { etime_id: et4, tag_id: t12 }
+  ettag7: { etime_id: et4, tag_id: t13 }
+  ettag8: { etime_id: et5, tag_id: t16 }
