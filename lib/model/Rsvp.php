@@ -9,4 +9,7 @@
  */ 
 class Rsvp extends BaseRsvp
 {
+  public function __toString() {
+    return $this->getName();
+  }
 }

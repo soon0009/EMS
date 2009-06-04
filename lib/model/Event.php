@@ -21,4 +21,5 @@ class Event extends BaseEvent
   public function getPublishedString() {
     return myTools::yesNo($this->getPublished());
   }
+
 }

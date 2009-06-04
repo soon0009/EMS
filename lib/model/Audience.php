@@ -9,4 +9,7 @@
  */ 
 class Audience extends BaseAudience
 {
+  public function __toString() {
+    return $this->getName();
+  }
 }

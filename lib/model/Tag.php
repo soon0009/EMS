@@ -9,6 +9,9 @@
  */ 
 class Tag extends BaseTag
 {
+  public function __toString() {
+    return $this->getTag();
+  }
   public function setTag($v) {
     parent::setTag($v);
     $this->setNormalizedTag(TagTools::normalize($v));

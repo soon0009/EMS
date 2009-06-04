@@ -33,6 +33,15 @@
             <div class="label">Interested parties:</div>
             <div class="value"><?php print $event->getInterestedParties(); ?></div>
             <div class="clear_float"></div>
+            <div class="label">Tags:</div>
+            <div class="value">
+              <ul>
+              <?php foreach ($event->getEventTags() as $tag): ?>
+                <li><?php print link_to($tag->getTag(), '@tag?tag='.$tag->getTag()->getNormalizedTag(), 'rel=tag') ?></li>
+              <?php endforeach; ?>
+              </ul>
+            </div>
+            <div class="clear_float"></div>
             <div class="label">Updated at:</div>
             <div class="value"><?php print $event->getupdatedAt(); ?></div>
             <div class="clear_float"></div>
@@ -68,7 +77,7 @@
               <div class="value">
                 <ul>
                 <?php foreach ($etime->getEtimeAudiences() as $audience): ?>
-                  <li><?php print $audience->getAudience()->getName(); ?></li>
+                  <li><?php print $audience->getAudience(); ?></li>
                 <?php endforeach; ?>
                 </ul>
               </div>
@@ -77,7 +86,7 @@
               <div class="value">
                 <ul>
                 <?php foreach ($etime->getEtimeRsvps() as $rsvp): ?>
-                  <li><?php print $rsvp->getRsvp()->getName(); ?></li>
+                  <li><?php print $rsvp->getRsvp(); ?></li>
                 <?php endforeach; ?>
                 </ul>
               </div>
@@ -97,6 +106,14 @@
               <div class="label">Notes:</div>
               <div class="value"><?php print $etime->getNotes(); ?></div>
               <div class="clear_float"></div>
+              <div class="label">Tags:</div>
+              <div class="value">
+                <ul>
+                <?php foreach ($etime->getEtimeTags() as $tag): ?>
+                  <li><?php print $tag->getTag() ?></li>
+                <?php endforeach; ?>
+                </ul>
+              </div>
               <div class="label"></div>
               <div class="value update"> <?php // link_to('Update event time details', ) ?> </div>
               <div class="clear_float"></div>
