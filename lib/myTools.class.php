@@ -13,5 +13,14 @@ class myTools
     $text = preg_replace('/^\-/', '', $text); 
     return $text; 
   } 
+
+  public static function yesNo($option) {
+    if ($option) {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
 } 
 

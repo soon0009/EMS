@@ -17,4 +17,8 @@ class Event extends BaseEvent
     parent::setTitle($v);
     $this->setSlug(myTools::stripText($v));
   }
+
+  public function getPublishedString() {
+    return myTools::yesNo($this->getPublished());
+  }
 }

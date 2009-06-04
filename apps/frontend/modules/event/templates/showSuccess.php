@@ -25,10 +25,10 @@
             <div class="value"><?php print $event->getImageUrl(); ?></div>
             <div class="clear_float"></div>
             <div class="label">Status:</div>
-            <div class="value"><?php print $event->getStatusId(); ?></div>
+            <div class="value"><?php print $event->getStatus(); ?></div>
             <div class="clear_float"></div>
             <div class="label">Published:</div>
-            <div class="value"><?php print $event->getPublished(); ?></div>
+            <div class="value"><?php print $event->getPublishedString(); ?></div>
             <div class="clear_float"></div>
             <div class="label">Interested parties:</div>
             <div class="value"><?php print $event->getInterestedParties(); ?></div>
@@ -62,7 +62,7 @@
               <div class="value"><?php print $etime->getStartTime(); ?> - <?php print $etime->getEndTime(); ?></div>
               <div class="clear_float"></div>
               <div class="label">All day:</div>
-              <div class="value"><?php print $etime->getAllDay(); ?></div>
+              <div class="value"><?php print $etime->getAllDayString(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Audience:</div>
               <div class="value">
@@ -86,7 +86,7 @@
               <div class="value"><?php print $etime->getCapacity(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Fee:</div>
-              <div class="value"><?php print $etime->getHasFee(); ?></div>
+              <div class="value"><?php print $etime->getHasFeeString(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Organiser:</div>
               <div class="value"><?php print $etime->getOrganiser(); ?></div>
