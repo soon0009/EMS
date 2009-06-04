@@ -8,7 +8,7 @@ $browser->initialize();
 $browser->
   get('/')->
   isStatusCode(401)->
-  isRequestParameter('module', 'event')->
+  isRequestParameter('module', 'etime')->
   isRequestParameter('action', 'list')->
   checkResponseElement('body', '/FAN:/')->
   click('sign in', array('username'=>'soon0009', 'password'=>'*th3C0n*'))->
@@ -32,6 +32,6 @@ $browser->
   isRedirected()->
   followRedirect()->
   isStatusCode(200)->
-  isRequestParameter('module', 'event')->
+  isRequestParameter('module', 'etime')->
   isRequestParameter('action', 'list')
 ;

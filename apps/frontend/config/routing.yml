@@ -1,4 +1,4 @@
-#sfGuard
+# sfGuard
 sf_guard_signin:
   url:   /login
   param: { module: sfGuardAuth, action: signin }
@@ -20,7 +20,11 @@ show_event:
   url: /event/:slug
   param: { module: event, action: show }
 
-#Event times
+list_events:
+  url: /show_events
+  param: { module: event, action: list }
+
+# Event times
 list_times:
   url: /show_times
   param: { module: etime, action: list }
@@ -28,7 +32,7 @@ list_times:
 # default rules
 homepage:
   url:   /
-  param: { module: event, action: list }
+  param: { module: etime, action: list }
 
 default_symfony:
   url:   /symfony/:action/*

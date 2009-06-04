@@ -7,9 +7,15 @@ $browser = new sfTestBrowser();
 $browser->initialize();
 
 $browser->
-  get('/etime/index')->
-  isStatusCode(200)->
+  get('/show_times')->
+  isStatusCode(401)->
   isRequestParameter('module', 'etime')->
-  isRequestParameter('action', 'index')->
-  checkResponseElement('body', '!/This is a temporary page/')
+  isRequestParameter('action', 'list')->
+  checkResponseElement('body', '/FAN:/')->
+  click('sign in', array('username'=>'soon0009', 'password'=>'*th3C0n*'))->
+  isRedirected()->
+  followRedirect()->
+  isStatusCode(200)->
+  isRequestParameter('action', 'list')->
+  checkResponseElement('body', '/Contemplating/')
 ;
