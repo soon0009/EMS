@@ -23,11 +23,16 @@
       <div class="eventrecords">
         <div class="record yui-gd">
           <div class="yui-u first">
-            <?php echo link_to($etime->dashboardLinkText(), '@show_event?slug='.$etime->getEvent()->getSlug()) ?>
+            <div>
+              <?php echo link_to($etime->fullTitle(), '@show_event?slug='.$etime->getEvent()->getSlug()) ?>
+            </div>
+            <div class="time">
+              <div><?php echo $etime->timeSpan(); ?></div>
+            </div>
           </div>
           <div class="yui-u">
             <div><?php echo $etime->getDescription() ?></div>
-            <div><?php echo $etime->getLocation() ?></div>
+            <div class="location">Location: <?php echo $etime->getLocation() ?></div>
           </div>
         </div>
       </div>

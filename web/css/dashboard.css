@@ -46,6 +46,10 @@ ul.dashboard_view_buttons {
   background: transparent url(../img/arrow.gif) no-repeat scroll 5px 5px;
 }
 
+#eventlist .time, #eventlist .location {
+  font-style: italic;
+}
+
 /* Event details */
 #event_heading {
   margin-bottom: 20px;
@@ -82,3 +86,4 @@ ul.dashboard_view_buttons {
   padding-bottom: 1em;
   border-bottom: 1px solid #EEE;
 }
+
