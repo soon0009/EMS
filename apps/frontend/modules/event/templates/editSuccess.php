@@ -8,59 +8,60 @@
 
 <?php echo object_input_hidden_tag($event, 'getId') ?>
 
-<table>
-<tbody>
-<tr>
-  <th>Title*:</th>
-  <td><?php echo object_input_tag($event, 'getTitle', array (
-  'size' => 80,
-)) ?></td>
-</tr>
-<tr>
-  <th>Status:</th>
-  <td><?php echo object_select_tag($event, 'getStatusId', array (
-  'related_class' => 'Status',
-  'include_blank' => true,
-)) ?></td>
-</tr>
-<tr>
-  <th>Published*:</th>
-  <td><?php echo object_checkbox_tag($event, 'getPublished', array (
-)) ?></td>
-</tr>
-<tr>
-  <th>Description:</th>
-  <td><?php echo object_textarea_tag($event, 'getDescription', array (
-  'size' => '30x3',
-)) ?></td>
-</tr>
-<tr>
-  <th>Notes:</th>
-  <td><?php echo object_textarea_tag($event, 'getNotes', array (
-  'size' => '30x3',
-)) ?></td>
-</tr>
-<tr>
-  <th>Image url:</th>
-  <td><?php echo object_input_tag($event, 'getImageUrl', array (
-  'size' => 80,
-)) ?></td>
-</tr>
-<tr>
-  <th>Organiser:</th>
-  <td><?php echo object_textarea_tag($event, 'getOrganiser', array (
-  'size' => '30x3',
-)) ?></td>
-</tr>
-<tr>
-  <th>Interested parties:</th>
-  <td><?php echo object_textarea_tag($event, 'getInterestedParties', array (
-  'size' => '30x3',
-)) ?></td>
-</tr>
-</tbody>
-</table>
+
+  <div class="long_form">
+    <label class="label" for="title">Event title</label>
+    <div class="value">
+      <?php echo object_input_tag($event, 'getTitle', array ( 'class' => 'long',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="organiser">Organiser</label>
+    <div class="value">
+      <?php echo object_input_tag($event, 'getOrganiser', array ( 'class' => 'long',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="description">Description</label>
+    <div class="value">
+      <?php echo object_textarea_tag($event, 'getDescription', array ( 'size' => '30x3',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="notes">Notes</label>
+    <div class="value">
+      <?php echo object_textarea_tag($event, 'getNotes', array ( 'size' => '30x3',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="image_url">Image URL</label>
+    <div class="value">
+      <?php echo object_input_tag($event, 'getImageUrl', array ( 'class' => 'long',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="status">Status</label>
+    <div class="value">
+      <?php echo object_select_tag($event, 'getStatusId', array ( 'related_class' => 'Status', 'include_blank' => true,)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="published">Published</label>
+    <div class="value">
+      <?php echo object_checkbox_tag($event, 'getPublished', array ()) ?>
+    </div>
+
+    <div class="clear_float"></div>
+  </div>
+
 <hr />
+
 <?php echo submit_tag('save') ?>
 <?php if ($event->getId()): ?>
   &nbsp;<?php echo link_to('delete', 'event/delete?id='.$event->getId(), 'post=true&confirm=Are you sure?') ?>
