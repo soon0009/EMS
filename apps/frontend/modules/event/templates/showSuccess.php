@@ -110,7 +110,7 @@
               <div class="value">
                 <ul>
                 <?php foreach ($etime->getEtimeTags() as $tag): ?>
-                  <li><?php print $tag->getTag() ?></li>
+                  <li><?php print link_to($tag->getTag(), '@tag?tag='.$tag->getTag()->getNormalizedTag(), 'rel=tag') ?></li>
                 <?php endforeach; ?>
                 </ul>
               </div>
