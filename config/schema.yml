@@ -24,7 +24,7 @@ propel:
   etime: 
     _attributes:        { phpName: Etime, idMethod: native }
     id:                 { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    event_id:           { type: integer, foreignTable: event, foreignReference: id, required: true }
+    event_id:           { type: integer, foreignTable: event, foreignReference: id, required: true, onDelete: cascade }
     title:              { type: varchar(255) }
     start_date:         { type: date, required: true }
     end_date:           { type: date, required: true }
@@ -47,7 +47,7 @@ propel:
 
   etime_audience_key:
     _attributes: { phpName: EtimeAudience, idMethod: native }
-    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true, onDelete: cascade }
     audience_id: { type: integer, foreignTable: audience, foreignReference: id, primaryKey: true }
 
   rsvp:
@@ -57,7 +57,7 @@ propel:
 
   etime_rsvp_key:
     _attributes: { phpName: EtimeRsvp, idMethod: native }
-    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true, onDelete: cascade }
     rsvp_id:     { type: integer, foreignTable: rsvp, foreignReference: id, primaryKey: true }
 
   tag:
@@ -69,10 +69,10 @@ propel:
   
   event_tag:
     _attributes: { phpName: EventTag, idMethod: native }
-    event_id:    { type: integer, foreignTable: event, foreignReference: id, primaryKey: true }
-    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true }
+    event_id:    { type: integer, foreignTable: event, foreignReference: id, primaryKey: true, onDelete: cascade }
+    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true, onDelete: cascade }
 
   etime_tag:
     _attributes: { phpName: EtimeTag, idMethod: native }
-    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true }
-    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true, onDelete: cascade }
+    tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true, onDelete: cascade }

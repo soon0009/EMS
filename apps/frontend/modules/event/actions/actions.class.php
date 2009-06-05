@@ -41,7 +41,9 @@ class eventActions extends sfActions
 
   public function executeEdit()
   {
-    $this->event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
+    $c = new Criteria();
+    $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));
+    $this->event = EventPeer::doSelectOne($c);
     $this->forward404Unless($this->event);
   }
 

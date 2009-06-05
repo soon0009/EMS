@@ -21,6 +21,10 @@ add_event:
   url: /add_event
   param: { module: event, action: create }
 
+edit_event:
+  url: /edit_event/:slug
+  param: { module: event, action: edit }
+
 show_event:
   url: /event/:slug
   param: { module: event, action: show }

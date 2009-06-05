@@ -91,7 +91,7 @@ COMMENT ON TABLE etime IS '';
 
 
 SET search_path TO public;
-ALTER TABLE etime ADD CONSTRAINT etime_FK_1 FOREIGN KEY (event_id) REFERENCES event (id);
+ALTER TABLE etime ADD CONSTRAINT etime_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
 
 -----------------------------------------------------------------------------
 -- audience
@@ -133,7 +133,7 @@ COMMENT ON TABLE etime_audience_key IS '';
 
 
 SET search_path TO public;
-ALTER TABLE etime_audience_key ADD CONSTRAINT etime_audience_key_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id);
+ALTER TABLE etime_audience_key ADD CONSTRAINT etime_audience_key_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
 
 ALTER TABLE etime_audience_key ADD CONSTRAINT etime_audience_key_FK_2 FOREIGN KEY (audience_id) REFERENCES audience (id);
 
@@ -177,7 +177,7 @@ COMMENT ON TABLE etime_rsvp_key IS '';
 
 
 SET search_path TO public;
-ALTER TABLE etime_rsvp_key ADD CONSTRAINT etime_rsvp_key_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id);
+ALTER TABLE etime_rsvp_key ADD CONSTRAINT etime_rsvp_key_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
 
 ALTER TABLE etime_rsvp_key ADD CONSTRAINT etime_rsvp_key_FK_2 FOREIGN KEY (rsvp_id) REFERENCES rsvp (id);
 
@@ -225,9 +225,9 @@ COMMENT ON TABLE event_tag IS '';
 
 
 SET search_path TO public;
-ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_1 FOREIGN KEY (event_id) REFERENCES event (id);
+ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
 
-ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id);
+ALTER TABLE event_tag ADD CONSTRAINT event_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id) ON DELETE CASCADE;
 
 -----------------------------------------------------------------------------
 -- etime_tag
@@ -247,6 +247,6 @@ COMMENT ON TABLE etime_tag IS '';
 
 
 SET search_path TO public;
-ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id);
+ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
 
-ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id);
+ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id) ON DELETE CASCADE;
