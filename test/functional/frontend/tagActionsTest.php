@@ -7,9 +7,10 @@ $browser = new sfTestBrowser();
 $browser->initialize();
 
 $browser->
-  get('/tag/index')->
-  isStatusCode(200)->
-  isRequestParameter('module', 'tag')->
-  isRequestParameter('action', 'index')->
-  checkResponseElement('body', '!/This is a temporary page/')
+  get('/tag')->
+  click('sign in', array('username'=>'soon0009', 'password'=>'*th3C0n*'))->
+  followRedirect()->
+  isStatusCode(404)->
+  get('/tag/sittingaround')->
+  isStatusCode(200)
 ;

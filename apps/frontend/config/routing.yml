@@ -18,11 +18,11 @@ tag:
 
 # Event
 add_event:
-  url: /add_event
+  url: /event/add
   param: { module: event, action: create }
 
 edit_event:
-  url: /edit_event/:slug
+  url: /event/edit/:slug
   param: { module: event, action: edit }
 
 show_event:
@@ -30,7 +30,7 @@ show_event:
   param: { module: event, action: show }
 
 list_events:
-  url: /show_events
+  url: /events
   param: { module: event, action: list }
 
 # Event times
