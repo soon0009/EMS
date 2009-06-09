@@ -1,0 +1,9 @@
+fields:
+  title:
+    required:
+      msg: The title can not be blank
+    sfStringValidator:
+      min: 1
+      min_error: The title is too short
+      max: 255
+      max_error: The title is too long (255 characters maximum)

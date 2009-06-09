@@ -41,37 +41,44 @@ class eventActions extends sfActions
 
   public function executeEdit()
   {
-    $c = new Criteria();
-    $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));
-    $this->event = EventPeer::doSelectOne($c);
-    $this->forward404Unless($this->event);
-  }
-
-  public function executeUpdate()
-  {
-    if (!$this->getRequestParameter('id'))
-    {
-      $event = new Event();
+    if ($this->getRequest()->getMethod() != sfRequest::POST) {
+      if (!$this->getRequestParameter('slug')) {
+        $this->event = new Event();
+        $this->forward404Unless($this->event);
+      }
+      else {
+        $c = new Criteria();
+        $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));
+        $this->event = EventPeer::doSelectOne($c);
+        $this->forward404Unless($this->event);
+      }
     }
-    else
-    {
-      $event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
-      $this->forward404Unless($event);
+    else {
+      if (!$this->getRequestParameter('id'))
+      {
+        $event = new Event();
+      }
+      else
+      {
+        $event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
+        $this->forward404Unless($event);
+      }
+  
+      $event->setId($this->getRequestParameter('id'));
+      $event->setTitle($this->getRequestParameter('title'));
+      $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
+      $event->setPublished($this->getRequestParameter('published', 0));
+      $event->setDescription($this->getRequestParameter('description'));
+      $event->setNotes($this->getRequestParameter('notes'));
+      $event->setImageUrl($this->getRequestParameter('image_url'));
+      $event->setOrganiser($this->getRequestParameter('organiser'));
+      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
+  
+      $event->save();
+  
+      return $this->redirect('@show_event?slug='.$event->getSlug());
     }
-
-    $event->setId($this->getRequestParameter('id'));
-    $event->setTitle($this->getRequestParameter('title'));
-    $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
-    $event->setPublished($this->getRequestParameter('published', 0));
-    $event->setDescription($this->getRequestParameter('description'));
-    $event->setNotes($this->getRequestParameter('notes'));
-    $event->setImageUrl($this->getRequestParameter('image_url'));
-    $event->setOrganiser($this->getRequestParameter('organiser'));
-    $event->setInterestedParties($this->getRequestParameter('interested_parties'));
-
-    $event->save();
-
-    return $this->redirect('event/show?id='.$event->getId());
+    return sfView::SUCCESS;
   }
 
   public function executeDelete()
@@ -84,4 +91,12 @@ class eventActions extends sfActions
 
     return $this->redirect('event/list');
   }
+
+  public function handleErrorEdit() {
+    $this->event = new Event;
+    $this->event->fromArray($this->getRequest()->getParameterHolder()->getAll(),BasePeer::TYPE_FIELDNAME);
+
+    return sfView::SUCCESS;
+  }
+
 }
