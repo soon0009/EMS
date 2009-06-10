@@ -94,8 +94,6 @@ class eventActions extends sfActions
 
   public function handleErrorEdit() {
     $this->event = new Event;
-    $this->event->fromArray($this->getRequest()->getParameterHolder()->getAll(),BasePeer::TYPE_FIELDNAME);
-
     return sfView::SUCCESS;
   }
 

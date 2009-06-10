@@ -7,3 +7,6 @@ fields:
       min_error: The title is too short
       max: 255
       max_error: The title is too long (255 characters maximum)
+
+fillin:
+  enabled: true
