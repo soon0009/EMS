@@ -1,12 +1,32 @@
+validators:
+  string255Validator:
+    class: sfStringValidator
+    param:
+      min: 1
+      min_error: The string is too short
+      max: 255
+      max_error: The string is too long (255 characters maximum)
+  
+  slugValidator:
+    class: mySlugValidator
+    param:
+      slug_error: This title already exists
+
 fields:
   title:
     required:
       msg: The title can not be blank
-    sfStringValidator:
-      min: 1
-      min_error: The title is too short
-      max: 255
-      max_error: The title is too long (255 characters maximum)
+    string255Validator:
+    slugValidator:
+      slug_error: This title already exists
+  image_url:
+    sfUrlValidator:
+      url_error: The image URL is invalid
 
 fillin:
   enabled: true
+  param:
+    converters:
+      htmlentities: [title, organiser, description, notes, imageurl]
+      htmlspecialchars: [description, notes]
+

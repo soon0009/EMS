@@ -7,6 +7,7 @@
 <?php echo form_tag('event/edit') ?>
 
 <?php echo object_input_hidden_tag($event, 'getId') ?>
+<?php echo object_input_hidden_tag($event, 'getSlug') ?>
 
 
   <div class="long_form">
@@ -39,6 +40,7 @@
 
     <div class="clear_float"></div>
 
+    <?php echo form_error('image_url'); ?>
     <label class="label" for="image_url">Image URL</label>
     <div class="value">
       <?php echo object_input_tag($event, 'getImageUrl', array ( 'class' => 'long',)) ?>
