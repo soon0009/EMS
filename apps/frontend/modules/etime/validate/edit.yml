@@ -1,0 +1,48 @@
+validators:
+  string255Validator:
+    class: sfStringValidator
+    param:
+      min: 1
+      min_error: The string is too short
+      max: 255
+      max_error: The string is too long (255 characters maximum)
+  dateValidator:
+    class: sfRegexValidator
+    param:
+      match: Yes
+      match_error: Please enter a date in the format yyyy-mm-dd
+      pattern: /^\d{4}-\d{2}-\d{2}$/
+  timeValidator:
+    class: sfRegexValidator
+    param:
+      match: Yes
+      match_error: Please enter a time in the format HH:MM
+      pattern: /^\d{2}:\d{2}$/
+  
+fields:
+  event_id:
+    required:
+      msg: Please select an event
+  start_date:
+    required:
+      msg: Please select an start date
+    dateValidator:
+  end_date:
+    required:
+      msg: Please select an end date
+    dateValidator:
+  start_time:
+    timeValidator:
+  end_time:
+    timeValidator:
+  capacity:
+    sfNumberValidator:
+      nan_error: Please enter a whole number
+
+fillin:
+  enabled: true
+  param:
+    converters:
+      htmlentities: [title, organiser, description, notes]
+      htmlspecialchars: [description, notes]
+
