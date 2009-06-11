@@ -53,19 +53,19 @@ class etimeActions extends sfActions
   
       $etime->setId($this->getRequestParameter('id'));
       $etime->setEventId($this->getRequestParameter('event_id'));
-      $etime->setTitle($this->getRequestParameter('title'));
+      $etime->setTitle($this->getRequestParameter('etime_title'));
       $start_date = $this->getRequestParameter('start_date');
       $etime->setStartDate($start_date['year'].'-'.$start_date['month'].'-'.$start_date['day'].' '.$start_date['hour'].':'.$start_date['minute']);
       $end_date = $this->getRequestParameter('end_date');
       $etime->setEndDate($end_date['year'].'-'.$end_date['month'].'-'.$end_date['day'].' '.$end_date['hour'].':'.$end_date['minute']);
       $etime->setAllDay($this->getRequestParameter('all_day') ? $this->getRequestParameter('all_day') : false);
       $etime->setLocation($this->getRequestParameter('location'));
-      $etime->setDescription($this->getRequestParameter('description'));
-      $etime->setNotes($this->getRequestParameter('notes'));
+      $etime->setDescription($this->getRequestParameter('etime_description'));
+      $etime->setNotes($this->getRequestParameter('etime_notes'));
       $etime->setCapacity($this->getRequestParameter('capacity'));
       $etime->setHasFee($this->getRequestParameter('has_fee') ? $this->getRequestParameter('has_fee') : false);
-      $etime->setOrganiser($this->getRequestParameter('organiser'));
-      $etime->setInterestedParties($this->getRequestParameter('interested_parties'));
+      $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
+      $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
       $etime->save();
   

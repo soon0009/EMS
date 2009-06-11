@@ -34,9 +34,48 @@ class eventActions extends sfActions
 
   public function executeCreate()
   {
-    $this->event = new Event();
+    if ($this->getRequest()->getMethod() != sfRequest::POST) {
+      $this->event = new Event();
+      $this->etime = new Etime();
+      $this->forward404Unless($this->event);
+      $this->forward404Unless($this->etime);
+    }
+    else {
+      $event = new Event();
+      $etime = new Etime();
+  
+      $event->setTitle($this->getRequestParameter('title'));
+      $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
+      $event->setPublished($this->getRequestParameter('published', 0));
+      $event->setDescription($this->getRequestParameter('description'));
+      $event->setNotes($this->getRequestParameter('notes'));
+      $event->setImageUrl($this->getRequestParameter('image_url'));
+      $event->setOrganiser($this->getRequestParameter('organiser'));
+      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
+  
+      $event->save();
 
-    $this->setTemplate('edit');
+      $etime->setEventId($event->getId());
+      $etime->setTitle($this->getRequestParameter('etime_title'));
+      $start_date = $this->getRequestParameter('start_date');
+      $etime->setStartDate($start_date['year'].'-'.$start_date['month'].'-'.$start_date['day'].' '.$start_date['hour'].':'.$start_date['minute']);
+      $end_date = $this->getRequestParameter('end_date');
+      $etime->setEndDate($end_date['year'].'-'.$end_date['month'].'-'.$end_date['day'].' '.$end_date['hour'].':'.$end_date['minute']);
+      $etime->setAllDay($this->getRequestParameter('all_day') ? $this->getRequestParameter('all_day') : false);
+      $etime->setLocation($this->getRequestParameter('location'));
+      $etime->setDescription($this->getRequestParameter('etime_description'));
+      $etime->setNotes($this->getRequestParameter('etime_notes'));
+      $etime->setCapacity($this->getRequestParameter('capacity'));
+      $etime->setHasFee($this->getRequestParameter('has_fee') ? $this->getRequestParameter('has_fee') : false);
+      $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
+      $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
+
+      $etime->save();
+  
+      return $this->redirect('@show_event?slug='.$event->getSlug());
+    }
+    return sfView::SUCCESS;
+
   }
 
   public function executeEdit()
@@ -94,6 +133,12 @@ class eventActions extends sfActions
 
   public function handleErrorEdit() {
     $this->event = new Event;
+    return sfView::SUCCESS;
+  }
+
+  public function handleErrorCreate() {
+    $this->event = new Event;
+    $this->etime = new Etime;
     return sfView::SUCCESS;
   }
 

@@ -34,6 +34,10 @@ list_events:
   param: { module: event, action: list }
 
 # Event times
+add_etime:
+  url: /etime/add
+  param: { module: etime, action: create }
+
 list_times:
   url: /show_times
   param: { module: etime, action: list }

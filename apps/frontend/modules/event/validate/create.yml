@@ -1,0 +1,48 @@
+validators:
+  string255Validator:
+    class: sfStringValidator
+    param:
+      min: 1
+      min_error: The string is too short
+      max: 255
+      max_error: The string is too long (255 characters maximum)
+  slugValidator:
+    class: mySlugValidator
+    param:
+      slug_error: This title already exists
+  dateValidator:
+    class: myDateValidator
+    param:
+      start_date: start_date
+      date_error: Please check your start and end times
+
+fields:
+  title:
+    required:
+      msg: The title can not be blank
+    string255Validator:
+    slugValidator:
+      slug_error: This title already exists
+  image_url:
+    sfUrlValidator:
+      url_error: The image URL is invalid
+  start_date:
+    required:
+      msg: Please select an start date
+  end_date:
+    required:
+      msg: Please select an end date
+    dateValidator:
+      date_error: This date occurs before the start date
+  capacity:
+    sfNumberValidator:
+      nan_error: Please enter a whole number
+
+
+fillin:
+  enabled: true
+  param:
+    converters:
+      htmlentities: [title, etime_title, organiser, etime_organiser, description, etime_description, notes, etime_notes, imageurl]
+      htmlspecialchars: [description, etime_description, notes, etime_notes]
+
