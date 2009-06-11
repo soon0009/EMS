@@ -23,7 +23,7 @@
     <?php echo form_error('start_date'); ?>
     <label class="label" for="start_date">Start date</label>
     <div class="value">
-      <?php echo object_input_date_tag($etime, 'getStartDate', array ( 'rich' => 'true',)) ?>
+      <?php echo select_datetime_tag('start_date') ?>
     </div>
 
     <div class="clear_float"></div>
@@ -31,7 +31,7 @@
     <?php echo form_error('end_date'); ?>
     <label class="label" for="end_date">End date</label>
     <div class="value">
-      <?php echo object_input_date_tag($etime, 'getEndDate', array ( 'rich' => 'true',)) ?>
+      <?php echo select_datetime_tag('end_date') ?>
     </div>
 
     <div class="clear_float"></div>
@@ -39,22 +39,6 @@
     <label class="label" for="all_day">All day</label>
     <div class="value">
       <?php echo object_checkbox_tag($etime, 'getAllDay', array ()) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
-    <?php echo form_error('start_time'); ?>
-    <label class="label" for="start_time">Start time</label>
-    <div class="value">
-      <?php echo object_input_tag($etime, 'getStartTime') ?>
-    </div>
-
-    <div class="clear_float"></div>
-
-    <?php echo form_error('end_time'); ?>
-    <label class="label" for="end_time">End time</label>
-    <div class="value">
-      <?php echo object_input_tag($etime, 'getEndTime') ?>
     </div>
 
     <div class="clear_float"></div>

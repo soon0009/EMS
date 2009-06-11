@@ -165,10 +165,8 @@ Etime:
   et1:
     event_id: e1
     title: The contemplating part
-    start_date: 2009-05-30
-    end_date: 2009-05-30
-    start_time: 09:00
-    end_time: 15:00
+    start_date: 2009-05-30 09:00
+    end_date: 2009-05-30 15:00
     all_day: false
     location: Sophie's world
     description: |
@@ -199,10 +197,8 @@ Etime:
   et3:
     event_id: e2
     title: Erect the flag
-    start_date: 2009-06-01
-    end_date: 2009-06-01
-    start_time: 12:00
-    end_time: 13:00
+    start_date: 2009-06-01 12:00
+    end_date: 2009-06-01 13:00
     all_day: false
     location: The Moon
     description: |
@@ -232,10 +228,8 @@ Etime:
 
   et5:
     event_id: e4
-    start_date: 2009-06-02
-    end_date: 2009-06-02
-    start_time: 18:00
-    end_time: 18:30
+    start_date: 2009-06-02 18:00
+    end_date: 2009-06-02 18:30
     all_day: false
     location: The Island
     description: |

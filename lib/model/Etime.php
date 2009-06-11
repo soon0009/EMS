@@ -25,12 +25,26 @@ class Etime extends BaseEtime
     return myTools::yesNo($this->getHasFee());
   }
 
+  public function getStartTime() {
+    if ($this->getAllday()) {
+      return '';
+    }
+    return date('H:i', strtotime($this->getStartDate()));
+  }
+
+  public function getEndTime() {
+    if ($this->getAllday()) {
+      return '';
+    }
+    return date('H:i', strtotime($this->getEndDate()));
+  }
+
   public function timeSpan() {
     if ($this->getAllday()) {
       return 'All day';
     }
     else {
-      return $this->getStarttime().' - '.$this->getEndtime();
+      return $this->getStartTime().' - '.$this->getEndTime();
     }
   }
 

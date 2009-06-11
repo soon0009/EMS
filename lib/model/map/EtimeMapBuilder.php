@@ -40,13 +40,9 @@ class EtimeMapBuilder {
 
 		$tMap->addColumn('TITLE', 'Title', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('START_DATE', 'StartDate', 'int', CreoleTypes::DATE, true, null);
+		$tMap->addColumn('START_DATE', 'StartDate', 'int', CreoleTypes::TIMESTAMP, true, null);
 
-		$tMap->addColumn('END_DATE', 'EndDate', 'int', CreoleTypes::DATE, true, null);
-
-		$tMap->addColumn('START_TIME', 'StartTime', 'int', CreoleTypes::TIME, false, null);
-
-		$tMap->addColumn('END_TIME', 'EndTime', 'int', CreoleTypes::TIME, false, null);
+		$tMap->addColumn('END_DATE', 'EndDate', 'int', CreoleTypes::TIMESTAMP, true, null);
 
 		$tMap->addColumn('ALL_DAY', 'AllDay', 'boolean', CreoleTypes::BOOLEAN, true, null);
 

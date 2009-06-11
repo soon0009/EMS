@@ -7,17 +7,10 @@ validators:
       max: 255
       max_error: The string is too long (255 characters maximum)
   dateValidator:
-    class: sfRegexValidator
+    class: myDateValidator
     param:
-      match: Yes
-      match_error: Please enter a date in the format yyyy-mm-dd
-      pattern: /^\d{4}-\d{2}-\d{2}$/
-  timeValidator:
-    class: sfRegexValidator
-    param:
-      match: Yes
-      match_error: Please enter a time in the format HH:MM
-      pattern: /^\d{2}:\d{2}$/
+      start_date: start_date
+      date_error: Please check your start and end times
   
 fields:
   event_id:
@@ -26,15 +19,11 @@ fields:
   start_date:
     required:
       msg: Please select an start date
-    dateValidator:
   end_date:
     required:
       msg: Please select an end date
     dateValidator:
-  start_time:
-    timeValidator:
-  end_time:
-    timeValidator:
+      date_error: This date occurs before the start date
   capacity:
     sfNumberValidator:
       nan_error: Please enter a whole number

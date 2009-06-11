@@ -1,3 +1,4 @@
+<?php use_helper('Date'); ?>
 <div id="event_details">
   <div id="event_heading" class="light_border_bottom">
     <h2 id="event_title">
@@ -65,7 +66,7 @@
               <div class="value"><?php print $etime->getLocation(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Date:</div>
-              <div class="value"><?php print $etime->getStartDate(); ?> - <?php print $etime->getEndDate(); ?></div>
+              <div class="value"><?php print format_date($etime->getStartDate()); ?> - <?php print format_date($etime->getEndDate()); ?></div>
               <div class="clear_float"></div>
               <div class="label">Time:</div>
               <div class="value"><?php print $etime->getStartTime(); ?> - <?php print $etime->getEndTime(); ?></div>

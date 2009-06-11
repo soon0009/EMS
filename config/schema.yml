@@ -26,10 +26,8 @@ propel:
     id:                 { type: integer, required: true, primaryKey: true, autoIncrement: true }
     event_id:           { type: integer, foreignTable: event, foreignReference: id, required: true, onDelete: cascade }
     title:              { type: varchar(255) }
-    start_date:         { type: date, required: true }
-    end_date:           { type: date, required: true }
-    start_time:         { type: time }
-    end_time:           { type: time }
+    start_date:         { type: timestamp, required: true }
+    end_date:           { type: timestamp, required: true }
     all_day:            { type: boolean, required: true, default: false }
     location:           { type: longvarchar }
     description:        { type: longvarchar }

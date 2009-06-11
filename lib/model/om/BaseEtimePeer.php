@@ -13,7 +13,7 @@ abstract class BaseEtimePeer {
 	const CLASS_DEFAULT = 'lib.model.Etime';
 
 	
-	const NUM_COLUMNS = 16;
+	const NUM_COLUMNS = 14;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -33,12 +33,6 @@ abstract class BaseEtimePeer {
 
 	
 	const END_DATE = 'etime.END_DATE';
-
-	
-	const START_TIME = 'etime.START_TIME';
-
-	
-	const END_TIME = 'etime.END_TIME';
 
 	
 	const ALL_DAY = 'etime.ALL_DAY';
@@ -73,18 +67,18 @@ abstract class BaseEtimePeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'EventId', 'Title', 'StartDate', 'EndDate', 'StartTime', 'EndTime', 'AllDay', 'Location', 'Description', 'Notes', 'Capacity', 'HasFee', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
-		BasePeer::TYPE_COLNAME => array (EtimePeer::ID, EtimePeer::EVENT_ID, EtimePeer::TITLE, EtimePeer::START_DATE, EtimePeer::END_DATE, EtimePeer::START_TIME, EtimePeer::END_TIME, EtimePeer::ALL_DAY, EtimePeer::LOCATION, EtimePeer::DESCRIPTION, EtimePeer::NOTES, EtimePeer::CAPACITY, EtimePeer::HAS_FEE, EtimePeer::ORGANISER, EtimePeer::INTERESTED_PARTIES, EtimePeer::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'event_id', 'title', 'start_date', 'end_date', 'start_time', 'end_time', 'all_day', 'location', 'description', 'notes', 'capacity', 'has_fee', 'organiser', 'interested_parties', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'EventId', 'Title', 'StartDate', 'EndDate', 'AllDay', 'Location', 'Description', 'Notes', 'Capacity', 'HasFee', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
+		BasePeer::TYPE_COLNAME => array (EtimePeer::ID, EtimePeer::EVENT_ID, EtimePeer::TITLE, EtimePeer::START_DATE, EtimePeer::END_DATE, EtimePeer::ALL_DAY, EtimePeer::LOCATION, EtimePeer::DESCRIPTION, EtimePeer::NOTES, EtimePeer::CAPACITY, EtimePeer::HAS_FEE, EtimePeer::ORGANISER, EtimePeer::INTERESTED_PARTIES, EtimePeer::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'event_id', 'title', 'start_date', 'end_date', 'all_day', 'location', 'description', 'notes', 'capacity', 'has_fee', 'organiser', 'interested_parties', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EventId' => 1, 'Title' => 2, 'StartDate' => 3, 'EndDate' => 4, 'StartTime' => 5, 'EndTime' => 6, 'AllDay' => 7, 'Location' => 8, 'Description' => 9, 'Notes' => 10, 'Capacity' => 11, 'HasFee' => 12, 'Organiser' => 13, 'InterestedParties' => 14, 'UpdatedAt' => 15, ),
-		BasePeer::TYPE_COLNAME => array (EtimePeer::ID => 0, EtimePeer::EVENT_ID => 1, EtimePeer::TITLE => 2, EtimePeer::START_DATE => 3, EtimePeer::END_DATE => 4, EtimePeer::START_TIME => 5, EtimePeer::END_TIME => 6, EtimePeer::ALL_DAY => 7, EtimePeer::LOCATION => 8, EtimePeer::DESCRIPTION => 9, EtimePeer::NOTES => 10, EtimePeer::CAPACITY => 11, EtimePeer::HAS_FEE => 12, EtimePeer::ORGANISER => 13, EtimePeer::INTERESTED_PARTIES => 14, EtimePeer::UPDATED_AT => 15, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'event_id' => 1, 'title' => 2, 'start_date' => 3, 'end_date' => 4, 'start_time' => 5, 'end_time' => 6, 'all_day' => 7, 'location' => 8, 'description' => 9, 'notes' => 10, 'capacity' => 11, 'has_fee' => 12, 'organiser' => 13, 'interested_parties' => 14, 'updated_at' => 15, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EventId' => 1, 'Title' => 2, 'StartDate' => 3, 'EndDate' => 4, 'AllDay' => 5, 'Location' => 6, 'Description' => 7, 'Notes' => 8, 'Capacity' => 9, 'HasFee' => 10, 'Organiser' => 11, 'InterestedParties' => 12, 'UpdatedAt' => 13, ),
+		BasePeer::TYPE_COLNAME => array (EtimePeer::ID => 0, EtimePeer::EVENT_ID => 1, EtimePeer::TITLE => 2, EtimePeer::START_DATE => 3, EtimePeer::END_DATE => 4, EtimePeer::ALL_DAY => 5, EtimePeer::LOCATION => 6, EtimePeer::DESCRIPTION => 7, EtimePeer::NOTES => 8, EtimePeer::CAPACITY => 9, EtimePeer::HAS_FEE => 10, EtimePeer::ORGANISER => 11, EtimePeer::INTERESTED_PARTIES => 12, EtimePeer::UPDATED_AT => 13, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'event_id' => 1, 'title' => 2, 'start_date' => 3, 'end_date' => 4, 'all_day' => 5, 'location' => 6, 'description' => 7, 'notes' => 8, 'capacity' => 9, 'has_fee' => 10, 'organiser' => 11, 'interested_parties' => 12, 'updated_at' => 13, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, )
 	);
 
 	
@@ -147,10 +141,6 @@ abstract class BaseEtimePeer {
 		$criteria->addSelectColumn(EtimePeer::START_DATE);
 
 		$criteria->addSelectColumn(EtimePeer::END_DATE);
-
-		$criteria->addSelectColumn(EtimePeer::START_TIME);
-
-		$criteria->addSelectColumn(EtimePeer::END_TIME);
 
 		$criteria->addSelectColumn(EtimePeer::ALL_DAY);
 
