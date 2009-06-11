@@ -38,6 +38,10 @@ list_times:
   url: /show_times
   param: { module: etime, action: list }
 
+edit_etime:
+  url: /etime/edit/:id
+  param: { module: etime, action: edit }
+
 # default rules
 homepage:
   url:   /

@@ -78,4 +78,16 @@ class etimeActions extends sfActions
     $this->etime = new Etime;
     return sfView::SUCCESS;
   }
+
+  public function executeDelete()
+  {
+    $etime = EtimePeer::retrieveByPk($this->getRequestParameter('id'));
+    $event = $etime->getEvent();
+
+    $this->forward404Unless($etime);
+
+    $etime->delete();
+
+    return $this->redirect('@show_event?slug='.$event->getSlug());
+  }
 }
