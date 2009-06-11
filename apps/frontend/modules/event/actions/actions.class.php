@@ -81,14 +81,18 @@ class eventActions extends sfActions
   public function executeEdit()
   {
     if ($this->getRequest()->getMethod() != sfRequest::POST) {
-      if (!$this->getRequestParameter('slug')) {
-        $this->event = new Event();
-        $this->forward404Unless($this->event);
-      }
-      else {
+      if ($this->getRequestParameter('slug')) {
         $c = new Criteria();
         $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));
         $this->event = EventPeer::doSelectOne($c);
+        $this->forward404Unless($this->event);
+      }
+      elseif ($this->getRequestParameter('id')) {
+        $this->event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
+        $this->forward404Unless($this->event);
+      }
+      else {
+        $this->event = new Event();
         $this->forward404Unless($this->event);
       }
     }
