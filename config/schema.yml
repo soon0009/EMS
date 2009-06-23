@@ -62,8 +62,9 @@ propel:
     _attributes:    { phpName: Tag, idMethod: native }
     id:             { type: integer, required: true, primaryKey: true, autoIncrement: true }
     tag:            { type: varchar(100), required: true }
-    normalized_tag: { type: varchar(100), unique: true, index: true }
+    normalized_tag: { type: varchar(100), index: true }
     created_at:     ~
+    _uniques:       { unique_normalized_tag: [normalized_tag] }
   
   event_tag:
     _attributes: { phpName: EventTag, idMethod: native }

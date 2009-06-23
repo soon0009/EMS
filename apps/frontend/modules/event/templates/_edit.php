@@ -32,6 +32,13 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="notes">Tags</label>
+    <div class="value">
+      <?php echo input_tag('tags') ?>
+    </div>
+
+    <div class="clear_float"></div>
+
     <?php echo form_error('image_url'); ?>
     <label class="label" for="image_url">Image URL</label>
     <div class="value">

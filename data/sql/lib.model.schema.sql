@@ -196,7 +196,8 @@ CREATE TABLE tag
 	tag VARCHAR(100)  NOT NULL,
 	normalized_tag VARCHAR(100),
 	created_at TIMESTAMP,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	CONSTRAINT unique_normalized_tag UNIQUE (normalized_tag)
 );
 
 COMMENT ON TABLE tag IS '';
