@@ -282,7 +282,7 @@ EtimeRsvp:
     rsvp_id: email
 
 Tag:
-  t1: { tag: 'sitting around' }
+  t1: { tag: '"sitting around"' }
   t2: { tag: 'quiet time' }
   t3: { tag: philosophy }
   t4: { tag: space }

@@ -13,7 +13,10 @@ class Tag extends BaseTag
     return $this->getTag();
   }
   public function setTag($v) {
-    parent::setTag($v);
-    $this->setNormalizedTag(TagTools::normalize($v));
+    $tags = TagTools::splitPhrase($v);
+    foreach ($tags as $tag) {
+      parent::setTag($tag);
+      $this->setNormalizedTag(TagTools::normalize($tag));
+    }
   }
 }
