@@ -14,11 +14,11 @@ class EventPeer extends BaseEventPeer
     $query = '
       SELECT DISTINCT(%s.*)
       FROM %s as event
-      JOIN %s event_tag ON (%s = %s)
-      JOIN %s tag ON (%s = %s)
-      JOIN %s etime ON (%s = %s)
-      JOIN %s etime_tag ON (%s = %s)
-      JOIN %s t ON (t.id = %s)
+      LEFT OUTER JOIN %s event_tag ON (%s = %s)
+      LEFT OUTER JOIN %s tag ON (%s = %s)
+      LEFT OUTER JOIN %s etime ON (%s = %s)
+      LEFT OUTER JOIN %s etime_tag ON (%s = %s)
+      LEFT OUTER JOIN %s t ON (t.id = %s)
       WHERE
         tag.normalized_tag = ?
         OR
