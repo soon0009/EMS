@@ -34,7 +34,7 @@
 
     <label class="label" for="notes">Tags</label>
     <div class="value">
-      <?php echo input_tag('tags') ?>
+      <?php echo object_input_tag($event, 'getTagString', array ( 'class' => 'long',)) ?>
     </div>
 
     <div class="clear_float"></div>

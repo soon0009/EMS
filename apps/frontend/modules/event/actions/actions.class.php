@@ -72,8 +72,8 @@ class eventActions extends sfActions
 
       $etime->save();
 
-      if ($this->getRequestParameter('tags')) {
-        $tags = TagTools::splitPhrase($this->getRequestParameter('tags'));
+      if ($this->getRequestParameter('tag_string')) {
+        $tags = TagTools::splitPhrase($this->getRequestParameter('tag_string'));
         foreach ($tags as $settag) {
           $tag      = new Tag();
           $eventTag = new EventTag();

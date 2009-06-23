@@ -22,4 +22,12 @@ class Event extends BaseEvent
     return myTools::yesNo($this->getPublished());
   }
 
+  public function getTagString() {
+    $r = "";
+    foreach ($this->getEventTags() as $tag) {
+      $r .= '"'. $tag->getTag() . '" ';
+    }
+    return $r;
+  }
+
 }
