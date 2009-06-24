@@ -38,5 +38,53 @@ class TagTools
  
     return $tags;
   }
+
+  public static function recordTags($phrase, $model, $obj) {
+    $tags = TagTools::splitPhrase($phrase);
+    foreach ($tags as $settag) {
+      $tag      = new Tag();
+      if ($model == "etime") {
+        $modelTag = new EtimeTag();
+      }
+      else {
+        $modelTag = new EventTag();
+      }
+      $tag->setTag($settag);
+
+      $c = new Criteria();
+      $c->add(TagPeer::NORMALIZED_TAG, $tag->getNormalizedTag());
+      $tag_exists = TagPeer::doSelectOne($c);
+      if (!$tag_exists) {
+        $tag->save();
+      }
+      else {
+        $tag = $tag_exists;
+      }
+
+      if ($model == "etime") {
+        $modelTag->setEtime($obj);
+      }
+      else {
+        $modelTag->setEvent($obj);
+      }
+      $modelTag->setTag($tag);
+      $modelTag->save();
+    }
+    return true;
+  }
+
+  public static function replaceTags($phrase, $model, $obj) {
+    if ($model == "etime") {
+      foreach($obj->getEtimeTags() as $etimeTag) {
+        $etimeTag->delete();
+      }
+    }
+    else {
+      foreach($obj->getEventTags() as $eventTag) {
+        $eventTag->delete();
+      }
+    }
+    TagTools::recordTags($phrase, $model, $obj);
+  }
+
 }
- 

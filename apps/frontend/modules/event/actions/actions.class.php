@@ -73,26 +73,7 @@ class eventActions extends sfActions
       $etime->save();
 
       if ($this->getRequestParameter('tag_string')) {
-        $tags = TagTools::splitPhrase($this->getRequestParameter('tag_string'));
-        foreach ($tags as $settag) {
-          $tag      = new Tag();
-          $eventTag = new EventTag();
-          $tag->setTag($settag);
-
-          $c = new Criteria();
-          $c->add(TagPeer::NORMALIZED_TAG, $tag->getNormalizedTag());
-          $tag_exists = TagPeer::doSelectOne($c);
-          if (!$tag_exists) {
-            $tag->save();
-          }
-          else {
-            $tag = $tag_exists;
-          }
-
-          $eventTag->setEvent($event);
-          $eventTag->setTag($tag);
-          $eventTag->save();
-        }
+        TagTools::recordTags($this->getRequestParameter('tag_string'), "event", $event);
       }
   
       return $this->redirect('@show_event?slug='.$event->getSlug());
@@ -141,6 +122,8 @@ class eventActions extends sfActions
       $event->setInterestedParties($this->getRequestParameter('interested_parties'));
   
       $event->save();
+
+      TagTools::replaceTags($this->getRequestParameter('tag_string'), "event", $event);
   
       return $this->redirect('@show_event?slug='.$event->getSlug());
     }
