@@ -68,6 +68,15 @@ class etimeActions extends sfActions
       $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
       $etime->save();
+
+      if ($this->getRequestParameter('etime_audiences')) {
+        foreach($this->getRequestParameter('etime_audiences') as $audience_selection) {
+          $etimeAudience = new EtimeAudience();
+          $etimeAudience->setEtime($etime);
+          $etimeAudience->setAudienceId($audience_selection);
+          $etimeAudience->save();
+        }
+      }
   
       return $this->redirect('@show_event?slug='.$etime->getEvent()->getSlug());
     }

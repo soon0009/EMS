@@ -41,8 +41,8 @@ class eventActions extends sfActions
       $this->forward404Unless($this->etime);
     }
     else {
-      $event    = new Event();
-      $etime    = new Etime();
+      $event         = new Event();
+      $etime         = new Etime();
   
       $event->setTitle($this->getRequestParameter('title'));
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
@@ -71,6 +71,15 @@ class eventActions extends sfActions
       $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
       $etime->save();
+
+      if ($this->getRequestParameter('etime_audiences')) {
+        foreach($this->getRequestParameter('etime_audiences') as $audience_selection) {
+          $etimeAudience = new EtimeAudience();
+          $etimeAudience->setEtime($etime);
+          $etimeAudience->setAudienceId($audience_selection);
+          $etimeAudience->save();
+        }
+      }
 
       if ($this->getRequestParameter('tag_string')) {
         TagTools::recordTags($this->getRequestParameter('tag_string'), "event", $event);

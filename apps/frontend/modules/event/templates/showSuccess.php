@@ -47,7 +47,7 @@
             <div class="value"><?php print $event->getupdatedAt(); ?></div>
             <div class="clear_float"></div>
             <div class="label"></div>
-            <div class="value update"><?php echo link_to('Update event details', 'event/edit?id='.$event->getId()) ?></div>
+            <div class="value update"><?php echo link_to('Update event details', '@edit_event?slug='.$event->getSlug()) ?></div>
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
@@ -116,7 +116,7 @@
                 </ul>
               </div>
               <div class="label"></div>
-              <div class="value update"> <?php // link_to('Update event time details', ) ?> </div>
+              <div class="value update"> <?php echo link_to('Update event time details', '@edit_etime?id='.$etime->getId()) ?> </div>
               <div class="clear_float"></div>
             </div>
           </div> <!-- end yui-u -->

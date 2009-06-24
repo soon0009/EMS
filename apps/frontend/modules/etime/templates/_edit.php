@@ -45,6 +45,13 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="notes">Audience</label>
+    <div class="value">
+      <?php echo object_select_tag($etime, 'getEtimeAudiences', array ( 'related_class' => 'Audience', 'include_blank' => false, 'multiple' => true)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
     <label class="label" for="notes">Notes</label>
     <div class="value">
       <?php echo object_textarea_tag($etime, 'getNotes', array ( 'id' => 'etime_notes', 'name' => 'etime_notes', 'size' => '30x3',)) ?>
