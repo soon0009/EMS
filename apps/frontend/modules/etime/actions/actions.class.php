@@ -30,8 +30,7 @@ class etimeActions extends sfActions
   public function executeEdit() {
     if ($this->getRequest()->getMethod() != sfRequest::POST) {
       if (!$this->getRequestParameter('id')) {
-        $this->etime = new Etime();
-        $this->forward404Unless($this->etime);
+        $this->forward404();
       }
       else {
         $c = new Criteria();
@@ -77,7 +76,7 @@ class etimeActions extends sfActions
           $etimeAudience->save();
         }
       }
-  
+
       return $this->redirect('@show_event?slug='.$etime->getEvent()->getSlug());
     }
     return sfView::SUCCESS;

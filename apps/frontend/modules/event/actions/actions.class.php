@@ -41,8 +41,8 @@ class eventActions extends sfActions
       $this->forward404Unless($this->etime);
     }
     else {
-      $event         = new Event();
-      $etime         = new Etime();
+      $event = new Event();
+      $etime = new Etime();
   
       $event->setTitle($this->getRequestParameter('title'));
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
@@ -105,8 +105,7 @@ class eventActions extends sfActions
         $this->forward404Unless($this->event);
       }
       else {
-        $this->event = new Event();
-        $this->forward404Unless($this->event);
+        $this->forward404();
       }
     }
     else {

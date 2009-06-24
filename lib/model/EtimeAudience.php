@@ -9,4 +9,7 @@
  */ 
 class EtimeAudience extends BaseEtimeAudience
 {
+  public function __toString() {
+    return $this->getAudience()->getName();
+  }
 }
