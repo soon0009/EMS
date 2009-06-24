@@ -10,6 +10,7 @@ validators:
   slugValidator:
     class: mySlugValidator
     param:
+      event_id: id
       slug_error: This title already exists
 
 fields:
