@@ -11,7 +11,7 @@
     <?php echo form_error('start_date'); ?>
     <label class="label" for="start_date">Start date</label>
     <div class="value">
-      <?php echo select_datetime_tag('start_date') ?>
+      <?php echo select_datetime_tag('start_date', $etime->getStartDate()) ?>
     </div>
 
     <div class="clear_float"></div>
@@ -19,7 +19,7 @@
     <?php echo form_error('end_date'); ?>
     <label class="label" for="end_date">End date</label>
     <div class="value">
-      <?php echo select_datetime_tag('end_date') ?>
+      <?php echo select_datetime_tag('end_date', $etime->getEndDate()) ?>
     </div>
 
     <div class="clear_float"></div>
@@ -48,6 +48,9 @@
     <label class="label" for="notes">Audience</label>
     <div class="value">
       <?php echo object_select_tag($etime, 'getEtimeAudiences', array ( 'related_class' => 'Audience', 'include_blank' => false, 'multiple' => true)) ?>
+      <?php $c = new Criteria(); $audiences = AudiencePeer::doSelect($c); ?>
+      <?php $selected = array(); foreach ($etime->getEtimeAudiences() as $eaObject) { $selected[] = $eaObject->getAudienceId(); }?>
+      <?php echo select_tag('etime_audiences', objects_for_select($audiences, 'getId', 'getName', $selected), array( 'multiple' => true)) ?>
     </div>
 
     <div class="clear_float"></div>

@@ -19,7 +19,7 @@
 <?php echo submit_tag('save') ?>
 <?php if ($etime->getId()): ?>
   &nbsp;<?php echo link_to('delete', 'etime/delete?id='.$etime->getId(), 'post=true&confirm=Are you sure?') ?>
-  &nbsp;<?php echo link_to('cancel', 'etime/show?id='.$etime->getId()) ?>
+  &nbsp;<?php echo link_to('cancel', '@show_event?slug='.$etime->getEvent()->getSlug()) ?>
 <?php else: ?>
   &nbsp;<?php echo link_to('cancel', 'event/list') ?>
 <?php endif; ?>
