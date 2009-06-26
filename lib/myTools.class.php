@@ -22,5 +22,9 @@ class myTools
       return "No";
     }
   }
+
+  public static function strToInt(&$v) {
+    settype($v, 'int');
+  }
 } 
 

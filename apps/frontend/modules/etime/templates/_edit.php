@@ -47,9 +47,20 @@
 
     <label class="label" for="notes">Audience</label>
     <div class="value">
-      <?php echo object_select_tag($etime, 'getEtimeAudiences', array ( 'related_class' => 'Audience', 'include_blank' => false, 'multiple' => true)) ?>
+      <?php
+        $selected = array();
+        if ($sf_params->get('etime_audiences')) {
+          $selected = $sf_params->get('etime_audiences');
+          array_walk($selected, 'myTools::strToInt');
+        }
+        else {
+          foreach ($etime->getEtimeAudiences() as $eaObject) { $selected[] = $eaObject->getAudienceId(); }
+        }
+print "<pre>";
+var_dump($selected);
+print "</pre>";
+      ?>
       <?php $c = new Criteria(); $audiences = AudiencePeer::doSelect($c); ?>
-      <?php $selected = array(); foreach ($etime->getEtimeAudiences() as $eaObject) { $selected[] = $eaObject->getAudienceId(); }?>
       <?php echo select_tag('etime_audiences', objects_for_select($audiences, 'getId', 'getName', $selected), array( 'multiple' => true)) ?>
     </div>
 
