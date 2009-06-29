@@ -1,6 +1,9 @@
-<?php use_helper('Object', 'Validation') ?>
+<?php use_helper('Object', 'ObjectAdmin', 'Validation') ?>
 
-<?php echo form_tag('event/edit') ?>
+<?php echo form_tag('event/edit', array(
+  'multipart' => true,
+  'onsubmit'  => 'double_list_submit(); return true;'
+)) ?>
 
 <?php echo include_partial('edit', array('event'=>$event)); ?>
 

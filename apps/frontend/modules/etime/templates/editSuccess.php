@@ -1,6 +1,11 @@
-<?php use_helper('DateForm', 'Object', 'Validation') ?>
+<?php use_helper('DateForm', 'Object', 'ObjectAdmin', 'Validation') ?>
 
-<?php echo form_tag('etime/edit') ?>
+<?php echo form_tag('etime/edit', array(
+  'id'        => 'sf_admin_edit_form',
+  'name'      => 'sf_admin_edit_form',
+  'multipart' => true,
+  'onsubmit'  => 'double_list_submit(); return true;'
+)) ?>
 
   <div class="long_form">
     <?php echo form_error('event_id'); ?>

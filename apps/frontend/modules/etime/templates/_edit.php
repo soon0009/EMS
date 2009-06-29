@@ -45,30 +45,37 @@
 
     <div class="clear_float"></div>
 
-    <label class="label" for="notes">Audience</label>
+    <label class="label" for="notes">Notes</label>
     <div class="value">
-      <?php
-        $selected = array();
-        if ($sf_params->get('etime_audiences')) {
-          $selected = $sf_params->get('etime_audiences');
-          array_walk($selected, 'myTools::strToInt');
-        }
-        else {
-          foreach ($etime->getEtimeAudiences() as $eaObject) { $selected[] = $eaObject->getAudienceId(); }
-        }
-print "<pre>";
-var_dump($selected);
-print "</pre>";
-      ?>
-      <?php $c = new Criteria(); $audiences = AudiencePeer::doSelect($c); ?>
-      <?php echo select_tag('etime_audiences', objects_for_select($audiences, 'getId', 'getName', $selected), array( 'multiple' => true)) ?>
+      <?php echo object_textarea_tag($etime, 'getNotes', array ( 'id' => 'etime_notes', 'name' => 'etime_notes', 'size' => '30x3',)) ?>
     </div>
 
     <div class="clear_float"></div>
 
-    <label class="label" for="notes">Notes</label>
+    <label class="label" for="audience">Audience</label>
     <div class="value">
-      <?php echo object_textarea_tag($etime, 'getNotes', array ( 'id' => 'etime_notes', 'name' => 'etime_notes', 'size' => '30x3',)) ?>
+      <?php if ($sf_request->hasError('audience')): ?>
+        <?php echo form_error('audience', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+    
+      <?php $value = object_admin_check_list($etime, 'getEtimeAudience', array (
+      'control_name' => 'audience',
+      'through_class' => 'EtimeAudience',
+      )); echo $value ? $value : '&nbsp;' ?>
+    </div>
+
+    <div class="clear_float"></div>
+
+    <label class="label" for="audience">Rsvp</label>
+    <div class="value">
+      <?php if ($sf_request->hasError('audience')): ?>
+        <?php echo form_error('audience', array('class' => 'form-error-msg')) ?>
+      <?php endif; ?>
+    
+      <?php $value = object_admin_check_list($etime, 'getEtimeRsvp', array (
+      'control_name' => 'audience',
+      'through_class' => 'EtimeRsvp',
+      )); echo $value ? $value : '&nbsp;' ?>
     </div>
 
     <div class="clear_float"></div>
