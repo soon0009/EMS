@@ -72,14 +72,40 @@ class eventActions extends sfActions
 
       $etime->save();
 
-      if ($this->getRequestParameter('etime_audiences')) {
-        foreach($this->getRequestParameter('etime_audiences') as $audience_selection) {
-          $etimeAudience = new EtimeAudience();
-          $etimeAudience->setEtime($etime);
-          $etimeAudience->setAudienceId($audience_selection);
-          $etimeAudience->save();
+      // Update many-to-many for "etime_rsvp"
+      $c = new Criteria();
+      $c->add(EtimeRsvpPeer::ETIME_ID, $etime->getPrimaryKey());
+      EtimeRsvpPeer::doDelete($c);
+
+      $ids = $this->getRequestParameter('associated_etime_rsvp');
+      if (is_array($ids))
+      {
+        foreach ($ids as $id)
+        {
+          $EtimeRsvp = new EtimeRsvp();
+          $EtimeRsvp->setEtime($etime);
+          $EtimeRsvp->setRsvpId($id);
+          $EtimeRsvp->save();
         }
       }
+
+      // Update many-to-many for "etime_audience"
+      $c = new Criteria();
+      $c->add(EtimeAudiencePeer::ETIME_ID, $etime->getPrimaryKey());
+      EtimeAudiencePeer::doDelete($c);
+
+      $ids = $this->getRequestParameter('associated_etime_audience');
+      if (is_array($ids))
+      {
+        foreach ($ids as $id)
+        {
+          $EtimeAudience = new EtimeAudience();
+          $EtimeAudience->setEtime($etime);
+          $EtimeAudience->setAudienceId($id);
+          $EtimeAudience->save();
+        }
+      }
+
 
       if ($this->getRequestParameter('tag_string')) {
         TagTools::recordTags($this->getRequestParameter('tag_string'), "event", $event);

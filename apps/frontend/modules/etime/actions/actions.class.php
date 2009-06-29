@@ -73,7 +73,7 @@ class etimeActions extends sfActions
       $c->add(EtimeRsvpPeer::ETIME_ID, $etime->getPrimaryKey());
       EtimeRsvpPeer::doDelete($c);
 
-      $ids = $this->getRequestParameter('etime_rsvp');
+      $ids = $this->getRequestParameter('associated_etime_rsvp');
       if (is_array($ids))
       {
         foreach ($ids as $id)
