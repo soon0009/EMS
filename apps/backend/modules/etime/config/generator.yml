@@ -1,0 +1,27 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Etime
+    theme:            default
+
+    fields:
+      id: { name: Event Id }
+      updated_at: { params: date_format='dd/MM/yy' }
+
+    list:
+      title: List of all event times
+      display: [title, event, all_day, start_date, end_date, location]
+      layout: stacked
+      params: |
+        <strong>%%=title%%</strong> - %%organiser%% <br/>
+        <em>%%location%%</em>
+        <p>%%description%%</p>
+      filters: [id, title, organiser]
+      max_per_page: 2
+
+
+    edit:
+      fields:
+        etime_audience: { type: admin_double_list, params: through_class=EtimeAudience }
+        etime_rsvp: { type: admin_check_list, params: through_class=EtimeRsvp }
+      display: [event, title, all_day, start_date, end_date, location, description, notes, etime_audience, etime_rsvp, capacity, has_fee, organiser, interested_parties]

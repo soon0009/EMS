@@ -1,0 +1,20 @@
+generator:
+  class:              sfPropelAdminGenerator
+  param:
+    model_class:      Event
+    theme:            default
+
+    fields:
+      id: { name: Event Id }
+      updated_at: { params: date_format='dd/MM/yy' }
+
+    list:
+      title: List of all events
+      display: [id, title, status, published, organiser, updated_at]
+      layout: stacked
+      params: |
+        %%published%% <strong>%%=title%%</strong> - %%status%% <br/>
+        <em>by %%organiser%%</em>
+        <p>%%description%%</p>
+      filters: [id, title, status_id, published, organiser]
+      max_per_page: 2
