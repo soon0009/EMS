@@ -1,4 +1,4 @@
-<?php use_helper('DateForm', 'Object', 'Validation') ?>
+<?php use_helper('DateForm', 'Object', 'ObjectAdmin', 'Validation') ?>
 
 <?php echo form_tag('event/create') ?>
 
