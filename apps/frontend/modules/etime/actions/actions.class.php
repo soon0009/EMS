@@ -108,7 +108,7 @@ class etimeActions extends sfActions
   }
 
   public function handleErrorEdit() {
-    $this->etime = new Etime;
+    $this->etime = $this->getEtimeOrCreate();
     return sfView::SUCCESS;
   }
 
@@ -122,5 +122,21 @@ class etimeActions extends sfActions
     $etime->delete();
 
     return $this->redirect('@show_event?slug='.$event->getSlug());
+  }
+
+  protected function getEtimeOrCreate($id = 'id')
+  {
+    if (!$this->getRequestParameter($id))
+    {
+      $etime = new Etime();
+    }
+    else
+    {
+      $etime = EtimePeer::retrieveByPk($this->getRequestParameter($id));
+
+      $this->forward404Unless($etime);
+    }
+
+    return $etime;
   }
 }
