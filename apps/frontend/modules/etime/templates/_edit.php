@@ -95,6 +95,14 @@
 
     <div class="clear_float"></div>
 
+    <?php echo form_error('additional_guests'); ?>
+    <label class="label" for="additional_guests">Additional guests</label>
+    <div class="value">
+      <?php echo object_input_tag($etime, 'getAdditionalGuests') ?>
+    </div>
+
+    <div class="clear_float"></div>
+
     <label class="label" for="has_fee">Has fee</label>
     <div class="value">
       <?php echo object_checkbox_tag($etime, 'getHasFee', array ()) ?>

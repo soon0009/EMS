@@ -104,6 +104,7 @@ CREATE TABLE etime
 	description TEXT,
 	notes TEXT,
 	capacity INTEGER,
+	additional_guests INTEGER default 0 NOT NULL,
 	has_fee BOOLEAN default 'f' NOT NULL,
 	audio_visual_support BOOLEAN default 'f' NOT NULL,
 	organiser TEXT,
@@ -276,3 +277,118 @@ SET search_path TO public;
 ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
 
 ALTER TABLE etime_tag ADD CONSTRAINT etime_tag_FK_2 FOREIGN KEY (tag_id) REFERENCES tag (id) ON DELETE CASCADE;
+
+-----------------------------------------------------------------------------
+-- guest
+-----------------------------------------------------------------------------
+
+DROP TABLE guest CASCADE;
+
+DROP SEQUENCE guest_seq;
+
+CREATE SEQUENCE guest_seq;
+
+
+CREATE TABLE guest
+(
+	etime_id INTEGER,
+	id INTEGER  NOT NULL,
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE guest IS '';
+
+
+SET search_path TO public;
+ALTER TABLE guest ADD CONSTRAINT guest_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
+
+-----------------------------------------------------------------------------
+-- reg_field
+-----------------------------------------------------------------------------
+
+DROP TABLE reg_field CASCADE;
+
+DROP SEQUENCE reg_field_seq;
+
+CREATE SEQUENCE reg_field_seq;
+
+
+CREATE TABLE reg_field
+(
+	name VARCHAR(50)  NOT NULL,
+	type VARCHAR(50)  NOT NULL,
+	id INTEGER  NOT NULL,
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE reg_field IS '';
+
+
+SET search_path TO public;
+-----------------------------------------------------------------------------
+-- reg_form
+-----------------------------------------------------------------------------
+
+DROP TABLE reg_form CASCADE;
+
+
+CREATE TABLE reg_form
+(
+	event_id INTEGER  NOT NULL,
+	reg_field_id INTEGER  NOT NULL,
+	field_order INTEGER,
+	PRIMARY KEY (event_id,reg_field_id)
+);
+
+COMMENT ON TABLE reg_form IS '';
+
+
+SET search_path TO public;
+ALTER TABLE reg_form ADD CONSTRAINT reg_form_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
+
+ALTER TABLE reg_form ADD CONSTRAINT reg_form_FK_2 FOREIGN KEY (reg_field_id) REFERENCES reg_field (id) ON DELETE CASCADE;
+
+-----------------------------------------------------------------------------
+-- guest_reg
+-----------------------------------------------------------------------------
+
+DROP TABLE guest_reg CASCADE;
+
+
+CREATE TABLE guest_reg
+(
+	guest_id INTEGER  NOT NULL,
+	reg_field_id INTEGER  NOT NULL,
+	value TEXT,
+	PRIMARY KEY (guest_id,reg_field_id)
+);
+
+COMMENT ON TABLE guest_reg IS '';
+
+
+SET search_path TO public;
+ALTER TABLE guest_reg ADD CONSTRAINT guest_reg_FK_1 FOREIGN KEY (guest_id) REFERENCES guest (id) ON DELETE CASCADE;
+
+ALTER TABLE guest_reg ADD CONSTRAINT guest_reg_FK_2 FOREIGN KEY (reg_field_id) REFERENCES reg_field (id) ON DELETE CASCADE;
+
+-----------------------------------------------------------------------------
+-- additional_guest
+-----------------------------------------------------------------------------
+
+DROP TABLE additional_guest CASCADE;
+
+
+CREATE TABLE additional_guest
+(
+	parent_guest_id INTEGER  NOT NULL,
+	child_guest_id INTEGER  NOT NULL,
+	PRIMARY KEY (parent_guest_id,child_guest_id)
+);
+
+COMMENT ON TABLE additional_guest IS '';
+
+
+SET search_path TO public;
+ALTER TABLE additional_guest ADD CONSTRAINT additional_guest_FK_1 FOREIGN KEY (parent_guest_id) REFERENCES guest (id) ON DELETE CASCADE;
+
+ALTER TABLE additional_guest ADD CONSTRAINT additional_guest_FK_2 FOREIGN KEY (child_guest_id) REFERENCES guest (id) ON DELETE CASCADE;

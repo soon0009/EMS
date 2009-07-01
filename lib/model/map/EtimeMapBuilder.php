@@ -54,6 +54,8 @@ class EtimeMapBuilder {
 
 		$tMap->addColumn('CAPACITY', 'Capacity', 'int', CreoleTypes::INTEGER, false, null);
 
+		$tMap->addColumn('ADDITIONAL_GUESTS', 'AdditionalGuests', 'int', CreoleTypes::INTEGER, true, null);
+
 		$tMap->addColumn('HAS_FEE', 'HasFee', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
 		$tMap->addColumn('AUDIO_VISUAL_SUPPORT', 'AudioVisualSupport', 'boolean', CreoleTypes::BOOLEAN, true, null);

@@ -40,6 +40,7 @@ propel:
     description:          { type: longvarchar }
     notes:                { type: longvarchar }
     capacity:             { type: integer }
+    additional_guests:    { type: integer, required: true, default: 0 }
     has_fee:              { type: boolean, required: true, default: false }
     audio_visual_support: { type: boolean, required: true, default: false }
     organiser:            { type: longvarchar }
@@ -83,3 +84,29 @@ propel:
     _attributes: { phpName: EtimeTag, idMethod: native }
     etime_id:    { type: integer, foreignTable: etime, foreignReference: id, primaryKey: true, onDelete: cascade }
     tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true, onDelete: cascade }
+
+  guest:
+    _attributes: { phpName: Guest, idMethod: native }
+    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
+
+  reg_field:
+    _attributes: { phpName: RegField, idMethod: native }
+    name:        { type: varchar(50), required: true }
+    type:        { type: varchar(50), required: true }
+
+  reg_form:
+    _attributes:  { phpName: RegForm, idMethod: native }
+    event_id:     { type: integer, foreignTable: event, foreignReference: id, primaryKey: true, onDelete: cascade }
+    reg_field_id: { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
+    field_order:  { type: integer }
+
+  guest_reg:
+    _attributes:  { phpName: GuestReg, idMethod: native }
+    guest_id:     { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }
+    reg_field_id: { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
+    value:        { type: longvarchar }
+
+  additional_guest:
+    _attributes:     { phpName: AdditionalGuest, idMethod: native }
+    parent_guest_id: { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }
+    child_guest_id:  { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }

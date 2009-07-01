@@ -78,6 +78,12 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	protected $lastEventTagCriteria = null;
 
 	
+	protected $collRegForms;
+
+	
+	protected $lastRegFormCriteria = null;
+
+	
 	protected $alreadyInSave = false;
 
 	
@@ -534,6 +540,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->collRegForms !== null) {
+				foreach($this->collRegForms as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -599,6 +613,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 				if ($this->collEventTags !== null) {
 					foreach($this->collEventTags as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
+
+				if ($this->collRegForms !== null) {
+					foreach($this->collRegForms as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -843,6 +865,10 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 			foreach($this->getEventTags() as $relObj) {
 				$copyObj->addEventTag($relObj->copy($deepCopy));
+			}
+
+			foreach($this->getRegForms() as $relObj) {
+				$copyObj->addRegForm($relObj->copy($deepCopy));
 			}
 
 		} 
@@ -1101,6 +1127,111 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		$this->lastEventTagCriteria = $criteria;
 
 		return $this->collEventTags;
+	}
+
+	
+	public function initRegForms()
+	{
+		if ($this->collRegForms === null) {
+			$this->collRegForms = array();
+		}
+	}
+
+	
+	public function getRegForms($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseRegFormPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collRegForms === null) {
+			if ($this->isNew()) {
+			   $this->collRegForms = array();
+			} else {
+
+				$criteria->add(RegFormPeer::EVENT_ID, $this->getId());
+
+				RegFormPeer::addSelectColumns($criteria);
+				$this->collRegForms = RegFormPeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(RegFormPeer::EVENT_ID, $this->getId());
+
+				RegFormPeer::addSelectColumns($criteria);
+				if (!isset($this->lastRegFormCriteria) || !$this->lastRegFormCriteria->equals($criteria)) {
+					$this->collRegForms = RegFormPeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastRegFormCriteria = $criteria;
+		return $this->collRegForms;
+	}
+
+	
+	public function countRegForms($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseRegFormPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(RegFormPeer::EVENT_ID, $this->getId());
+
+		return RegFormPeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addRegForm(RegForm $l)
+	{
+		$this->collRegForms[] = $l;
+		$l->setEvent($this);
+	}
+
+
+	
+	public function getRegFormsJoinRegField($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseRegFormPeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collRegForms === null) {
+			if ($this->isNew()) {
+				$this->collRegForms = array();
+			} else {
+
+				$criteria->add(RegFormPeer::EVENT_ID, $this->getId());
+
+				$this->collRegForms = RegFormPeer::doSelectJoinRegField($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(RegFormPeer::EVENT_ID, $this->getId());
+
+			if (!isset($this->lastRegFormCriteria) || !$this->lastRegFormCriteria->equals($criteria)) {
+				$this->collRegForms = RegFormPeer::doSelectJoinRegField($criteria, $con);
+			}
+		}
+		$this->lastRegFormCriteria = $criteria;
+
+		return $this->collRegForms;
 	}
 
 } 

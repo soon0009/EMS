@@ -101,6 +101,9 @@
               <div class="label">Registration capacity:</div>
               <div class="value"><?php print $etime->getCapacity(); ?></div>
               <div class="clear_float"></div>
+              <div class="label">Additional guests:</div>
+              <div class="value"><?php print $etime->getAdditionalGuests(); ?></div>
+              <div class="clear_float"></div>
               <div class="label">Fee:</div>
               <div class="value"><?php print $etime->getHasFeeString(); ?></div>
               <div class="clear_float"></div>
