@@ -92,6 +92,7 @@ propel:
   reg_field:
     _attributes: { phpName: RegField, idMethod: native }
     name:        { type: varchar(50), required: true }
+    label:       { type: varchar(50), required: true }
     type:        { type: varchar(50), required: true }
 
   reg_form:

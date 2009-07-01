@@ -13,7 +13,7 @@ abstract class BaseRegFieldPeer {
 	const CLASS_DEFAULT = 'lib.model.RegField';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -21,6 +21,9 @@ abstract class BaseRegFieldPeer {
 
 	
 	const NAME = 'reg_field.NAME';
+
+	
+	const LABEL = 'reg_field.LABEL';
 
 	
 	const TYPE = 'reg_field.TYPE';
@@ -34,18 +37,18 @@ abstract class BaseRegFieldPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Name', 'Type', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (RegFieldPeer::NAME, RegFieldPeer::TYPE, RegFieldPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('name', 'type', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Name', 'Label', 'Type', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (RegFieldPeer::NAME, RegFieldPeer::LABEL, RegFieldPeer::TYPE, RegFieldPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('name', 'label', 'type', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Name' => 0, 'Type' => 1, 'Id' => 2, ),
-		BasePeer::TYPE_COLNAME => array (RegFieldPeer::NAME => 0, RegFieldPeer::TYPE => 1, RegFieldPeer::ID => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('name' => 0, 'type' => 1, 'id' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('Name' => 0, 'Label' => 1, 'Type' => 2, 'Id' => 3, ),
+		BasePeer::TYPE_COLNAME => array (RegFieldPeer::NAME => 0, RegFieldPeer::LABEL => 1, RegFieldPeer::TYPE => 2, RegFieldPeer::ID => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('name' => 0, 'label' => 1, 'type' => 2, 'id' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -100,6 +103,8 @@ abstract class BaseRegFieldPeer {
 	{
 
 		$criteria->addSelectColumn(RegFieldPeer::NAME);
+
+		$criteria->addSelectColumn(RegFieldPeer::LABEL);
 
 		$criteria->addSelectColumn(RegFieldPeer::TYPE);
 

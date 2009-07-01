@@ -46,6 +46,11 @@ edit_etime:
   url: /etime/edit/:id
   param: { module: etime, action: edit }
 
+# Registration form
+show_reg_form:
+  url: /registration_form/show/:slug
+  param: { module: registration_form, action: show }
+
 # default rules
 homepage:
   url:   /

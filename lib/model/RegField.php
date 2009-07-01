@@ -9,4 +9,7 @@
  */ 
 class RegField extends BaseRegField
 {
+  public function __toString() {
+    return $this->getLabel();
+  }
 }

@@ -36,6 +36,8 @@ class RegFieldMapBuilder {
 
 		$tMap->addColumn('NAME', 'Name', 'string', CreoleTypes::VARCHAR, true, 50);
 
+		$tMap->addColumn('LABEL', 'Label', 'string', CreoleTypes::VARCHAR, true, 50);
+
 		$tMap->addColumn('TYPE', 'Type', 'string', CreoleTypes::VARCHAR, true, 50);
 
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);

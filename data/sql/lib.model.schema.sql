@@ -316,6 +316,7 @@ CREATE SEQUENCE reg_field_seq;
 CREATE TABLE reg_field
 (
 	name VARCHAR(50)  NOT NULL,
+	label VARCHAR(50)  NOT NULL,
 	type VARCHAR(50)  NOT NULL,
 	id INTEGER  NOT NULL,
 	PRIMARY KEY (id)

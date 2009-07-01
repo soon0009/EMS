@@ -1,7 +1,6 @@
 <?php echo object_input_hidden_tag($event, 'getId') ?>
 <?php echo object_input_hidden_tag($event, 'getSlug') ?>
 
-
   <div class="long_form">
     <?php echo form_error('title'); ?>
     <label class="label" for="title">Event title</label>

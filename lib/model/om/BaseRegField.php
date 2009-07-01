@@ -13,6 +13,10 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 
 
 	
+	protected $label;
+
+
+	
 	protected $type;
 
 
@@ -45,6 +49,13 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getLabel()
+	{
+
+		return $this->label;
+	}
+
+	
 	public function getType()
 	{
 
@@ -71,6 +82,22 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 		if ($this->name !== $v) {
 			$this->name = $v;
 			$this->modifiedColumns[] = RegFieldPeer::NAME;
+		}
+
+	} 
+	
+	public function setLabel($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->label !== $v) {
+			$this->label = $v;
+			$this->modifiedColumns[] = RegFieldPeer::LABEL;
 		}
 
 	} 
@@ -113,15 +140,17 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 
 			$this->name = $rs->getString($startcol + 0);
 
-			$this->type = $rs->getString($startcol + 1);
+			$this->label = $rs->getString($startcol + 1);
 
-			$this->id = $rs->getInt($startcol + 2);
+			$this->type = $rs->getString($startcol + 2);
+
+			$this->id = $rs->getInt($startcol + 3);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 3; 
+						return $startcol + 4; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating RegField object", $e);
 		}
@@ -284,9 +313,12 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 				return $this->getName();
 				break;
 			case 1:
-				return $this->getType();
+				return $this->getLabel();
 				break;
 			case 2:
+				return $this->getType();
+				break;
+			case 3:
 				return $this->getId();
 				break;
 			default:
@@ -300,8 +332,9 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 		$keys = RegFieldPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getName(),
-			$keys[1] => $this->getType(),
-			$keys[2] => $this->getId(),
+			$keys[1] => $this->getLabel(),
+			$keys[2] => $this->getType(),
+			$keys[3] => $this->getId(),
 		);
 		return $result;
 	}
@@ -321,9 +354,12 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 				$this->setName($value);
 				break;
 			case 1:
-				$this->setType($value);
+				$this->setLabel($value);
 				break;
 			case 2:
+				$this->setType($value);
+				break;
+			case 3:
 				$this->setId($value);
 				break;
 		} 	}
@@ -334,8 +370,9 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 		$keys = RegFieldPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setName($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setType($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setId($arr[$keys[2]]);
+		if (array_key_exists($keys[1], $arr)) $this->setLabel($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setType($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setId($arr[$keys[3]]);
 	}
 
 	
@@ -344,6 +381,7 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 		$criteria = new Criteria(RegFieldPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(RegFieldPeer::NAME)) $criteria->add(RegFieldPeer::NAME, $this->name);
+		if ($this->isColumnModified(RegFieldPeer::LABEL)) $criteria->add(RegFieldPeer::LABEL, $this->label);
 		if ($this->isColumnModified(RegFieldPeer::TYPE)) $criteria->add(RegFieldPeer::TYPE, $this->type);
 		if ($this->isColumnModified(RegFieldPeer::ID)) $criteria->add(RegFieldPeer::ID, $this->id);
 
@@ -377,6 +415,8 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setName($this->name);
+
+		$copyObj->setLabel($this->label);
 
 		$copyObj->setType($this->type);
 

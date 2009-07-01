@@ -57,7 +57,7 @@
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
-          Next to event
+            <?php echo link_to('Show registration form', '@show_reg_form?slug='.$event->getSlug()) ?>
           </div> <!-- end yui-u -->
         </div> <!-- end yui-g -->
       </div>

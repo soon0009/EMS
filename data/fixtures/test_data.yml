@@ -348,3 +348,37 @@ EtimeTag:
   ettag6: { etime_id: et4, tag_id: t12 }
   ettag7: { etime_id: et4, tag_id: t13 }
   ettag8: { etime_id: et5, tag_id: t16 }
+
+RegField:
+  field1: { name: title, label: Title, type: varchar }
+  field2: { name: firstname, label: 'First name', type: varchar }
+  field3: { name: lastname, label: 'Last name', type: varchar }
+  field4: { name: preferred_name, label: 'Preferred name', type: varchar }
+  field5: { name: email, label: 'Email', type: email }
+  field6: { name: mobile, label: 'Mobile', type: phone }
+  field7: { name: primary_address_line_1, label: 'Address line 1', type: varchar }
+  field8: { name: primary_address_line_2, label: 'Address line 2', type: varchar }
+  field9: { name: primary_address_line_3, label: 'Address line 3', type: varchar }
+  field10: { name: primary_address_city, label: 'City', type: varchar }
+  field11: { name: primary_address_postcode, label: 'Postcode', type: varchar }
+  field12: { name: primary_address_state, label: 'State', type: varchar }
+  field13: { name: primary_address_country, label: 'Country', type: varchar }
+  field14: { name: secondary_address_line_1, label: 'Secondary address line 1', type: varchar }
+  field15: { name: secondary_address_line_2, label: 'Secondary address line 2', type: varchar }
+  field16: { name: secondary_address_line_3, label: 'Secondary address line 3', type: varchar }
+  field17: { name: secondary_address_city, label: 'Secondary address city', type: varchar }
+  field18: { name: secondary_address_postcode, label: 'Secondary address postcode', type: varchar }
+  field19: { name: secondary_address_state, label: 'Secondary address state', type: varchar }
+  field20: { name: secondary_address_country, label: 'Secondary address country', type: varchar }
+  field21: { name: special_req, label: 'Special requirements', type: longvarchar }
+  field22: { name: position, label: 'Position', type: varchar }
+  field23: { name: presenter, label: 'Presenter', type: boolean }
+  field24: { name: srn, label: 'SRN', type: varchar }
+  field25: { name: fan, label: 'FAN', type: varchar }
+  field26: { name: aou, label: 'AOU', type: varchar }
+  field27: { name: business_unit, label: 'Busines unit', type: varchar }
+
+RegForm:
+  form1_1: { event_id: e1, reg_field_id: field1, field_order: 0 }
+  form1_2: { event_id: e1, reg_field_id: field2, field_order: 1 }
+  form1_3: { event_id: e1, reg_field_id: field3, field_order: 2 }
