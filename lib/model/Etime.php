@@ -48,4 +48,12 @@ class Etime extends BaseEtime
     }
   }
 
+  public function getEtimeTagString() {
+    $r = "";
+    foreach ($this->getEtimeTags() as $tag) {
+      $r .= '"'. $tag->getTag() . '" ';
+    }
+    return $r;
+  }
+
 }

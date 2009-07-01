@@ -80,6 +80,13 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="notes">Tags</label>
+    <div class="value">
+      <?php echo object_input_tag($etime, 'getEtimeTagString', array ( 'class' => 'long',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
     <?php echo form_error('capacity'); ?>
     <label class="label" for="capacity">Capacity</label>
     <div class="value">

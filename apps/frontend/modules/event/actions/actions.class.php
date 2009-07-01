@@ -110,6 +110,10 @@ class eventActions extends sfActions
       if ($this->getRequestParameter('tag_string')) {
         TagTools::recordTags($this->getRequestParameter('tag_string'), "event", $event);
       }
+
+      if ($this->getRequestParameter('etime_tag_string')) {
+        TagTools::recordTags($this->getRequestParameter('etime_tag_string'), "etime", $etime);
+      }
   
       return $this->redirect('@show_event?slug='.$event->getSlug());
     }

@@ -102,6 +102,8 @@ class etimeActions extends sfActions
         }
       }
 
+      TagTools::replaceTags($this->getRequestParameter('etime_tag_string'), "etime", $etime);
+
       return $this->redirect('@show_event?slug='.$etime->getEvent()->getSlug());
     }
     return sfView::SUCCESS;
