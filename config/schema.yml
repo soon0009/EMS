@@ -7,6 +7,7 @@ propel:
     title:              { type: varchar(255), required: true }
     slug:               { type: varchar(255) }
     status_id:          { type: integer, foreignTable: status, foreignReference: id }
+    category_id:        { type: integer, foreignTable: category, foreignReference: id }
     published:          { type: boolean, required: true, default: false }
     description:        { type: longvarchar }
     notes:              { type: longvarchar }
@@ -20,6 +21,11 @@ propel:
     _attributes: { phpName: Status, idMethod: native }
     id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
     status:      { type: varchar(16) }
+
+  category:
+    _attributes: { phpName: Category, idMethod: native }
+    id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    name:        { type: varchar(32) }
 
   etime: 
     _attributes:        { phpName: Etime, idMethod: native }

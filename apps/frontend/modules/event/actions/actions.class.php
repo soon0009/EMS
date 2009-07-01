@@ -46,6 +46,7 @@ class eventActions extends sfActions
   
       $event->setTitle($this->getRequestParameter('title'));
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
+      $event->setCategoryId($this->getRequestParameter('category_id') ? $this->getRequestParameter('category_id') : null);
       $event->setPublished($this->getRequestParameter('published', 0));
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));
@@ -152,6 +153,7 @@ class eventActions extends sfActions
       $event->setId($this->getRequestParameter('id'));
       $event->setTitle($this->getRequestParameter('title'));
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
+      $event->setCategoryId($this->getRequestParameter('category_id') ? $this->getRequestParameter('category_id') : null);
       $event->setPublished($this->getRequestParameter('published', 0));
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));

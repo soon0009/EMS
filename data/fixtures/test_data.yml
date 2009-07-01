@@ -6,6 +6,14 @@ Status:
   cancelled:
     status: Cancelled
 
+Category:
+  cat1:
+    name: category1
+  cat2:
+    name: category2
+  cat3:
+    name: category3
+
 Audience:
   tba:
     name: TBA

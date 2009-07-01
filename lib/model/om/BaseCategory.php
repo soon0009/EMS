@@ -1,7 +1,7 @@
 <?php
 
 
-abstract class BaseStatus extends BaseObject  implements Persistent {
+abstract class BaseCategory extends BaseObject  implements Persistent {
 
 
 	
@@ -13,7 +13,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 
 
 	
-	protected $status;
+	protected $name;
 
 	
 	protected $collEvents;
@@ -35,10 +35,10 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getStatus()
+	public function getName()
 	{
 
-		return $this->status;
+		return $this->name;
 	}
 
 	
@@ -53,12 +53,12 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 
 		if ($this->id !== $v) {
 			$this->id = $v;
-			$this->modifiedColumns[] = StatusPeer::ID;
+			$this->modifiedColumns[] = CategoryPeer::ID;
 		}
 
 	} 
 	
-	public function setStatus($v)
+	public function setName($v)
 	{
 
 		
@@ -67,9 +67,9 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->status !== $v) {
-			$this->status = $v;
-			$this->modifiedColumns[] = StatusPeer::STATUS;
+		if ($this->name !== $v) {
+			$this->name = $v;
+			$this->modifiedColumns[] = CategoryPeer::NAME;
 		}
 
 	} 
@@ -80,7 +80,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 
 			$this->id = $rs->getInt($startcol + 0);
 
-			$this->status = $rs->getString($startcol + 1);
+			$this->name = $rs->getString($startcol + 1);
 
 			$this->resetModified();
 
@@ -88,7 +88,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 
 						return $startcol + 2; 
 		} catch (Exception $e) {
-			throw new PropelException("Error populating Status object", $e);
+			throw new PropelException("Error populating Category object", $e);
 		}
 	}
 
@@ -100,12 +100,12 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(StatusPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CategoryPeer::DATABASE_NAME);
 		}
 
 		try {
 			$con->begin();
-			StatusPeer::doDelete($this, $con);
+			CategoryPeer::doDelete($this, $con);
 			$this->setDeleted(true);
 			$con->commit();
 		} catch (PropelException $e) {
@@ -122,7 +122,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 		}
 
 		if ($con === null) {
-			$con = Propel::getConnection(StatusPeer::DATABASE_NAME);
+			$con = Propel::getConnection(CategoryPeer::DATABASE_NAME);
 		}
 
 		try {
@@ -145,12 +145,12 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 
 						if ($this->isModified()) {
 				if ($this->isNew()) {
-					$pk = StatusPeer::doInsert($this, $con);
+					$pk = CategoryPeer::doInsert($this, $con);
 					$affectedRows += 1; 										 										 
 					$this->setId($pk);  
 					$this->setNew(false);
 				} else {
-					$affectedRows += StatusPeer::doUpdate($this, $con);
+					$affectedRows += CategoryPeer::doUpdate($this, $con);
 				}
 				$this->resetModified(); 			}
 
@@ -198,7 +198,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 			$failureMap = array();
 
 
-			if (($retval = StatusPeer::doValidate($this, $columns)) !== true) {
+			if (($retval = CategoryPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
@@ -221,7 +221,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	
 	public function getByName($name, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = StatusPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CategoryPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->getByPosition($pos);
 	}
 
@@ -233,7 +233,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 				return $this->getId();
 				break;
 			case 1:
-				return $this->getStatus();
+				return $this->getName();
 				break;
 			default:
 				return null;
@@ -243,10 +243,10 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	
 	public function toArray($keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = StatusPeer::getFieldNames($keyType);
+		$keys = CategoryPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getId(),
-			$keys[1] => $this->getStatus(),
+			$keys[1] => $this->getName(),
 		);
 		return $result;
 	}
@@ -254,7 +254,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	
 	public function setByName($name, $value, $type = BasePeer::TYPE_PHPNAME)
 	{
-		$pos = StatusPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
+		$pos = CategoryPeer::translateFieldName($name, $type, BasePeer::TYPE_NUM);
 		return $this->setByPosition($pos, $value);
 	}
 
@@ -266,26 +266,26 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 				$this->setId($value);
 				break;
 			case 1:
-				$this->setStatus($value);
+				$this->setName($value);
 				break;
 		} 	}
 
 	
 	public function fromArray($arr, $keyType = BasePeer::TYPE_PHPNAME)
 	{
-		$keys = StatusPeer::getFieldNames($keyType);
+		$keys = CategoryPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setStatus($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setName($arr[$keys[1]]);
 	}
 
 	
 	public function buildCriteria()
 	{
-		$criteria = new Criteria(StatusPeer::DATABASE_NAME);
+		$criteria = new Criteria(CategoryPeer::DATABASE_NAME);
 
-		if ($this->isColumnModified(StatusPeer::ID)) $criteria->add(StatusPeer::ID, $this->id);
-		if ($this->isColumnModified(StatusPeer::STATUS)) $criteria->add(StatusPeer::STATUS, $this->status);
+		if ($this->isColumnModified(CategoryPeer::ID)) $criteria->add(CategoryPeer::ID, $this->id);
+		if ($this->isColumnModified(CategoryPeer::NAME)) $criteria->add(CategoryPeer::NAME, $this->name);
 
 		return $criteria;
 	}
@@ -293,9 +293,9 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	
 	public function buildPkeyCriteria()
 	{
-		$criteria = new Criteria(StatusPeer::DATABASE_NAME);
+		$criteria = new Criteria(CategoryPeer::DATABASE_NAME);
 
-		$criteria->add(StatusPeer::ID, $this->id);
+		$criteria->add(CategoryPeer::ID, $this->id);
 
 		return $criteria;
 	}
@@ -316,7 +316,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	public function copyInto($copyObj, $deepCopy = false)
 	{
 
-		$copyObj->setStatus($this->status);
+		$copyObj->setName($this->name);
 
 
 		if ($deepCopy) {
@@ -346,7 +346,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	public function getPeer()
 	{
 		if (self::$peer === null) {
-			self::$peer = new StatusPeer();
+			self::$peer = new CategoryPeer();
 		}
 		return self::$peer;
 	}
@@ -376,7 +376,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 			   $this->collEvents = array();
 			} else {
 
-				$criteria->add(EventPeer::STATUS_ID, $this->getId());
+				$criteria->add(EventPeer::CATEGORY_ID, $this->getId());
 
 				EventPeer::addSelectColumns($criteria);
 				$this->collEvents = EventPeer::doSelect($criteria, $con);
@@ -385,7 +385,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 						if (!$this->isNew()) {
 												
 
-				$criteria->add(EventPeer::STATUS_ID, $this->getId());
+				$criteria->add(EventPeer::CATEGORY_ID, $this->getId());
 
 				EventPeer::addSelectColumns($criteria);
 				if (!isset($this->lastEventCriteria) || !$this->lastEventCriteria->equals($criteria)) {
@@ -409,7 +409,7 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 			$criteria = clone $criteria;
 		}
 
-		$criteria->add(EventPeer::STATUS_ID, $this->getId());
+		$criteria->add(EventPeer::CATEGORY_ID, $this->getId());
 
 		return EventPeer::doCount($criteria, $distinct, $con);
 	}
@@ -418,12 +418,12 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 	public function addEvent(Event $l)
 	{
 		$this->collEvents[] = $l;
-		$l->setStatus($this);
+		$l->setCategory($this);
 	}
 
 
 	
-	public function getEventsJoinCategory($criteria = null, $con = null)
+	public function getEventsJoinStatus($criteria = null, $con = null)
 	{
 				include_once 'lib/model/om/BaseEventPeer.php';
 		if ($criteria === null) {
@@ -439,16 +439,16 @@ abstract class BaseStatus extends BaseObject  implements Persistent {
 				$this->collEvents = array();
 			} else {
 
-				$criteria->add(EventPeer::STATUS_ID, $this->getId());
+				$criteria->add(EventPeer::CATEGORY_ID, $this->getId());
 
-				$this->collEvents = EventPeer::doSelectJoinCategory($criteria, $con);
+				$this->collEvents = EventPeer::doSelectJoinStatus($criteria, $con);
 			}
 		} else {
 									
-			$criteria->add(EventPeer::STATUS_ID, $this->getId());
+			$criteria->add(EventPeer::CATEGORY_ID, $this->getId());
 
 			if (!isset($this->lastEventCriteria) || !$this->lastEventCriteria->equals($criteria)) {
-				$this->collEvents = EventPeer::doSelectJoinCategory($criteria, $con);
+				$this->collEvents = EventPeer::doSelectJoinStatus($criteria, $con);
 			}
 		}
 		$this->lastEventCriteria = $criteria;

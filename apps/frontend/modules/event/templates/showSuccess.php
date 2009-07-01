@@ -31,6 +31,9 @@
             <div class="label">Published:</div>
             <div class="value"><?php print $event->getPublishedString(); ?></div>
             <div class="clear_float"></div>
+            <div class="label">Category:</div>
+            <div class="value"><?php print $event->getCategory(); ?></div>
+            <div class="clear_float"></div>
             <div class="label">Interested parties:</div>
             <div class="value"><?php print $event->getInterestedParties(); ?></div>
             <div class="clear_float"></div>

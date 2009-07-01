@@ -16,6 +16,7 @@ CREATE TABLE event
 	title VARCHAR(255)  NOT NULL,
 	slug VARCHAR(255),
 	status_id INTEGER,
+	category_id INTEGER,
 	published BOOLEAN default 'f' NOT NULL,
 	description TEXT,
 	notes TEXT,
@@ -32,6 +33,8 @@ COMMENT ON TABLE event IS '';
 
 SET search_path TO public;
 ALTER TABLE event ADD CONSTRAINT event_FK_1 FOREIGN KEY (status_id) REFERENCES status (id);
+
+ALTER TABLE event ADD CONSTRAINT event_FK_2 FOREIGN KEY (category_id) REFERENCES category (id);
 
 -----------------------------------------------------------------------------
 -- status
@@ -52,6 +55,28 @@ CREATE TABLE status
 );
 
 COMMENT ON TABLE status IS '';
+
+
+SET search_path TO public;
+-----------------------------------------------------------------------------
+-- category
+-----------------------------------------------------------------------------
+
+DROP TABLE category CASCADE;
+
+DROP SEQUENCE category_seq;
+
+CREATE SEQUENCE category_seq;
+
+
+CREATE TABLE category
+(
+	id INTEGER  NOT NULL,
+	name VARCHAR(32),
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE category IS '';
 
 
 SET search_path TO public;

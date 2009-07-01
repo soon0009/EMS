@@ -60,4 +60,12 @@
     </div>
 
     <div class="clear_float"></div>
+
+    <label class="label" for="status">Category</label>
+    <div class="value">
+      <?php echo object_select_tag($event, 'getCategoryId', array ( 'related_class' => 'Category', 'include_blank' => true,)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
   </div>

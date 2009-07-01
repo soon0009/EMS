@@ -25,6 +25,10 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 
 	
+	protected $category_id;
+
+
+	
 	protected $published = false;
 
 
@@ -53,6 +57,9 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 	
 	protected $aStatus;
+
+	
+	protected $aCategory;
 
 	
 	protected $collEtimes;
@@ -98,6 +105,13 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 	{
 
 		return $this->status_id;
+	}
+
+	
+	public function getCategoryId()
+	{
+
+		return $this->category_id;
 	}
 
 	
@@ -233,6 +247,26 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setCategoryId($v)
+	{
+
+		
+		
+		if ($v !== null && !is_int($v) && is_numeric($v)) {
+			$v = (int) $v;
+		}
+
+		if ($this->category_id !== $v) {
+			$this->category_id = $v;
+			$this->modifiedColumns[] = EventPeer::CATEGORY_ID;
+		}
+
+		if ($this->aCategory !== null && $this->aCategory->getId() !== $v) {
+			$this->aCategory = null;
+		}
+
+	} 
+	
 	public function setPublished($v)
 	{
 
@@ -352,25 +386,27 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 
 			$this->status_id = $rs->getInt($startcol + 3);
 
-			$this->published = $rs->getBoolean($startcol + 4);
+			$this->category_id = $rs->getInt($startcol + 4);
 
-			$this->description = $rs->getString($startcol + 5);
+			$this->published = $rs->getBoolean($startcol + 5);
 
-			$this->notes = $rs->getString($startcol + 6);
+			$this->description = $rs->getString($startcol + 6);
 
-			$this->image_url = $rs->getString($startcol + 7);
+			$this->notes = $rs->getString($startcol + 7);
 
-			$this->organiser = $rs->getString($startcol + 8);
+			$this->image_url = $rs->getString($startcol + 8);
 
-			$this->interested_parties = $rs->getString($startcol + 9);
+			$this->organiser = $rs->getString($startcol + 9);
 
-			$this->updated_at = $rs->getTimestamp($startcol + 10, null);
+			$this->interested_parties = $rs->getString($startcol + 10);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 11, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 11; 
+						return $startcol + 12; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Event object", $e);
 		}
@@ -438,6 +474,13 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 					$affectedRows += $this->aStatus->save($con);
 				}
 				$this->setStatus($this->aStatus);
+			}
+
+			if ($this->aCategory !== null) {
+				if ($this->aCategory->isModified()) {
+					$affectedRows += $this->aCategory->save($con);
+				}
+				$this->setCategory($this->aCategory);
 			}
 
 
@@ -511,6 +554,12 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				}
 			}
 
+			if ($this->aCategory !== null) {
+				if (!$this->aCategory->validate($columns)) {
+					$failureMap = array_merge($failureMap, $this->aCategory->getValidationFailures());
+				}
+			}
+
 
 			if (($retval = EventPeer::doValidate($this, $columns)) !== true) {
 				$failureMap = array_merge($failureMap, $retval);
@@ -564,24 +613,27 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				return $this->getStatusId();
 				break;
 			case 4:
-				return $this->getPublished();
+				return $this->getCategoryId();
 				break;
 			case 5:
-				return $this->getDescription();
+				return $this->getPublished();
 				break;
 			case 6:
-				return $this->getNotes();
+				return $this->getDescription();
 				break;
 			case 7:
-				return $this->getImageUrl();
+				return $this->getNotes();
 				break;
 			case 8:
-				return $this->getOrganiser();
+				return $this->getImageUrl();
 				break;
 			case 9:
-				return $this->getInterestedParties();
+				return $this->getOrganiser();
 				break;
 			case 10:
+				return $this->getInterestedParties();
+				break;
+			case 11:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -598,13 +650,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			$keys[1] => $this->getTitle(),
 			$keys[2] => $this->getSlug(),
 			$keys[3] => $this->getStatusId(),
-			$keys[4] => $this->getPublished(),
-			$keys[5] => $this->getDescription(),
-			$keys[6] => $this->getNotes(),
-			$keys[7] => $this->getImageUrl(),
-			$keys[8] => $this->getOrganiser(),
-			$keys[9] => $this->getInterestedParties(),
-			$keys[10] => $this->getUpdatedAt(),
+			$keys[4] => $this->getCategoryId(),
+			$keys[5] => $this->getPublished(),
+			$keys[6] => $this->getDescription(),
+			$keys[7] => $this->getNotes(),
+			$keys[8] => $this->getImageUrl(),
+			$keys[9] => $this->getOrganiser(),
+			$keys[10] => $this->getInterestedParties(),
+			$keys[11] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -633,24 +686,27 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 				$this->setStatusId($value);
 				break;
 			case 4:
-				$this->setPublished($value);
+				$this->setCategoryId($value);
 				break;
 			case 5:
-				$this->setDescription($value);
+				$this->setPublished($value);
 				break;
 			case 6:
-				$this->setNotes($value);
+				$this->setDescription($value);
 				break;
 			case 7:
-				$this->setImageUrl($value);
+				$this->setNotes($value);
 				break;
 			case 8:
-				$this->setOrganiser($value);
+				$this->setImageUrl($value);
 				break;
 			case 9:
-				$this->setInterestedParties($value);
+				$this->setOrganiser($value);
 				break;
 			case 10:
+				$this->setInterestedParties($value);
+				break;
+			case 11:
 				$this->setUpdatedAt($value);
 				break;
 		} 	}
@@ -664,13 +720,14 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[1], $arr)) $this->setTitle($arr[$keys[1]]);
 		if (array_key_exists($keys[2], $arr)) $this->setSlug($arr[$keys[2]]);
 		if (array_key_exists($keys[3], $arr)) $this->setStatusId($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setPublished($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setDescription($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setNotes($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setImageUrl($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setOrganiser($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setInterestedParties($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setUpdatedAt($arr[$keys[10]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCategoryId($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setPublished($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setDescription($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setNotes($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setImageUrl($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setOrganiser($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setInterestedParties($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setUpdatedAt($arr[$keys[11]]);
 	}
 
 	
@@ -682,6 +739,7 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EventPeer::TITLE)) $criteria->add(EventPeer::TITLE, $this->title);
 		if ($this->isColumnModified(EventPeer::SLUG)) $criteria->add(EventPeer::SLUG, $this->slug);
 		if ($this->isColumnModified(EventPeer::STATUS_ID)) $criteria->add(EventPeer::STATUS_ID, $this->status_id);
+		if ($this->isColumnModified(EventPeer::CATEGORY_ID)) $criteria->add(EventPeer::CATEGORY_ID, $this->category_id);
 		if ($this->isColumnModified(EventPeer::PUBLISHED)) $criteria->add(EventPeer::PUBLISHED, $this->published);
 		if ($this->isColumnModified(EventPeer::DESCRIPTION)) $criteria->add(EventPeer::DESCRIPTION, $this->description);
 		if ($this->isColumnModified(EventPeer::NOTES)) $criteria->add(EventPeer::NOTES, $this->notes);
@@ -724,6 +782,8 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 		$copyObj->setSlug($this->slug);
 
 		$copyObj->setStatusId($this->status_id);
+
+		$copyObj->setCategoryId($this->category_id);
 
 		$copyObj->setPublished($this->published);
 
@@ -803,6 +863,35 @@ abstract class BaseEvent extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aStatus;
+	}
+
+	
+	public function setCategory($v)
+	{
+
+
+		if ($v === null) {
+			$this->setCategoryId(NULL);
+		} else {
+			$this->setCategoryId($v->getId());
+		}
+
+
+		$this->aCategory = $v;
+	}
+
+
+	
+	public function getCategory($con = null)
+	{
+		if ($this->aCategory === null && ($this->category_id !== null)) {
+						include_once 'lib/model/om/BaseCategoryPeer.php';
+
+			$this->aCategory = CategoryPeer::retrieveByPK($this->category_id, $con);
+
+			
+		}
+		return $this->aCategory;
 	}
 
 	
