@@ -8,11 +8,29 @@ Status:
 
 Category:
   cat1:
-    name: category1
+    name: Art exhibitions
   cat2:
-    name: category2
+    name: Drama/Theatre
   cat3:
-    name: category3
+    name: Public lectures
+  cat4:
+    name: Prospective student events
+  cat5:
+    name: Seminars
+  cat6:
+    name: Graduations
+  cat7:
+    name: Concerts
+  cat8:
+    name: Flinders staff
+  cat9:
+    name: Flinders students
+  cat10:
+    name: Alumni
+  cat11:
+    name: Forums and workshops
+  cat12:
+    name: Other
 
 Audience:
   tba:
