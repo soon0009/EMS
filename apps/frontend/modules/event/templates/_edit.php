@@ -68,4 +68,11 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="media_potential">Media potential</label>
+    <div class="value">
+      <?php echo object_checkbox_tag($event, 'getMediaPotential', array ()) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
   </div>

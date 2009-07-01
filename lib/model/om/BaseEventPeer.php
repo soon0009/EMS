@@ -13,7 +13,7 @@ abstract class BaseEventPeer {
 	const CLASS_DEFAULT = 'lib.model.Event';
 
 	
-	const NUM_COLUMNS = 12;
+	const NUM_COLUMNS = 13;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -36,6 +36,9 @@ abstract class BaseEventPeer {
 
 	
 	const PUBLISHED = 'event.PUBLISHED';
+
+	
+	const MEDIA_POTENTIAL = 'event.MEDIA_POTENTIAL';
 
 	
 	const DESCRIPTION = 'event.DESCRIPTION';
@@ -61,18 +64,18 @@ abstract class BaseEventPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Slug', 'StatusId', 'CategoryId', 'Published', 'Description', 'Notes', 'ImageUrl', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID, EventPeer::TITLE, EventPeer::SLUG, EventPeer::STATUS_ID, EventPeer::CATEGORY_ID, EventPeer::PUBLISHED, EventPeer::DESCRIPTION, EventPeer::NOTES, EventPeer::IMAGE_URL, EventPeer::ORGANISER, EventPeer::INTERESTED_PARTIES, EventPeer::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'slug', 'status_id', 'category_id', 'published', 'description', 'notes', 'image_url', 'organiser', 'interested_parties', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Slug', 'StatusId', 'CategoryId', 'Published', 'MediaPotential', 'Description', 'Notes', 'ImageUrl', 'Organiser', 'InterestedParties', 'UpdatedAt', ),
+		BasePeer::TYPE_COLNAME => array (EventPeer::ID, EventPeer::TITLE, EventPeer::SLUG, EventPeer::STATUS_ID, EventPeer::CATEGORY_ID, EventPeer::PUBLISHED, EventPeer::MEDIA_POTENTIAL, EventPeer::DESCRIPTION, EventPeer::NOTES, EventPeer::IMAGE_URL, EventPeer::ORGANISER, EventPeer::INTERESTED_PARTIES, EventPeer::UPDATED_AT, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'slug', 'status_id', 'category_id', 'published', 'media_potential', 'description', 'notes', 'image_url', 'organiser', 'interested_parties', 'updated_at', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Slug' => 2, 'StatusId' => 3, 'CategoryId' => 4, 'Published' => 5, 'Description' => 6, 'Notes' => 7, 'ImageUrl' => 8, 'Organiser' => 9, 'InterestedParties' => 10, 'UpdatedAt' => 11, ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID => 0, EventPeer::TITLE => 1, EventPeer::SLUG => 2, EventPeer::STATUS_ID => 3, EventPeer::CATEGORY_ID => 4, EventPeer::PUBLISHED => 5, EventPeer::DESCRIPTION => 6, EventPeer::NOTES => 7, EventPeer::IMAGE_URL => 8, EventPeer::ORGANISER => 9, EventPeer::INTERESTED_PARTIES => 10, EventPeer::UPDATED_AT => 11, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'slug' => 2, 'status_id' => 3, 'category_id' => 4, 'published' => 5, 'description' => 6, 'notes' => 7, 'image_url' => 8, 'organiser' => 9, 'interested_parties' => 10, 'updated_at' => 11, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Slug' => 2, 'StatusId' => 3, 'CategoryId' => 4, 'Published' => 5, 'MediaPotential' => 6, 'Description' => 7, 'Notes' => 8, 'ImageUrl' => 9, 'Organiser' => 10, 'InterestedParties' => 11, 'UpdatedAt' => 12, ),
+		BasePeer::TYPE_COLNAME => array (EventPeer::ID => 0, EventPeer::TITLE => 1, EventPeer::SLUG => 2, EventPeer::STATUS_ID => 3, EventPeer::CATEGORY_ID => 4, EventPeer::PUBLISHED => 5, EventPeer::MEDIA_POTENTIAL => 6, EventPeer::DESCRIPTION => 7, EventPeer::NOTES => 8, EventPeer::IMAGE_URL => 9, EventPeer::ORGANISER => 10, EventPeer::INTERESTED_PARTIES => 11, EventPeer::UPDATED_AT => 12, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'slug' => 2, 'status_id' => 3, 'category_id' => 4, 'published' => 5, 'media_potential' => 6, 'description' => 7, 'notes' => 8, 'image_url' => 9, 'organiser' => 10, 'interested_parties' => 11, 'updated_at' => 12, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, )
 	);
 
 	
@@ -137,6 +140,8 @@ abstract class BaseEventPeer {
 		$criteria->addSelectColumn(EventPeer::CATEGORY_ID);
 
 		$criteria->addSelectColumn(EventPeer::PUBLISHED);
+
+		$criteria->addSelectColumn(EventPeer::MEDIA_POTENTIAL);
 
 		$criteria->addSelectColumn(EventPeer::DESCRIPTION);
 

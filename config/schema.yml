@@ -9,6 +9,7 @@ propel:
     status_id:          { type: integer, foreignTable: status, foreignReference: id }
     category_id:        { type: integer, foreignTable: category, foreignReference: id }
     published:          { type: boolean, required: true, default: false }
+    media_potential:    { type: boolean, required: true, default: false }
     description:        { type: longvarchar }
     notes:              { type: longvarchar }
     image_url:          { type: varchar(255) }
@@ -28,21 +29,22 @@ propel:
     name:        { type: varchar(32) }
 
   etime: 
-    _attributes:        { phpName: Etime, idMethod: native }
-    id:                 { type: integer, required: true, primaryKey: true, autoIncrement: true }
-    event_id:           { type: integer, foreignTable: event, foreignReference: id, required: true, onDelete: cascade }
-    title:              { type: varchar(255) }
-    start_date:         { type: timestamp, required: true }
-    end_date:           { type: timestamp, required: true }
-    all_day:            { type: boolean, required: true, default: false }
-    location:           { type: longvarchar }
-    description:        { type: longvarchar }
-    notes:              { type: longvarchar }
-    capacity:           { type: integer }
-    has_fee:            { type: boolean, required: true, default: false }
-    organiser:          { type: longvarchar }
-    interested_parties: { type: longvarchar }
-    updated_at:         ~
+    _attributes:          { phpName: Etime, idMethod: native }
+    id:                   { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    event_id:             { type: integer, foreignTable: event, foreignReference: id, required: true, onDelete: cascade }
+    title:                { type: varchar(255) }
+    start_date:           { type: timestamp, required: true }
+    end_date:             { type: timestamp, required: true }
+    all_day:              { type: boolean, required: true, default: false }
+    location:             { type: longvarchar }
+    description:          { type: longvarchar }
+    notes:                { type: longvarchar }
+    capacity:             { type: integer }
+    has_fee:              { type: boolean, required: true, default: false }
+    audio_visual_support: { type: boolean, required: true, default: false }
+    organiser:            { type: longvarchar }
+    interested_parties:   { type: longvarchar }
+    updated_at:           ~
 
   audience:
     _attributes: { phpName: Audience, idMethod: native }

@@ -56,6 +56,8 @@ class EtimeMapBuilder {
 
 		$tMap->addColumn('HAS_FEE', 'HasFee', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('AUDIO_VISUAL_SUPPORT', 'AudioVisualSupport', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
 		$tMap->addColumn('ORGANISER', 'Organiser', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('INTERESTED_PARTIES', 'InterestedParties', 'string', CreoleTypes::LONGVARCHAR, false, null);

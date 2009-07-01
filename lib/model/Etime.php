@@ -21,6 +21,10 @@ class Etime extends BaseEtime
     return myTools::yesNo($this->getAllDay());
   }
 
+  public function getAudioVisualSupportString () {
+    return myTools::yesNo($this->getAudioVisualSupport());
+  }
+
   public function getHasFeeString () {
     return myTools::yesNo($this->getHasFee());
   }

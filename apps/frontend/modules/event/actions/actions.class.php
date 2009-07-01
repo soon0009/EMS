@@ -48,6 +48,7 @@ class eventActions extends sfActions
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
       $event->setCategoryId($this->getRequestParameter('category_id') ? $this->getRequestParameter('category_id') : null);
       $event->setPublished($this->getRequestParameter('published', 0));
+      $event->setMediaPotential($this->getRequestParameter('media_potential', 0));
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));
       $event->setImageUrl($this->getRequestParameter('image_url'));
@@ -68,6 +69,7 @@ class eventActions extends sfActions
       $etime->setNotes($this->getRequestParameter('etime_notes'));
       $etime->setCapacity($this->getRequestParameter('capacity')? $this->getRequestParameter('capacity') : null);
       $etime->setHasFee($this->getRequestParameter('has_fee') ? $this->getRequestParameter('has_fee') : false);
+      $etime->setAudioVisualSupport($this->getRequestParameter('audio_visual_support') ? $this->getRequestParameter('audio_visual_support') : false);
       $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
       $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
@@ -155,6 +157,7 @@ class eventActions extends sfActions
       $event->setStatusId($this->getRequestParameter('status_id') ? $this->getRequestParameter('status_id') : null);
       $event->setCategoryId($this->getRequestParameter('category_id') ? $this->getRequestParameter('category_id') : null);
       $event->setPublished($this->getRequestParameter('published', 0));
+      $event->setMediaPotential($this->getRequestParameter('media_potential', 0));
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));
       $event->setImageUrl($this->getRequestParameter('image_url'));

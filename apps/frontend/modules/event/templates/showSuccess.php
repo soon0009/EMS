@@ -34,6 +34,9 @@
             <div class="label">Category:</div>
             <div class="value"><?php print $event->getCategory(); ?></div>
             <div class="clear_float"></div>
+            <div class="label">Media potential:</div>
+            <div class="value"><?php print $event->getMediaPotentialString(); ?></div>
+            <div class="clear_float"></div>
             <div class="label">Interested parties:</div>
             <div class="value"><?php print $event->getInterestedParties(); ?></div>
             <div class="clear_float"></div>
@@ -100,6 +103,9 @@
               <div class="clear_float"></div>
               <div class="label">Fee:</div>
               <div class="value"><?php print $etime->getHasFeeString(); ?></div>
+              <div class="clear_float"></div>
+              <div class="label">Audio/Visual support:</div>
+              <div class="value"><?php print $etime->getAudioVisualSupportString(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Organiser:</div>
               <div class="value"><?php print $etime->getOrganiser(); ?></div>

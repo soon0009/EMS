@@ -22,6 +22,10 @@ class Event extends BaseEvent
     return myTools::yesNo($this->getPublished());
   }
 
+  public function getMediaPotentialString() {
+    return myTools::yesNo($this->getMediaPotential());
+  }
+
   public function getTagString() {
     $r = "";
     foreach ($this->getEventTags() as $tag) {

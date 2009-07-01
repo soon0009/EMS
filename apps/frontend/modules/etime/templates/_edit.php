@@ -102,6 +102,13 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="audio_visual_support">Required audio/visual support</label>
+    <div class="value">
+      <?php echo object_checkbox_tag($etime, 'getAudioVisualSupport', array ()) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
     <label class="label" for="organiser">Organiser</label>
     <div class="value">
       <?php echo object_input_tag($etime, 'getOrganiser', array ( 'id' => 'etime_organiser', 'name' => 'etime_organiser', 'class' => 'long',)) ?>

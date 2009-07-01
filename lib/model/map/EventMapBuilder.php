@@ -46,6 +46,8 @@ class EventMapBuilder {
 
 		$tMap->addColumn('PUBLISHED', 'Published', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('MEDIA_POTENTIAL', 'MediaPotential', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
 		$tMap->addColumn('DESCRIPTION', 'Description', 'string', CreoleTypes::LONGVARCHAR, false, null);
 
 		$tMap->addColumn('NOTES', 'Notes', 'string', CreoleTypes::LONGVARCHAR, false, null);

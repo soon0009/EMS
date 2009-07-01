@@ -53,6 +53,10 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 
 	
+	protected $audio_visual_support = false;
+
+
+	
 	protected $organiser;
 
 
@@ -195,6 +199,13 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 	{
 
 		return $this->has_fee;
+	}
+
+	
+	public function getAudioVisualSupport()
+	{
+
+		return $this->audio_visual_support;
 	}
 
 	
@@ -404,6 +415,16 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setAudioVisualSupport($v)
+	{
+
+		if ($this->audio_visual_support !== $v || $v === false) {
+			$this->audio_visual_support = $v;
+			$this->modifiedColumns[] = EtimePeer::AUDIO_VISUAL_SUPPORT;
+		}
+
+	} 
+	
 	public function setOrganiser($v)
 	{
 
@@ -479,17 +500,19 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 			$this->has_fee = $rs->getBoolean($startcol + 10);
 
-			$this->organiser = $rs->getString($startcol + 11);
+			$this->audio_visual_support = $rs->getBoolean($startcol + 11);
 
-			$this->interested_parties = $rs->getString($startcol + 12);
+			$this->organiser = $rs->getString($startcol + 12);
 
-			$this->updated_at = $rs->getTimestamp($startcol + 13, null);
+			$this->interested_parties = $rs->getString($startcol + 13);
+
+			$this->updated_at = $rs->getTimestamp($startcol + 14, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 14; 
+						return $startcol + 15; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Etime object", $e);
 		}
@@ -720,12 +743,15 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				return $this->getHasFee();
 				break;
 			case 11:
-				return $this->getOrganiser();
+				return $this->getAudioVisualSupport();
 				break;
 			case 12:
-				return $this->getInterestedParties();
+				return $this->getOrganiser();
 				break;
 			case 13:
+				return $this->getInterestedParties();
+				break;
+			case 14:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -749,9 +775,10 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 			$keys[8] => $this->getNotes(),
 			$keys[9] => $this->getCapacity(),
 			$keys[10] => $this->getHasFee(),
-			$keys[11] => $this->getOrganiser(),
-			$keys[12] => $this->getInterestedParties(),
-			$keys[13] => $this->getUpdatedAt(),
+			$keys[11] => $this->getAudioVisualSupport(),
+			$keys[12] => $this->getOrganiser(),
+			$keys[13] => $this->getInterestedParties(),
+			$keys[14] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -801,12 +828,15 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				$this->setHasFee($value);
 				break;
 			case 11:
-				$this->setOrganiser($value);
+				$this->setAudioVisualSupport($value);
 				break;
 			case 12:
-				$this->setInterestedParties($value);
+				$this->setOrganiser($value);
 				break;
 			case 13:
+				$this->setInterestedParties($value);
+				break;
+			case 14:
 				$this->setUpdatedAt($value);
 				break;
 		} 	}
@@ -827,9 +857,10 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[8], $arr)) $this->setNotes($arr[$keys[8]]);
 		if (array_key_exists($keys[9], $arr)) $this->setCapacity($arr[$keys[9]]);
 		if (array_key_exists($keys[10], $arr)) $this->setHasFee($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setOrganiser($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setInterestedParties($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setUpdatedAt($arr[$keys[13]]);
+		if (array_key_exists($keys[11], $arr)) $this->setAudioVisualSupport($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setOrganiser($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setInterestedParties($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setUpdatedAt($arr[$keys[14]]);
 	}
 
 	
@@ -848,6 +879,7 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EtimePeer::NOTES)) $criteria->add(EtimePeer::NOTES, $this->notes);
 		if ($this->isColumnModified(EtimePeer::CAPACITY)) $criteria->add(EtimePeer::CAPACITY, $this->capacity);
 		if ($this->isColumnModified(EtimePeer::HAS_FEE)) $criteria->add(EtimePeer::HAS_FEE, $this->has_fee);
+		if ($this->isColumnModified(EtimePeer::AUDIO_VISUAL_SUPPORT)) $criteria->add(EtimePeer::AUDIO_VISUAL_SUPPORT, $this->audio_visual_support);
 		if ($this->isColumnModified(EtimePeer::ORGANISER)) $criteria->add(EtimePeer::ORGANISER, $this->organiser);
 		if ($this->isColumnModified(EtimePeer::INTERESTED_PARTIES)) $criteria->add(EtimePeer::INTERESTED_PARTIES, $this->interested_parties);
 		if ($this->isColumnModified(EtimePeer::UPDATED_AT)) $criteria->add(EtimePeer::UPDATED_AT, $this->updated_at);
@@ -900,6 +932,8 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		$copyObj->setCapacity($this->capacity);
 
 		$copyObj->setHasFee($this->has_fee);
+
+		$copyObj->setAudioVisualSupport($this->audio_visual_support);
 
 		$copyObj->setOrganiser($this->organiser);
 

@@ -63,6 +63,7 @@ class etimeActions extends sfActions
       $etime->setNotes($this->getRequestParameter('etime_notes'));
       $etime->setCapacity($this->getRequestParameter('capacity')? $this->getRequestParameter('capacity') : null);
       $etime->setHasFee($this->getRequestParameter('has_fee') ? $this->getRequestParameter('has_fee') : false);
+      $etime->setAudioVisualSupport($this->getRequestParameter('audio_visual_support') ? $this->getRequestParameter('audio_visual_support') : false);
       $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
       $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
