@@ -51,6 +51,14 @@ show_reg_form:
   url: /registration_form/show/:slug
   param: { module: registration_form, action: show }
 
+create_reg_form:
+  url: /registration_form/create/:slug
+  param: { module: registration_form, action: create }
+
+change_reg_form:
+  url: /registration_form/change/:slug
+  param: { module: registration_form, action: change }
+
 # default rules
 homepage:
   url:   /

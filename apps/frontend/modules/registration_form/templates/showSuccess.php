@@ -1,5 +1,6 @@
 <div>
 <?php echo link_to('back', '@show_event?slug='.$event->getSlug()) ?>
+&nbsp;<?php echo link_to('Change registration form', '@change_reg_form?slug='.$event->getSlug()) ?>
 </div>
 <div class="long_form">
 <?php foreach ($regForm as $field): ?>

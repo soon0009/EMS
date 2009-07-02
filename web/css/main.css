@@ -124,3 +124,22 @@ ul.header_buttons li {
   margin-left: 0.2em;
 }
 
+table {
+  margin: 1em;
+}
+thead {
+  background-color: #183152;
+  color: #FFFFFF;
+}
+th {
+  font-weight: bold;
+}
+th, td {
+  padding: 0.2em;
+}
+.tr_bg_0 {
+  background-color: #E1E6FA;
+}
+.tr_bg_1 {
+  background-color: #ABC8E2;
+}
