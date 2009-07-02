@@ -70,11 +70,12 @@ class registration_formActions extends sfActions
     return sfView::SUCCESS;
   }
 
-  private function executeDelete() {
+  public function executeDelete() {
+      $event = EventPeer::retrieveByPK($this->getRequestParameter('event_id'));
       $c = new Criteria();
-      $c->add(RegFormPeer::ETIME_ID, $this->getRequestParameter('event_id'));
+      $c->add(RegFormPeer::EVENT_ID, $event->getId());
       RegFormPeer::doDelete($c);
-      return $this->forward('event', 'show', $this->getRequestParameter('slug'));
+      return $this->redirect('@show_event?slug='.$event->getSlug());
   }
 
   private function getEventFromSlug($slug) {
