@@ -379,6 +379,30 @@ RegField:
   field27: { name: business_unit, label: 'Busines unit', type: varchar }
 
 RegForm:
-  form1_1: { event_id: e1, reg_field_id: field1, field_order: 0 }
-  form1_2: { event_id: e1, reg_field_id: field2, field_order: 1 }
-  form1_3: { event_id: e1, reg_field_id: field3, field_order: 2 }
+  form1_1: { event_id: e1, reg_field_id: field1, field_order: 0, required_field: true }
+  form1_2: { event_id: e1, reg_field_id: field2, field_order: 1, required_field: true }
+  form1_3: { event_id: e1, reg_field_id: field3, field_order: 2, required_field: true }
+  form1_4: { event_id: e1, reg_field_id: field4, field_order: 3 }
+  form1_5: { event_id: e1, reg_field_id: field5, field_order: 4 }
+  form1_6: { event_id: e1, reg_field_id: field6, field_order: 5 }
+  form1_7: { event_id: e1, reg_field_id: field7, field_order: 6 }
+  form1_8: { event_id: e1, reg_field_id: field8, field_order: 7 }
+  form1_9: { event_id: e1, reg_field_id: field9, field_order: 8 }
+  form1_10: { event_id: e1, reg_field_id: field10, field_order: 9 }
+  form1_11: { event_id: e1, reg_field_id: field11, field_order: 10 }
+  form1_12: { event_id: e1, reg_field_id: field12, field_order: 11 }
+  form1_13: { event_id: e1, reg_field_id: field13, field_order: 12 }
+  form1_14: { event_id: e1, reg_field_id: field14, field_order: 13 }
+  form1_15: { event_id: e1, reg_field_id: field15, field_order: 14 }
+  form1_16: { event_id: e1, reg_field_id: field16, field_order: 15 }
+  form1_17: { event_id: e1, reg_field_id: field17, field_order: 16 }
+  form1_18: { event_id: e1, reg_field_id: field18, field_order: 17 }
+  form1_19: { event_id: e1, reg_field_id: field19, field_order: 18 }
+  form1_20: { event_id: e1, reg_field_id: field20, field_order: 19 }
+  form1_21: { event_id: e1, reg_field_id: field21, field_order: 20 }
+  form1_22: { event_id: e1, reg_field_id: field22, field_order: 21 }
+  form1_23: { event_id: e1, reg_field_id: field23, field_order: 22 }
+  form1_24: { event_id: e1, reg_field_id: field24, field_order: 23 }
+  form1_25: { event_id: e1, reg_field_id: field25, field_order: 24 }
+  form1_26: { event_id: e1, reg_field_id: field26, field_order: 25 }
+  form1_27: { event_id: e1, reg_field_id: field27, field_order: 26 }

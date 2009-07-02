@@ -17,6 +17,10 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 
 
 	
+	protected $required_field = false;
+
+
+	
 	protected $field_order;
 
 	
@@ -43,6 +47,13 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 	{
 
 		return $this->reg_field_id;
+	}
+
+	
+	public function getRequiredField()
+	{
+
+		return $this->required_field;
 	}
 
 	
@@ -93,6 +104,16 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setRequiredField($v)
+	{
+
+		if ($this->required_field !== $v || $v === false) {
+			$this->required_field = $v;
+			$this->modifiedColumns[] = RegFormPeer::REQUIRED_FIELD;
+		}
+
+	} 
+	
 	public function setFieldOrder($v)
 	{
 
@@ -117,13 +138,15 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 
 			$this->reg_field_id = $rs->getInt($startcol + 1);
 
-			$this->field_order = $rs->getInt($startcol + 2);
+			$this->required_field = $rs->getBoolean($startcol + 2);
+
+			$this->field_order = $rs->getInt($startcol + 3);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 3; 
+						return $startcol + 4; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating RegForm object", $e);
 		}
@@ -286,6 +309,9 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 				return $this->getRegFieldId();
 				break;
 			case 2:
+				return $this->getRequiredField();
+				break;
+			case 3:
 				return $this->getFieldOrder();
 				break;
 			default:
@@ -300,7 +326,8 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getEventId(),
 			$keys[1] => $this->getRegFieldId(),
-			$keys[2] => $this->getFieldOrder(),
+			$keys[2] => $this->getRequiredField(),
+			$keys[3] => $this->getFieldOrder(),
 		);
 		return $result;
 	}
@@ -323,6 +350,9 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 				$this->setRegFieldId($value);
 				break;
 			case 2:
+				$this->setRequiredField($value);
+				break;
+			case 3:
 				$this->setFieldOrder($value);
 				break;
 		} 	}
@@ -334,7 +364,8 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setEventId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setRegFieldId($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setFieldOrder($arr[$keys[2]]);
+		if (array_key_exists($keys[2], $arr)) $this->setRequiredField($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setFieldOrder($arr[$keys[3]]);
 	}
 
 	
@@ -344,6 +375,7 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(RegFormPeer::EVENT_ID)) $criteria->add(RegFormPeer::EVENT_ID, $this->event_id);
 		if ($this->isColumnModified(RegFormPeer::REG_FIELD_ID)) $criteria->add(RegFormPeer::REG_FIELD_ID, $this->reg_field_id);
+		if ($this->isColumnModified(RegFormPeer::REQUIRED_FIELD)) $criteria->add(RegFormPeer::REQUIRED_FIELD, $this->required_field);
 		if ($this->isColumnModified(RegFormPeer::FIELD_ORDER)) $criteria->add(RegFormPeer::FIELD_ORDER, $this->field_order);
 
 		return $criteria;
@@ -385,6 +417,8 @@ abstract class BaseRegForm extends BaseObject  implements Persistent {
 	
 	public function copyInto($copyObj, $deepCopy = false)
 	{
+
+		$copyObj->setRequiredField($this->required_field);
 
 		$copyObj->setFieldOrder($this->field_order);
 

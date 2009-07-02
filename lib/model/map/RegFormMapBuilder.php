@@ -36,6 +36,8 @@ class RegFormMapBuilder {
 
 		$tMap->addForeignPrimaryKey('REG_FIELD_ID', 'RegFieldId', 'int' , CreoleTypes::INTEGER, 'reg_field', 'ID', true, null);
 
+		$tMap->addColumn('REQUIRED_FIELD', 'RequiredField', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
 		$tMap->addColumn('FIELD_ORDER', 'FieldOrder', 'int', CreoleTypes::INTEGER, false, null);
 
 	} 

@@ -13,7 +13,7 @@ abstract class BaseRegFormPeer {
 	const CLASS_DEFAULT = 'lib.model.RegForm';
 
 	
-	const NUM_COLUMNS = 3;
+	const NUM_COLUMNS = 4;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -26,6 +26,9 @@ abstract class BaseRegFormPeer {
 	const REG_FIELD_ID = 'reg_form.REG_FIELD_ID';
 
 	
+	const REQUIRED_FIELD = 'reg_form.REQUIRED_FIELD';
+
+	
 	const FIELD_ORDER = 'reg_form.FIELD_ORDER';
 
 	
@@ -34,18 +37,18 @@ abstract class BaseRegFormPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('EventId', 'RegFieldId', 'FieldOrder', ),
-		BasePeer::TYPE_COLNAME => array (RegFormPeer::EVENT_ID, RegFormPeer::REG_FIELD_ID, RegFormPeer::FIELD_ORDER, ),
-		BasePeer::TYPE_FIELDNAME => array ('event_id', 'reg_field_id', 'field_order', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('EventId', 'RegFieldId', 'RequiredField', 'FieldOrder', ),
+		BasePeer::TYPE_COLNAME => array (RegFormPeer::EVENT_ID, RegFormPeer::REG_FIELD_ID, RegFormPeer::REQUIRED_FIELD, RegFormPeer::FIELD_ORDER, ),
+		BasePeer::TYPE_FIELDNAME => array ('event_id', 'reg_field_id', 'required_field', 'field_order', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('EventId' => 0, 'RegFieldId' => 1, 'FieldOrder' => 2, ),
-		BasePeer::TYPE_COLNAME => array (RegFormPeer::EVENT_ID => 0, RegFormPeer::REG_FIELD_ID => 1, RegFormPeer::FIELD_ORDER => 2, ),
-		BasePeer::TYPE_FIELDNAME => array ('event_id' => 0, 'reg_field_id' => 1, 'field_order' => 2, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, )
+		BasePeer::TYPE_PHPNAME => array ('EventId' => 0, 'RegFieldId' => 1, 'RequiredField' => 2, 'FieldOrder' => 3, ),
+		BasePeer::TYPE_COLNAME => array (RegFormPeer::EVENT_ID => 0, RegFormPeer::REG_FIELD_ID => 1, RegFormPeer::REQUIRED_FIELD => 2, RegFormPeer::FIELD_ORDER => 3, ),
+		BasePeer::TYPE_FIELDNAME => array ('event_id' => 0, 'reg_field_id' => 1, 'required_field' => 2, 'field_order' => 3, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, )
 	);
 
 	
@@ -102,6 +105,8 @@ abstract class BaseRegFormPeer {
 		$criteria->addSelectColumn(RegFormPeer::EVENT_ID);
 
 		$criteria->addSelectColumn(RegFormPeer::REG_FIELD_ID);
+
+		$criteria->addSelectColumn(RegFormPeer::REQUIRED_FIELD);
 
 		$criteria->addSelectColumn(RegFormPeer::FIELD_ORDER);
 

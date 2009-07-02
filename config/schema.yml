@@ -99,13 +99,14 @@ propel:
     _attributes:  { phpName: RegForm, idMethod: native }
     event_id:     { type: integer, foreignTable: event, foreignReference: id, primaryKey: true, onDelete: cascade }
     reg_field_id: { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
+    required_field: { type: boolean, required: true, default: false }
     field_order:  { type: integer }
 
   guest_reg:
-    _attributes:  { phpName: GuestReg, idMethod: native }
-    guest_id:     { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }
-    reg_field_id: { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
-    value:        { type: longvarchar }
+    _attributes:    { phpName: GuestReg, idMethod: native }
+    guest_id:       { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }
+    reg_field_id:   { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
+    value:          { type: longvarchar }
 
   additional_guest:
     _attributes:     { phpName: AdditionalGuest, idMethod: native }

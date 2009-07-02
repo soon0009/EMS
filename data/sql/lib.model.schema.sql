@@ -337,6 +337,7 @@ CREATE TABLE reg_form
 (
 	event_id INTEGER  NOT NULL,
 	reg_field_id INTEGER  NOT NULL,
+	required_field BOOLEAN default 'f' NOT NULL,
 	field_order INTEGER,
 	PRIMARY KEY (event_id,reg_field_id)
 );
