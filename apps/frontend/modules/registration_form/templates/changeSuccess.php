@@ -12,5 +12,6 @@
   &nbsp;<?php echo link_to('delete', 'registration_form/delete?event_id='.$event->getId(), 'post=true&confirm=Are you sure?') ?>
 <?php else: ?>
 <?php endif; ?>
-&nbsp;<?php echo link_to('cancel', '@show_event?slug='.$event->getSlug()) ?>
+&nbsp;<?php echo link_to('cancel', '@show_reg_form?slug='.$event->getSlug()) ?>
+&nbsp;<?php echo link_to($event->getTitle(), '@show_event?slug='.$event->getSlug()) ?>
 </form>
