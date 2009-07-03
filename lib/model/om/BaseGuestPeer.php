@@ -13,7 +13,7 @@ abstract class BaseGuestPeer {
 	const CLASS_DEFAULT = 'lib.model.Guest';
 
 	
-	const NUM_COLUMNS = 2;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
@@ -21,6 +21,18 @@ abstract class BaseGuestPeer {
 
 	
 	const ETIME_ID = 'guest.ETIME_ID';
+
+	
+	const ATTENDING = 'guest.ATTENDING';
+
+	
+	const REG_DATE = 'guest.REG_DATE';
+
+	
+	const EXTRA_INFO = 'guest.EXTRA_INFO';
+
+	
+	const CREATED_AT = 'guest.CREATED_AT';
 
 	
 	const ID = 'guest.ID';
@@ -31,18 +43,18 @@ abstract class BaseGuestPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('EtimeId', 'Id', ),
-		BasePeer::TYPE_COLNAME => array (GuestPeer::ETIME_ID, GuestPeer::ID, ),
-		BasePeer::TYPE_FIELDNAME => array ('etime_id', 'id', ),
-		BasePeer::TYPE_NUM => array (0, 1, )
+		BasePeer::TYPE_PHPNAME => array ('EtimeId', 'Attending', 'RegDate', 'ExtraInfo', 'CreatedAt', 'Id', ),
+		BasePeer::TYPE_COLNAME => array (GuestPeer::ETIME_ID, GuestPeer::ATTENDING, GuestPeer::REG_DATE, GuestPeer::EXTRA_INFO, GuestPeer::CREATED_AT, GuestPeer::ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('etime_id', 'attending', 'reg_date', 'extra_info', 'created_at', 'id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('EtimeId' => 0, 'Id' => 1, ),
-		BasePeer::TYPE_COLNAME => array (GuestPeer::ETIME_ID => 0, GuestPeer::ID => 1, ),
-		BasePeer::TYPE_FIELDNAME => array ('etime_id' => 0, 'id' => 1, ),
-		BasePeer::TYPE_NUM => array (0, 1, )
+		BasePeer::TYPE_PHPNAME => array ('EtimeId' => 0, 'Attending' => 1, 'RegDate' => 2, 'ExtraInfo' => 3, 'CreatedAt' => 4, 'Id' => 5, ),
+		BasePeer::TYPE_COLNAME => array (GuestPeer::ETIME_ID => 0, GuestPeer::ATTENDING => 1, GuestPeer::REG_DATE => 2, GuestPeer::EXTRA_INFO => 3, GuestPeer::CREATED_AT => 4, GuestPeer::ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('etime_id' => 0, 'attending' => 1, 'reg_date' => 2, 'extra_info' => 3, 'created_at' => 4, 'id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
@@ -97,6 +109,14 @@ abstract class BaseGuestPeer {
 	{
 
 		$criteria->addSelectColumn(GuestPeer::ETIME_ID);
+
+		$criteria->addSelectColumn(GuestPeer::ATTENDING);
+
+		$criteria->addSelectColumn(GuestPeer::REG_DATE);
+
+		$criteria->addSelectColumn(GuestPeer::EXTRA_INFO);
+
+		$criteria->addSelectColumn(GuestPeer::CREATED_AT);
 
 		$criteria->addSelectColumn(GuestPeer::ID);
 

@@ -36,6 +36,14 @@ class GuestMapBuilder {
 
 		$tMap->addForeignKey('ETIME_ID', 'EtimeId', 'int', CreoleTypes::INTEGER, 'etime', 'ID', false, null);
 
+		$tMap->addColumn('ATTENDING', 'Attending', 'boolean', CreoleTypes::BOOLEAN, true, null);
+
+		$tMap->addColumn('REG_DATE', 'RegDate', 'int', CreoleTypes::TIMESTAMP, false, null);
+
+		$tMap->addColumn('EXTRA_INFO', 'ExtraInfo', 'string', CreoleTypes::LONGVARCHAR, false, null);
+
+		$tMap->addColumn('CREATED_AT', 'CreatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
+
 		$tMap->addPrimaryKey('ID', 'Id', 'int', CreoleTypes::INTEGER, true, null);
 
 	} 

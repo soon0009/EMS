@@ -406,3 +406,11 @@ RegForm:
   form1_25: { event_id: e1, reg_field_id: field25, field_order: 24 }
   form1_26: { event_id: e1, reg_field_id: field26, field_order: 25 }
   form1_27: { event_id: e1, reg_field_id: field27, field_order: 26 }
+
+Guest:
+  guest1: { etime_id: et1, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
+
+GuestReg:
+  gr1_1: { guest_id: guest1, reg_field_id: field1, value: Mr }
+  gr1_2: { guest_id: guest1, reg_field_id: field2, value: Nigel }
+  gr1_3: { guest_id: guest1, reg_field_id: field3, value: Soon }

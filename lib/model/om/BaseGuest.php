@@ -13,6 +13,22 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 
 	
+	protected $attending = false;
+
+
+	
+	protected $reg_date;
+
+
+	
+	protected $extra_info;
+
+
+	
+	protected $created_at;
+
+
+	
 	protected $id;
 
 	
@@ -50,6 +66,64 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 	}
 
 	
+	public function getAttending()
+	{
+
+		return $this->attending;
+	}
+
+	
+	public function getRegDate($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->reg_date === null || $this->reg_date === '') {
+			return null;
+		} elseif (!is_int($this->reg_date)) {
+						$ts = strtotime($this->reg_date);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [reg_date] as date/time value: " . var_export($this->reg_date, true));
+			}
+		} else {
+			$ts = $this->reg_date;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
+	public function getExtraInfo()
+	{
+
+		return $this->extra_info;
+	}
+
+	
+	public function getCreatedAt($format = 'Y-m-d H:i:s')
+	{
+
+		if ($this->created_at === null || $this->created_at === '') {
+			return null;
+		} elseif (!is_int($this->created_at)) {
+						$ts = strtotime($this->created_at);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse value of [created_at] as date/time value: " . var_export($this->created_at, true));
+			}
+		} else {
+			$ts = $this->created_at;
+		}
+		if ($format === null) {
+			return $ts;
+		} elseif (strpos($format, '%') !== false) {
+			return strftime($format, $ts);
+		} else {
+			return date($format, $ts);
+		}
+	}
+
+	
 	public function getId()
 	{
 
@@ -77,6 +151,66 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 	} 
 	
+	public function setAttending($v)
+	{
+
+		if ($this->attending !== $v || $v === false) {
+			$this->attending = $v;
+			$this->modifiedColumns[] = GuestPeer::ATTENDING;
+		}
+
+	} 
+	
+	public function setRegDate($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [reg_date] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->reg_date !== $ts) {
+			$this->reg_date = $ts;
+			$this->modifiedColumns[] = GuestPeer::REG_DATE;
+		}
+
+	} 
+	
+	public function setExtraInfo($v)
+	{
+
+		
+		
+		if ($v !== null && !is_string($v)) {
+			$v = (string) $v; 
+		}
+
+		if ($this->extra_info !== $v) {
+			$this->extra_info = $v;
+			$this->modifiedColumns[] = GuestPeer::EXTRA_INFO;
+		}
+
+	} 
+	
+	public function setCreatedAt($v)
+	{
+
+		if ($v !== null && !is_int($v)) {
+			$ts = strtotime($v);
+			if ($ts === -1 || $ts === false) { 				throw new PropelException("Unable to parse date/time value for [created_at] from input: " . var_export($v, true));
+			}
+		} else {
+			$ts = $v;
+		}
+		if ($this->created_at !== $ts) {
+			$this->created_at = $ts;
+			$this->modifiedColumns[] = GuestPeer::CREATED_AT;
+		}
+
+	} 
+	
 	public function setId($v)
 	{
 
@@ -99,13 +233,21 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 			$this->etime_id = $rs->getInt($startcol + 0);
 
-			$this->id = $rs->getInt($startcol + 1);
+			$this->attending = $rs->getBoolean($startcol + 1);
+
+			$this->reg_date = $rs->getTimestamp($startcol + 2, null);
+
+			$this->extra_info = $rs->getString($startcol + 3);
+
+			$this->created_at = $rs->getTimestamp($startcol + 4, null);
+
+			$this->id = $rs->getInt($startcol + 5);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 2; 
+						return $startcol + 6; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Guest object", $e);
 		}
@@ -136,6 +278,11 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 	
 	public function save($con = null)
 	{
+    if ($this->isNew() && !$this->isColumnModified(GuestPeer::CREATED_AT))
+    {
+      $this->setCreatedAt(time());
+    }
+
 		if ($this->isDeleted()) {
 			throw new PropelException("You cannot save an object that has been deleted.");
 		}
@@ -301,6 +448,18 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				return $this->getEtimeId();
 				break;
 			case 1:
+				return $this->getAttending();
+				break;
+			case 2:
+				return $this->getRegDate();
+				break;
+			case 3:
+				return $this->getExtraInfo();
+				break;
+			case 4:
+				return $this->getCreatedAt();
+				break;
+			case 5:
 				return $this->getId();
 				break;
 			default:
@@ -314,7 +473,11 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		$keys = GuestPeer::getFieldNames($keyType);
 		$result = array(
 			$keys[0] => $this->getEtimeId(),
-			$keys[1] => $this->getId(),
+			$keys[1] => $this->getAttending(),
+			$keys[2] => $this->getRegDate(),
+			$keys[3] => $this->getExtraInfo(),
+			$keys[4] => $this->getCreatedAt(),
+			$keys[5] => $this->getId(),
 		);
 		return $result;
 	}
@@ -334,6 +497,18 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				$this->setEtimeId($value);
 				break;
 			case 1:
+				$this->setAttending($value);
+				break;
+			case 2:
+				$this->setRegDate($value);
+				break;
+			case 3:
+				$this->setExtraInfo($value);
+				break;
+			case 4:
+				$this->setCreatedAt($value);
+				break;
+			case 5:
 				$this->setId($value);
 				break;
 		} 	}
@@ -344,7 +519,11 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		$keys = GuestPeer::getFieldNames($keyType);
 
 		if (array_key_exists($keys[0], $arr)) $this->setEtimeId($arr[$keys[0]]);
-		if (array_key_exists($keys[1], $arr)) $this->setId($arr[$keys[1]]);
+		if (array_key_exists($keys[1], $arr)) $this->setAttending($arr[$keys[1]]);
+		if (array_key_exists($keys[2], $arr)) $this->setRegDate($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setExtraInfo($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setId($arr[$keys[5]]);
 	}
 
 	
@@ -353,6 +532,10 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		$criteria = new Criteria(GuestPeer::DATABASE_NAME);
 
 		if ($this->isColumnModified(GuestPeer::ETIME_ID)) $criteria->add(GuestPeer::ETIME_ID, $this->etime_id);
+		if ($this->isColumnModified(GuestPeer::ATTENDING)) $criteria->add(GuestPeer::ATTENDING, $this->attending);
+		if ($this->isColumnModified(GuestPeer::REG_DATE)) $criteria->add(GuestPeer::REG_DATE, $this->reg_date);
+		if ($this->isColumnModified(GuestPeer::EXTRA_INFO)) $criteria->add(GuestPeer::EXTRA_INFO, $this->extra_info);
+		if ($this->isColumnModified(GuestPeer::CREATED_AT)) $criteria->add(GuestPeer::CREATED_AT, $this->created_at);
 		if ($this->isColumnModified(GuestPeer::ID)) $criteria->add(GuestPeer::ID, $this->id);
 
 		return $criteria;
@@ -385,6 +568,14 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 	{
 
 		$copyObj->setEtimeId($this->etime_id);
+
+		$copyObj->setAttending($this->attending);
+
+		$copyObj->setRegDate($this->reg_date);
+
+		$copyObj->setExtraInfo($this->extra_info);
+
+		$copyObj->setCreatedAt($this->created_at);
 
 
 		if ($deepCopy) {

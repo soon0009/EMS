@@ -292,6 +292,10 @@ CREATE SEQUENCE guest_seq;
 CREATE TABLE guest
 (
 	etime_id INTEGER,
+	attending BOOLEAN default 'f' NOT NULL,
+	reg_date TIMESTAMP,
+	extra_info TEXT,
+	created_at TIMESTAMP,
 	id INTEGER  NOT NULL,
 	PRIMARY KEY (id)
 );

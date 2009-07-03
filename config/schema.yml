@@ -86,8 +86,12 @@ propel:
     tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true, onDelete: cascade }
 
   guest:
-    _attributes: { phpName: Guest, idMethod: native }
-    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
+    _attributes:       { phpName: Guest, idMethod: native }
+    etime_id:          { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
+    attending:         { type: boolean, required: true, default: false }
+    reg_date: { type: timestamp }
+    extra_info:        { type: longvarchar }
+    created_at:        ~
 
   reg_field:
     _attributes: { phpName: RegField, idMethod: native }
