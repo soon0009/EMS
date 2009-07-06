@@ -355,7 +355,8 @@ RegField:
   field3: { name: lastname, label: 'Last name', type: varchar }
   field4: { name: preferred_name, label: 'Preferred name', type: varchar }
   field5: { name: email, label: 'Email', type: email }
-  field6: { name: mobile, label: 'Mobile', type: phone }
+  field6a:{ name: phone, label: 'Phone', type: phone }
+  field6b:{ name: mobile, label: 'Mobile', type: phone }
   field7: { name: primary_address_line_1, label: 'Address line 1', type: varchar }
   field8: { name: primary_address_line_2, label: 'Address line 2', type: varchar }
   field9: { name: primary_address_line_3, label: 'Address line 3', type: varchar }
@@ -372,11 +373,10 @@ RegField:
   field20: { name: secondary_address_country, label: 'Secondary address country', type: varchar }
   field21: { name: special_req, label: 'Special requirements', type: longvarchar }
   field22: { name: position, label: 'Position', type: varchar }
-  field23: { name: presenter, label: 'Presenter', type: boolean }
+  field23: { name: presenter, label: 'Company', type: varchar }
   field24: { name: srn, label: 'SRN', type: varchar }
   field25: { name: fan, label: 'FAN', type: varchar }
   field26: { name: aou, label: 'AOU', type: varchar }
-  field27: { name: business_unit, label: 'Busines unit', type: varchar }
 
 RegForm:
   form1_1: { event_id: e1, reg_field_id: field1, field_order: 0, required_field: true }
@@ -384,7 +384,8 @@ RegForm:
   form1_3: { event_id: e1, reg_field_id: field3, field_order: 2, required_field: true }
   form1_4: { event_id: e1, reg_field_id: field4, field_order: 3 }
   form1_5: { event_id: e1, reg_field_id: field5, field_order: 4 }
-  form1_6: { event_id: e1, reg_field_id: field6, field_order: 5 }
+  form1_6a:{ event_id: e1, reg_field_id: field6a, field_order: 5 }
+  form1_6b:{ event_id: e1, reg_field_id: field6b, field_order: 5 }
   form1_7: { event_id: e1, reg_field_id: field7, field_order: 6 }
   form1_8: { event_id: e1, reg_field_id: field8, field_order: 7 }
   form1_9: { event_id: e1, reg_field_id: field9, field_order: 8 }
@@ -405,7 +406,6 @@ RegForm:
   form1_24: { event_id: e1, reg_field_id: field24, field_order: 23 }
   form1_25: { event_id: e1, reg_field_id: field25, field_order: 24 }
   form1_26: { event_id: e1, reg_field_id: field26, field_order: 25 }
-  form1_27: { event_id: e1, reg_field_id: field27, field_order: 26 }
 
 Guest:
   guest1: { etime_id: et1, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
