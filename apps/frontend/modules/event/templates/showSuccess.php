@@ -11,7 +11,7 @@
   </div>
 
       <div id="event">
-        <div class="yui-g">
+        <div class="yui-gc">
           <div class="yui-u first">
             <div class="label">Organiser:</div>
             <div class="value"><?php print $event->getOrganiser(); ?></div>
@@ -69,14 +69,14 @@
         <h3 id="times_heading" class="light_border_bottom">Times</h3>
         <?php foreach ($event->getEtimes() as $etime): ?>
         <h4><?php print $etime->getTitle(); ?></h4>
-        <div class="yui-g when_item">
+        <div class="yui-gc when_item">
           <div class="yui-u first">
             <div>
               <div class="label">Location:</div>
               <div class="value"><?php print $etime->getLocation(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Date:</div>
-              <div class="value"><?php print format_date($etime->getStartDate()); ?> - <?php print format_date($etime->getEndDate()); ?></div>
+              <div class="value"><?php print myTools::oneDate($etime->getStartDate(), $etime->getEndDate()); ?></div>
               <div class="clear_float"></div>
               <div class="label">Time:</div>
               <div class="value"><?php print $etime->getStartTime(); ?> - <?php print $etime->getEndTime(); ?></div>

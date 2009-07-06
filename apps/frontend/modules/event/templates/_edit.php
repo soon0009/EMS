@@ -74,4 +74,11 @@
 
     <div class="clear_float"></div>
 
+    <label class="label" for="organiser">Interested parties</label>
+    <div class="value">
+      <?php echo object_input_tag($event, 'getInterestedParties', array ( 'class' => 'long',)) ?>
+    </div>
+
+    <div class="clear_float"></div>
+
   </div>

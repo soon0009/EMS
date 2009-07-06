@@ -26,5 +26,12 @@ class myTools
   public static function strToInt(&$v) {
     settype($v, 'int');
   }
+
+  public static function oneDate($start_date, $finish_date) {
+    if ($start_date == $finish_date) {
+      return format_date($start_date);
+    }
+    return format_date($start_date)." - ".format_date($finish_date);
+  }
 } 
 
