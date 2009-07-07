@@ -409,8 +409,24 @@ RegForm:
 
 Guest:
   guest1: { etime_id: et1, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
+  guest2: { etime_id: et2, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
+  guest3: { etime_id: et3, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
+  guest4: { etime_id: et1, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
+  guest5: { etime_id: et2, attending: true, reg_date: 2009-06-03 09:30, extra_info: watch out }
 
 GuestReg:
   gr1_1: { guest_id: guest1, reg_field_id: field1, value: Mr }
   gr1_2: { guest_id: guest1, reg_field_id: field2, value: Nigel }
   gr1_3: { guest_id: guest1, reg_field_id: field3, value: Soon }
+  gr2_1: { guest_id: guest2, reg_field_id: field1, value: Mr }
+  gr2_2: { guest_id: guest2, reg_field_id: field2, value: Nigel }
+  gr2_3: { guest_id: guest2, reg_field_id: field3, value: Soon }
+  gr3_1: { guest_id: guest3, reg_field_id: field1, value: Mr }
+  gr3_2: { guest_id: guest3, reg_field_id: field2, value: Nigel }
+  gr3_3: { guest_id: guest3, reg_field_id: field3, value: Soon }
+  gr4_1: { guest_id: guest4, reg_field_id: field1, value: Mr }
+  gr4_2: { guest_id: guest4, reg_field_id: field2, value: Nigel }
+  gr4_3: { guest_id: guest4, reg_field_id: field3, value: Soon }
+  gr5_1: { guest_id: guest5, reg_field_id: field1, value: Mr }
+  gr5_2: { guest_id: guest5, reg_field_id: field2, value: Nigel }
+  gr5_3: { guest_id: guest5, reg_field_id: field3, value: Soon }
