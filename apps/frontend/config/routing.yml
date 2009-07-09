@@ -59,6 +59,11 @@ change_reg_form:
   url: /registration_form/change/:slug
   param: { module: registration_form, action: change }
 
+# Guests
+list_guests:
+  url: /etime/list_guests/:etime_id
+  param: { module: guest, action: list }
+
 # default rules
 homepage:
   url:   /

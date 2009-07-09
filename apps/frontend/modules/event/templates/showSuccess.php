@@ -137,7 +137,9 @@
             </div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
-            <?php //include('./view/extra_when_details.php'); ?>
+            <?php if ($etime->getGuests()): ?>
+            <?php echo link_to('List guests', '@list_guests?etime_id='.$etime->getId()) ?>
+            <?php endif; ?>
           </div> <!-- end yui-u -->
         </div> <!-- end yui-g -->
         <?php endforeach; ?>
