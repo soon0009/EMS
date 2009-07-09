@@ -86,12 +86,40 @@ propel:
     tag_id:      { type: integer, foreignTable: tag, foreignReference: id, primaryKey: true, onDelete: cascade }
 
   guest:
-    _attributes: { phpName: Guest, idMethod: native }
-    etime_id:    { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
-    attending:   { type: boolean, required: true, default: false }
-    reg_date:    { type: timestamp }
-    extra_info:  { type: longvarchar }
-    created_at:  ~
+    _attributes:                { phpName: Guest, idMethod: native }
+    etime_id:                   { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
+    attending:                  { type: boolean, required: true, default: false }
+    reg_date:                   { type: timestamp }
+    extra_info:                 { type: longvarchar }
+    created_at:                 ~
+    updated_at:                 ~
+    title:                      { type: varchar(50) }
+    firstname:                  { type: varchar(100) }
+    lastname:                   { type: varchar(100) }
+    preferred_name:             { type: varchar(100) }
+    email:                      { type: varchar(100) }
+    phone:                      { type: varchar(100) }
+    mobile:                     { type: varchar(100) }
+    primary_address_line_1:     { type: varchar(100) }
+    primary_address_line_2:     { type: varchar(100) }
+    primary_address_line_3:     { type: varchar(100) }
+    primary_address_city:       { type: varchar(100) }
+    primary_address_postcode:   { type: varchar(100) }
+    primary_address_state:      { type: varchar(100) }
+    primary_address_country:    { type: varchar(100) }
+    secondary_address_line_1:   { type: varchar(100) }
+    secondary_address_line_2:   { type: varchar(100) }
+    secondary_address_line_3:   { type: varchar(100) }
+    secondary_address_city:     { type: varchar(100) }
+    secondary_address_postcode: { type: varchar(100) }
+    secondary_address_state:    { type: varchar(100) }
+    secondary_address_country:  { type: varchar(100) }
+    special_req:                { type: longvarchar }
+    position:                   { type: varchar(100) }
+    presenter:                  { type: varchar(100) }
+    srn:                        { type: varchar(100) }
+    fan:                        { type: varchar(8) }
+    aou:                        { type: varchar(100) }
 
   reg_field:
     _attributes: { phpName: RegField, idMethod: native }
@@ -105,12 +133,6 @@ propel:
     reg_field_id:   { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
     required_field: { type: boolean, required: true, default: false }
     field_order:    { type: integer }
-
-  guest_reg:
-    _attributes:    { phpName: GuestReg, idMethod: native }
-    guest_id:       { type: integer, foreignTable: guest, foreignReference: id, primaryKey: true, onDelete: cascade }
-    reg_field_id:   { type: integer, foreignTable: reg_field, foreignReference: id, primaryKey: true, onDelete: cascade }
-    value:          { type: longvarchar }
 
   additional_guest:
     _attributes:     { phpName: AdditionalGuest, idMethod: native }

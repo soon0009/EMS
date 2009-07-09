@@ -30,12 +30,6 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 	protected $lastRegFormCriteria = null;
 
 	
-	protected $collGuestRegs;
-
-	
-	protected $lastGuestRegCriteria = null;
-
-	
 	protected $alreadyInSave = false;
 
 	
@@ -226,14 +220,6 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 				}
 			}
 
-			if ($this->collGuestRegs !== null) {
-				foreach($this->collGuestRegs as $referrerFK) {
-					if (!$referrerFK->isDeleted()) {
-						$affectedRows += $referrerFK->save($con);
-					}
-				}
-			}
-
 			$this->alreadyInSave = false;
 		}
 		return $affectedRows;
@@ -277,14 +263,6 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 
 				if ($this->collRegForms !== null) {
 					foreach($this->collRegForms as $referrerFK) {
-						if (!$referrerFK->validate($columns)) {
-							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
-						}
-					}
-				}
-
-				if ($this->collGuestRegs !== null) {
-					foreach($this->collGuestRegs as $referrerFK) {
 						if (!$referrerFK->validate($columns)) {
 							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
 						}
@@ -428,10 +406,6 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 				$copyObj->addRegForm($relObj->copy($deepCopy));
 			}
 
-			foreach($this->getGuestRegs() as $relObj) {
-				$copyObj->addGuestReg($relObj->copy($deepCopy));
-			}
-
 		} 
 
 		$copyObj->setNew(true);
@@ -560,111 +534,6 @@ abstract class BaseRegField extends BaseObject  implements Persistent {
 		$this->lastRegFormCriteria = $criteria;
 
 		return $this->collRegForms;
-	}
-
-	
-	public function initGuestRegs()
-	{
-		if ($this->collGuestRegs === null) {
-			$this->collGuestRegs = array();
-		}
-	}
-
-	
-	public function getGuestRegs($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseGuestRegPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collGuestRegs === null) {
-			if ($this->isNew()) {
-			   $this->collGuestRegs = array();
-			} else {
-
-				$criteria->add(GuestRegPeer::REG_FIELD_ID, $this->getId());
-
-				GuestRegPeer::addSelectColumns($criteria);
-				$this->collGuestRegs = GuestRegPeer::doSelect($criteria, $con);
-			}
-		} else {
-						if (!$this->isNew()) {
-												
-
-				$criteria->add(GuestRegPeer::REG_FIELD_ID, $this->getId());
-
-				GuestRegPeer::addSelectColumns($criteria);
-				if (!isset($this->lastGuestRegCriteria) || !$this->lastGuestRegCriteria->equals($criteria)) {
-					$this->collGuestRegs = GuestRegPeer::doSelect($criteria, $con);
-				}
-			}
-		}
-		$this->lastGuestRegCriteria = $criteria;
-		return $this->collGuestRegs;
-	}
-
-	
-	public function countGuestRegs($criteria = null, $distinct = false, $con = null)
-	{
-				include_once 'lib/model/om/BaseGuestRegPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		$criteria->add(GuestRegPeer::REG_FIELD_ID, $this->getId());
-
-		return GuestRegPeer::doCount($criteria, $distinct, $con);
-	}
-
-	
-	public function addGuestReg(GuestReg $l)
-	{
-		$this->collGuestRegs[] = $l;
-		$l->setRegField($this);
-	}
-
-
-	
-	public function getGuestRegsJoinGuest($criteria = null, $con = null)
-	{
-				include_once 'lib/model/om/BaseGuestRegPeer.php';
-		if ($criteria === null) {
-			$criteria = new Criteria();
-		}
-		elseif ($criteria instanceof Criteria)
-		{
-			$criteria = clone $criteria;
-		}
-
-		if ($this->collGuestRegs === null) {
-			if ($this->isNew()) {
-				$this->collGuestRegs = array();
-			} else {
-
-				$criteria->add(GuestRegPeer::REG_FIELD_ID, $this->getId());
-
-				$this->collGuestRegs = GuestRegPeer::doSelectJoinGuest($criteria, $con);
-			}
-		} else {
-									
-			$criteria->add(GuestRegPeer::REG_FIELD_ID, $this->getId());
-
-			if (!isset($this->lastGuestRegCriteria) || !$this->lastGuestRegCriteria->equals($criteria)) {
-				$this->collGuestRegs = GuestRegPeer::doSelectJoinGuest($criteria, $con);
-			}
-		}
-		$this->lastGuestRegCriteria = $criteria;
-
-		return $this->collGuestRegs;
 	}
 
 } 

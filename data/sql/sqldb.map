@@ -1,4 +1,3 @@
 # Sqlfile -> Database map
 lib.model.schema.sql=propel
 plugins.sfGuardPlugin.lib.model.schema.sql=propel
-post-trigger-creation.sql=propel

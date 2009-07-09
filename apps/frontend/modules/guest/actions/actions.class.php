@@ -12,8 +12,5 @@ class guestActions extends sfActions
 {
   public function executeList()
   {
-    $c = new Criteria();
-    $c->add(GuestPeer::ETIME_ID, $etime->getPrimaryKey());
-    $this->guests = GuestPeer::doSelect(new Criteria());
   }
 }

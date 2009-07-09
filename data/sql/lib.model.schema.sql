@@ -296,6 +296,34 @@ CREATE TABLE guest
 	reg_date TIMESTAMP,
 	extra_info TEXT,
 	created_at TIMESTAMP,
+	updated_at TIMESTAMP,
+	title VARCHAR(50),
+	firstname VARCHAR(100),
+	lastname VARCHAR(100),
+	preferred_name VARCHAR(100),
+	email VARCHAR(100),
+	phone VARCHAR(100),
+	mobile VARCHAR(100),
+	primary_address_line_1 VARCHAR(100),
+	primary_address_line_2 VARCHAR(100),
+	primary_address_line_3 VARCHAR(100),
+	primary_address_city VARCHAR(100),
+	primary_address_postcode VARCHAR(100),
+	primary_address_state VARCHAR(100),
+	primary_address_country VARCHAR(100),
+	secondary_address_line_1 VARCHAR(100),
+	secondary_address_line_2 VARCHAR(100),
+	secondary_address_line_3 VARCHAR(100),
+	secondary_address_city VARCHAR(100),
+	secondary_address_postcode VARCHAR(100),
+	secondary_address_state VARCHAR(100),
+	secondary_address_country VARCHAR(100),
+	special_req TEXT,
+	position VARCHAR(100),
+	presenter VARCHAR(100),
+	srn VARCHAR(100),
+	fan VARCHAR(8),
+	aou VARCHAR(100),
 	id INTEGER  NOT NULL,
 	PRIMARY KEY (id)
 );
@@ -353,29 +381,6 @@ SET search_path TO public;
 ALTER TABLE reg_form ADD CONSTRAINT reg_form_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
 
 ALTER TABLE reg_form ADD CONSTRAINT reg_form_FK_2 FOREIGN KEY (reg_field_id) REFERENCES reg_field (id) ON DELETE CASCADE;
-
------------------------------------------------------------------------------
--- guest_reg
------------------------------------------------------------------------------
-
-DROP TABLE guest_reg CASCADE;
-
-
-CREATE TABLE guest_reg
-(
-	guest_id INTEGER  NOT NULL,
-	reg_field_id INTEGER  NOT NULL,
-	value TEXT,
-	PRIMARY KEY (guest_id,reg_field_id)
-);
-
-COMMENT ON TABLE guest_reg IS '';
-
-
-SET search_path TO public;
-ALTER TABLE guest_reg ADD CONSTRAINT guest_reg_FK_1 FOREIGN KEY (guest_id) REFERENCES guest (id) ON DELETE CASCADE;
-
-ALTER TABLE guest_reg ADD CONSTRAINT guest_reg_FK_2 FOREIGN KEY (reg_field_id) REFERENCES reg_field (id) ON DELETE CASCADE;
 
 -----------------------------------------------------------------------------
 -- additional_guest
