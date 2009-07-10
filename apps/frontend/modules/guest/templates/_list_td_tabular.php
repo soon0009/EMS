@@ -1,4 +1,4 @@
-    <td> edit </td>
+    <td><?php echo link_to('edit', 'guest/edit?id='.$guest->getId()) ?></td>
     <?php foreach ($form_fields as $form_field): ?>
     <td>
       <?php if(method_exists($guest, 'get'.$form_field)): ?>
