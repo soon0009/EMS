@@ -127,7 +127,7 @@ ul.header_buttons li {
 table {
   margin: 1em;
 }
-thead {
+thead, thead a {
   background-color: #183152;
   color: #FFFFFF;
 }
