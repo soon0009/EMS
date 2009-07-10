@@ -19,22 +19,7 @@ class guestActions extends sfActions
     $this->etime = EtimePeer::retrieveByPk($this->getRequestParameter('etime_id'));
     $this->forward404Unless($this->etime);
 
-    $c = new Criteria();
-    $c->add(RegFormPeer::EVENT_ID, $this->etime->getEventId());
-    $c->addAscendingOrderByColumn(RegFormPeer::FIELD_ORDER);
-    $this->regForm = RegFormPeer::doSelect($c);
-    
-    $this->form_fields = array();
-    foreach ($this->regForm as $form_field) {
-      if ($form_field->getRequiredField()) {
-        $this->form_fields[] = $form_field->getRegField()->getName();
-      }
-    }
-    if (!count($this->form_fields)) {
-      foreach ($this->regForm as $form_field) {
-        $this->form_fields[] = $form_field->getRegField()->getName();
-      }
-    }
+    $this->form_fields = $this->getFormFields($this->etime->getEventId());
 
     $this->pager = new sfPropelPager('Guest', 10);
     $c = new Criteria();
@@ -48,6 +33,34 @@ class guestActions extends sfActions
         $this->getUser()->setAttribute('page', $this->getRequestParameter('page'), 'sf_admin/guest');
     }
 
+  }
+
+  private function getFormFields($event_id, $all_fields=false) {
+    $c = new Criteria();
+    $c->add(RegFormPeer::EVENT_ID, $event_id);
+    $c->addAscendingOrderByColumn(RegFormPeer::FIELD_ORDER);
+    $regForm = RegFormPeer::doSelect($c);
+    
+    $form_fields = array();
+
+    if ($all_fields) {
+      foreach ($regForm as $form_field) {
+        $form_fields[] = $form_field->getRegField()->getName();
+      }
+      return $form_fields;
+    }
+
+    foreach ($regForm as $form_field) {
+      if ($form_field->getRequiredField()) {
+        $form_fields[] = $form_field->getRegField()->getName();
+      }
+    }
+    if (!count($form_fields)) {
+      foreach ($regForm as $form_field) {
+        $form_fields[] = $form_field->getRegField()->getName();
+      }
+    }
+    return $form_fields;
   }
 
   protected function processFilters()
@@ -108,9 +121,15 @@ class guestActions extends sfActions
     $guest->save();
   }
 
+  public function executeCreate()
+  {
+    return $this->forward('guest', 'edit');
+  }
+
   public function executeEdit()
   {
     $this->guest = $this->getGuestOrCreate();
+    $this->form_fields = $this->getFormFields($this->guest->getEtime()->getEventId(), true);
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -153,6 +172,29 @@ class guestActions extends sfActions
     }
 
     return $guest;
+  }
+
+  public function executeDelete()
+  {
+    $this->guest = GuestPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->guest);
+
+    try
+    {
+      $this->deleteGuest($this->guest);
+    }
+    catch (PropelException $e)
+    {
+      $this->getRequest()->setError('delete', 'Could not delete the selected Guest. Make sure it does not have any associated items.');
+      return $this->forward('guest', 'list?etime_id='.$this->guest->getEtimeId());
+    }
+
+    return $this->redirect('guest/list?etime_id='.$this->guest->getEtimeId());
+  }
+
+  protected function deleteGuest($guest)
+  {
+    $guest->delete();
   }
 
   protected function getLabels()

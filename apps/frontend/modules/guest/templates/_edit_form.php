@@ -9,23 +9,9 @@
 )) ?>
 
 <?php echo object_input_hidden_tag($guest, 'getId') ?>
+<?php echo object_input_hidden_tag($guest, 'getEtimeId') ?>
 
 <fieldset id="sf_fieldset_none" class="">
-
-<div class="form-row">
-  <?php echo label_for('guest[etime_id]', $labels['guest{etime_id}'], '') ?>
-  <div class="content<?php if ($sf_request->hasError('guest{etime_id}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('guest{etime_id}')): ?>
-    <?php echo form_error('guest{etime_id}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_select_tag($guest, 'getEtimeId', array (
-  'related_class' => 'Etime',
-  'control_name' => 'guest[etime_id]',
-  'include_blank' => true,
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
 
 <div class="form-row">
   <?php echo label_for('guest[attending]', $labels['guest{attending}'], 'class="required" ') ?>
@@ -36,22 +22,6 @@
 
   <?php $value = object_checkbox_tag($guest, 'getAttending', array (
   'control_name' => 'guest[attending]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('guest[reg_date]', $labels['guest{reg_date}'], '') ?>
-  <div class="content<?php if ($sf_request->hasError('guest{reg_date}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('guest{reg_date}')): ?>
-    <?php echo form_error('guest{reg_date}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($guest, 'getRegDate', array (
-  'rich' => true,
-  'withtime' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'guest[reg_date]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
@@ -70,38 +40,7 @@
     </div>
 </div>
 
-<div class="form-row">
-  <?php echo label_for('guest[created_at]', $labels['guest{created_at}'], '') ?>
-  <div class="content<?php if ($sf_request->hasError('guest{created_at}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('guest{created_at}')): ?>
-    <?php echo form_error('guest{created_at}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($guest, 'getCreatedAt', array (
-  'rich' => true,
-  'withtime' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'guest[created_at]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
-<div class="form-row">
-  <?php echo label_for('guest[updated_at]', $labels['guest{updated_at}'], '') ?>
-  <div class="content<?php if ($sf_request->hasError('guest{updated_at}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('guest{updated_at}')): ?>
-    <?php echo form_error('guest{updated_at}', array('class' => 'form-error-msg')) ?>
-  <?php endif; ?>
-
-  <?php $value = object_input_date_tag($guest, 'getUpdatedAt', array (
-  'rich' => true,
-  'withtime' => true,
-  'calendar_button_img' => '/sf/sf_admin/images/date.png',
-  'control_name' => 'guest[updated_at]',
-)); echo $value ? $value : '&nbsp;' ?>
-    </div>
-</div>
-
+<?php if (in_array('title', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[title]', $labels['guest{title}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{title}')): ?> form-error<?php endif; ?>">
@@ -115,7 +54,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('firstname', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[firstname]', $labels['guest{firstname}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{firstname}')): ?> form-error<?php endif; ?>">
@@ -129,7 +70,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('lastname', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[lastname]', $labels['guest{lastname}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{lastname}')): ?> form-error<?php endif; ?>">
@@ -143,7 +86,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('preferred_name', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[preferred_name]', $labels['guest{preferred_name}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{preferred_name}')): ?> form-error<?php endif; ?>">
@@ -157,7 +102,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('email', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[email]', $labels['guest{email}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{email}')): ?> form-error<?php endif; ?>">
@@ -171,7 +118,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('phone', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[phone]', $labels['guest{phone}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{phone}')): ?> form-error<?php endif; ?>">
@@ -185,7 +134,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('mobile', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[mobile]', $labels['guest{mobile}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{mobile}')): ?> form-error<?php endif; ?>">
@@ -199,7 +150,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_line1', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_line1]', $labels['guest{primary_address_line1}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_line1}')): ?> form-error<?php endif; ?>">
@@ -213,7 +166,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_line2', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_line2]', $labels['guest{primary_address_line2}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_line2}')): ?> form-error<?php endif; ?>">
@@ -227,7 +182,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_line3', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_line3]', $labels['guest{primary_address_line3}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_line3}')): ?> form-error<?php endif; ?>">
@@ -241,7 +198,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_city', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_city]', $labels['guest{primary_address_city}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_city}')): ?> form-error<?php endif; ?>">
@@ -255,7 +214,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_postcode', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_postcode]', $labels['guest{primary_address_postcode}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_postcode}')): ?> form-error<?php endif; ?>">
@@ -269,7 +230,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_state', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_state]', $labels['guest{primary_address_state}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_state}')): ?> form-error<?php endif; ?>">
@@ -283,7 +246,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('primary_address_country', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[primary_address_country]', $labels['guest{primary_address_country}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{primary_address_country}')): ?> form-error<?php endif; ?>">
@@ -297,7 +262,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_line1', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_line1]', $labels['guest{secondary_address_line1}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_line1}')): ?> form-error<?php endif; ?>">
@@ -311,7 +278,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_line2', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_line2]', $labels['guest{secondary_address_line2}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_line2}')): ?> form-error<?php endif; ?>">
@@ -325,7 +294,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_line3', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_line3]', $labels['guest{secondary_address_line3}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_line3}')): ?> form-error<?php endif; ?>">
@@ -339,7 +310,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_city', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_city]', $labels['guest{secondary_address_city}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_city}')): ?> form-error<?php endif; ?>">
@@ -353,7 +326,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_postcode', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_postcode]', $labels['guest{secondary_address_postcode}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_postcode}')): ?> form-error<?php endif; ?>">
@@ -367,7 +342,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_state', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_state]', $labels['guest{secondary_address_state}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_state}')): ?> form-error<?php endif; ?>">
@@ -381,7 +358,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('secondary_address_country', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[secondary_address_country]', $labels['guest{secondary_address_country}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{secondary_address_country}')): ?> form-error<?php endif; ?>">
@@ -395,7 +374,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('special_req', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[special_req]', $labels['guest{special_req}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{special_req}')): ?> form-error<?php endif; ?>">
@@ -409,7 +390,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('position', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[position]', $labels['guest{position}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{position}')): ?> form-error<?php endif; ?>">
@@ -423,7 +406,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('presenter', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[presenter]', $labels['guest{presenter}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{presenter}')): ?> form-error<?php endif; ?>">
@@ -437,7 +422,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('srn', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[srn]', $labels['guest{srn}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{srn}')): ?> form-error<?php endif; ?>">
@@ -451,7 +438,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('fan', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[fan]', $labels['guest{fan}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{fan}')): ?> form-error<?php endif; ?>">
@@ -465,7 +454,9 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
+<?php if (in_array('aou', $form_fields)): ?>
 <div class="form-row">
   <?php echo label_for('guest[aou]', $labels['guest{aou}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{aou}')): ?> form-error<?php endif; ?>">
@@ -479,6 +470,7 @@
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>
+<?php endif; ?>
 
 </fieldset>
 
