@@ -123,13 +123,18 @@ class guestActions extends sfActions
 
   public function executeCreate()
   {
-    return $this->forward('guest', 'edit');
+    $this->forward404Unless($this->getRequestParameter('etime_id'));
+    return $this->forward('guest', 'edit', 'etime_id='.$this->getRequestParameter('etime_id'));
   }
 
   public function executeEdit()
   {
+    $this->forward404Unless($this->getRequestParameter('etime_id'));
     $this->guest = $this->getGuestOrCreate();
-    $this->form_fields = $this->getFormFields($this->guest->getEtime()->getEventId(), true);
+    $this->guest->setEtimeId($this->getRequestParameter('etime_id'));
+    $this->event_id = $this->guest->getEtime()->getEventId();
+
+    $this->form_fields = $this->getFormFields($this->event_id, true);
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
@@ -141,7 +146,7 @@ class guestActions extends sfActions
 
       if ($this->getRequestParameter('save_and_add'))
       {
-        return $this->redirect('guest/create');
+        return $this->redirect('guest/create?etime_id='.$this->guest->getEtimeId());
       }
       else if ($this->getRequestParameter('save_and_list'))
       {
@@ -149,7 +154,7 @@ class guestActions extends sfActions
       }
       else
       {
-        return $this->redirect('guest/edit?id='.$this->guest->getId());
+        return $this->redirect('guest/edit?id='.$this->guest->getId().'&etime_id='.$this->guest->getEtimeId());
       }
     }
     else

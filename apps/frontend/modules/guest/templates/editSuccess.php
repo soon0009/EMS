@@ -12,7 +12,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('guest/edit_messages', array('guest' => $guest, 'labels' => $labels)) ?>
-<?php include_partial('guest/edit_form', array('guest' => $guest, 'form_fields'=> $form_fields, 'labels' => $labels)) ?>
+<?php include_partial('guest/edit_form', array('guest' => $guest, 'event_id'=>$event_id, 'form_fields'=> $form_fields, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">
