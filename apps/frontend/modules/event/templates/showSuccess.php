@@ -137,8 +137,8 @@
             </div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
-            <?php if ($etime->getGuests()): ?>
-            <?php echo link_to('List guests', '@list_guests?etime_id='.$etime->getId()) ?>
+            <?php if ($event->getRegForms()): ?>
+              <?php echo link_to('Guest list', '@list_guests?etime_id='.$etime->getId()) ?>
             <?php endif; ?>
           </div> <!-- end yui-u -->
         </div> <!-- end yui-g -->

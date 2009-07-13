@@ -64,6 +64,10 @@ list_guests:
   url: /etime/list_guests/:etime_id
   param: { module: guest, action: list }
 
+add_guest:
+  url: /etime/add_guest/:etime_id
+  param: { module: guest, action: create }
+
 # default rules
 homepage:
   url:   /

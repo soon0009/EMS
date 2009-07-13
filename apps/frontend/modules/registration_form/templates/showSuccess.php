@@ -17,5 +17,5 @@
 <?php endforeach; ?>
 </div>
 <div>
-<?php echo link_to($event->getTitle(), '@show_event?slug='.$event->getSlug()) ?>
+<?php echo link_to('back to event', '@show_event?slug='.$event->getSlug()) ?>
 </div>
