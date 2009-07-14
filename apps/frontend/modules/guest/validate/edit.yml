@@ -1,0 +1,33 @@
+validators:
+  regFormValidator:
+    class: myRegFormValidator
+    param:
+      hidden_etime_id: etime_id
+      reg_error: This field is required
+
+fields:
+  etime_id:
+    group: validate_me_group
+    required: true
+      msg: Missing etime id
+  guest{title}:
+    group: validate_me_group
+      msg: Please select a title
+      required_msg: Please select a title
+    regFormValidator:
+      field: title
+      reg_error: Please select a title
+  guest{firstname}:
+    group: validate_me_group
+      msg: Please select a firstname
+      required_msg: Please select a firstname
+    regFormValidator:
+      field: firstname
+      reg_error: Please select a firstname
+  guest{preferred_name}:
+    group: validate_me_group
+      msg: Please select a preferred name
+      required_msg: Please select a preferred name
+    regFormValidator:
+      field: preferred_name
+      reg_error: Please select a preferred name

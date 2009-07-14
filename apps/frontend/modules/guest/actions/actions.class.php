@@ -108,7 +108,14 @@ class guestActions extends sfActions
   public function handleErrorEdit()
   {
     $this->preExecute();
+
+    $this->forward404Unless($this->getRequestParameter('etime_id'));
     $this->guest = $this->getGuestOrCreate();
+    $this->guest->setEtimeId($this->getRequestParameter('etime_id'));
+    $this->event_id = $this->guest->getEtime()->getEventId();
+    $this->form_fields = $this->getFormFields($this->event_id, true);
+    $this->required_form_fields = $this->getFormFields($this->event_id, false);
+
     $this->updateGuestFromRequest();
 
     $this->labels = $this->getLabels();
@@ -135,6 +142,7 @@ class guestActions extends sfActions
     $this->event_id = $this->guest->getEtime()->getEventId();
 
     $this->form_fields = $this->getFormFields($this->event_id, true);
+    $this->required_form_fields = $this->getFormFields($this->event_id, false);
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
