@@ -456,4 +456,42 @@ class guestActions extends sfActions
       $this->guest->setAou($guest['aou']);
     }
   }
+
+  public function validateEdit() {
+    $has_errors = false;
+    $msg = "Required";
+    $guest_data = $this->getRequestParameter('guest');
+    $event_id   = $this->getRequestParameter('event_id'); 
+
+    $c = new Criteria();
+    $c->add(EventPeer::ID, $event_id);
+    $event = EventPeer::doSelectOne($c);
+
+    if (is_array($guest_data)) {
+      $validator = new sfStringValidator();
+      $validator->initialize($this->getContext(), array('min'=>1,));
+      foreach ($guest_data as $field=>$data) {
+        $c = new Criteria();
+        $c->add(RegFieldPeer::NAME, $field);
+        $regField = RegFieldPeer::doSelectOne($c);
+        if ($regField) {
+          $c = new Criteria();
+          $c->add(RegFormPeer::EVENT_ID, $event->getId());
+          $c->add(RegFormPeer::REG_FIELD_ID, $regField->getId());
+          $regForm = RegFormPeer::doSelectOne($c);
+      
+          if ($regForm->getRequiredField() && !$validator->execute($data, $msg)) {
+            $this->getRequest()->setError('guest{'.$field.'}', 'Required');
+            $has_errors = true;
+          }
+        }
+      }
+      if ($has_errors) {
+        return false;
+      }
+      return true;
+    }
+    return false;
+  }
+
 }

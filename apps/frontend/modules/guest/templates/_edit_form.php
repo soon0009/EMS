@@ -10,6 +10,7 @@
 
 <?php echo object_input_hidden_tag($guest, 'getId') ?>
 <?php echo object_input_hidden_tag($guest, 'getEtimeId') ?>
+<?php echo input_hidden_tag('event_id', $event_id) ?>
 
 <fieldset id="sf_fieldset_none" class="">
 
