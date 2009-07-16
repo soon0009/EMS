@@ -19,6 +19,21 @@ class eventActions extends sfActions
     return $this->forward('event', 'list');
   }
 
+  public function executeShowOutside() {
+    $c = new Criteria();
+    $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));
+    $this->event = EventPeer::doSelectOne($c);
+    $this->forward404Unless($this->event);
+
+    if (!$this->event->getPublished()) {
+      return $this->forward('event', 'unavailable');
+    }
+
+  }
+
+  public function executeUnavailable() {
+  }
+
   public function executeList()
   {
     $this->events = EventPeer::doSelect(new Criteria());

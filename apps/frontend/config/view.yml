@@ -3,10 +3,10 @@ default:
     content-type: text/html
 
   metas:
-    title:        symfony project
+    title:        Flinders University Events
     robots:       index, follow
-    description:  symfony project
-    keywords:     symfony, project
+    description:  Flinders University Events
+    keywords:     Flinders University, events
     language:     en
 
   stylesheets:    ["http://www.flinders.edu.au/flinders/app_templates/flinderstemplates/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css", main, dashboard]

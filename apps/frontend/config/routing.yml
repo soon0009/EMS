@@ -16,6 +16,11 @@ tag:
   url: /tag/:tag
   param: { module: tag, action: show }
 
+# Outside
+show_outside_event:
+  url: /show/event/:slug
+  param: { module: event, action: showOutside }
+
 # Event
 add_event:
   url: /event/add
