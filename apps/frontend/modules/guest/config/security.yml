@@ -1,0 +1,6 @@
+createOutside:
+  is_secure: off
+edit:
+  is_secure: off
+save:
+  is_secure: off
