@@ -26,7 +26,7 @@
   </th></tr>
   </tfoot>
 <?php $i = 1; foreach ($pager->getResults() as $guest): $odd = fmod(++$i, 2) ?>
-  <tr class="sf_admin_row_<?php echo $odd ?>">
+  <tr class="tr_bg_<?php echo $odd ?>">
   <?php include_partial('list_td_tabular', array('guest' => $guest, 'form_fields'=>$form_fields)) ?>
   <?php include_partial('list_td_actions', array('guest' => $guest)) ?>
   </tr>

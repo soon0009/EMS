@@ -8,5 +8,5 @@
 <hr />
 
 <?php echo submit_tag('save') ?>
-&nbsp;<?php echo link_to('cancel', 'event/list') ?>
+&nbsp;<?php echo link_to('cancel', '@homepage') ?>
 </form>

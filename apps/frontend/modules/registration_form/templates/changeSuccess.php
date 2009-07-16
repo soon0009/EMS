@@ -13,5 +13,5 @@
 <?php else: ?>
 <?php endif; ?>
 &nbsp;<?php echo link_to('cancel', '@show_reg_form?slug='.$event->getSlug()) ?>
-&nbsp;<?php echo link_to($event->getTitle(), '@show_event?slug='.$event->getSlug()) ?>
+&nbsp;<?php echo link_to('back to event', '@show_event?slug='.$event->getSlug()) ?>
 </form>
