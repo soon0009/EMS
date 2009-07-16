@@ -4,7 +4,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo 'edit guest'; ?></h1>
+<h1><?php echo 'guest information'; ?></h1>
 
 <div id="sf_admin_header">
 <?php include_partial('guest/edit_header', array('guest' => $guest)) ?>
@@ -12,7 +12,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('guest/edit_messages', array('guest' => $guest, 'labels' => $labels)) ?>
-<?php include_partial('guest/edit_form', array('guest' => $guest, 'event_id'=>$event_id, 'form_fields'=> $form_fields, 'required_form_fields'=> $required_form_fields, 'labels' => $labels)) ?>
+<?php include_partial('guest/edit_form', array('outside' => $outside, 'guest' => $guest, 'event_id'=>$event_id, 'form_fields'=> $form_fields, 'required_form_fields'=> $required_form_fields, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

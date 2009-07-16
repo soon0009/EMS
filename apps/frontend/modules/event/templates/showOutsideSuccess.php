@@ -1,9 +1,15 @@
+<?php use_stylesheet('/sf/sf_admin/css/main') ?>
 <?php use_helper('Date'); ?>
+<?php if ($sf_flash->has('notice')): ?>
+  <div id="sf_admin_container">
+    <div class="save-ok">
+      <h2><?php echo $sf_flash->get('notice') ?></h2>
+    </div>
+  </div>
+<?php endif; ?>
 <div id="event_details">
   <div id="event_heading" class="light_border_bottom">
-    <h2 id="event_title">
-      <?php print $event->getTitle(); ?>
-    </h2>
+    <h2 id="event_title"> <?php print $event->getTitle(); ?> </h2>
     <div id="add_button">
       <?php // link_to('Add time', ); ?>
     </div>
@@ -83,6 +89,13 @@
               <div class="value"><?php print $etime->getNotes(); ?></div>
               <div class="clear_float"></div>
             </div>
+            <?php
+              foreach ($etime->getEtimeRsvps() as $rsvp) {
+                if ($rsvp->getRsvp() == "Online") {
+                  echo link_to('Register for this event', '@add_outside_guest?etime_id='.$etime->getId());
+                }
+              }
+            ?>
           </div> <!-- end yui-u -->
           <div class="yui-u">
           </div> <!-- end yui-u -->

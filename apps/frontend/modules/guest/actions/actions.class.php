@@ -115,6 +115,7 @@ class guestActions extends sfActions
     $this->event_id = $this->guest->getEtime()->getEventId();
     $this->form_fields = $this->getFormFields($this->event_id, true);
     $this->required_form_fields = $this->getFormFields($this->event_id, false);
+    $this->outside = $this->getOutside();
 
     $this->updateGuestFromRequest();
 
@@ -131,7 +132,14 @@ class guestActions extends sfActions
   public function executeCreate()
   {
     $this->forward404Unless($this->getRequestParameter('etime_id'));
-    return $this->forward('guest', 'edit', 'etime_id='.$this->getRequestParameter('etime_id'));
+    $this->forward('guest', 'edit');
+  }
+
+  public function executeCreateOutside()
+  {
+    $this->forward404Unless($this->getRequestParameter('etime_id'));
+    $this->setFlash('outside', true);
+    $this->forward('guest', 'edit');
   }
 
   public function executeEdit()
@@ -140,6 +148,7 @@ class guestActions extends sfActions
     $this->guest = $this->getGuestOrCreate();
     $this->guest->setEtimeId($this->getRequestParameter('etime_id'));
     $this->event_id = $this->guest->getEtime()->getEventId();
+    $this->outside = $this->getOutside();
 
     $this->form_fields = $this->getFormFields($this->event_id, true);
     $this->required_form_fields = $this->getFormFields($this->event_id, false);
@@ -150,7 +159,7 @@ class guestActions extends sfActions
 
       $this->saveGuest($this->guest);
 
-      $this->setFlash('notice', 'Your modifications have been saved');
+      $this->setFlash('notice', 'Your registration has been saved');
 
       if ($this->getRequestParameter('save_and_add'))
       {
@@ -160,6 +169,10 @@ class guestActions extends sfActions
       {
         return $this->redirect('guest/list');
       }
+      if ($this->getRequestParameter('save_outside'))
+      {
+        return $this->redirect('@show_outside_event?slug='.$this->guest->getEtime()->getEvent()->getSlug());
+      }
       else
       {
         return $this->redirect('guest/edit?id='.$this->guest->getId().'&etime_id='.$this->guest->getEtimeId());
@@ -168,6 +181,18 @@ class guestActions extends sfActions
     else
     {
       $this->labels = $this->getLabels();
+    }
+  }
+
+  protected function getOutside() {
+    if ($this->getRequestParameter('outside')) {
+      return $this->getRequestParameter('outside');
+    }
+    elseif ($this->getFlash('outside') && $this->getFlash('outside') == true) {
+      return true;
+    }
+    else {
+      return false;
     }
   }
 

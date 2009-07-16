@@ -14,4 +14,8 @@
   'name' => 'save_and_add',
   'class' => 'sf_admin_action_save_and_add',
 )) ?></li>
+      <li> <?php echo button_to('delete', 'guest/delete?id='.$guest->getId(), array (
+  'confirm' => 'Are you sure?',
+  'class' => 'sf_admin_action_delete',
+)) ?></li>
 </ul>
