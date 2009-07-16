@@ -9,4 +9,8 @@
  */ 
 class Guest extends BaseGuest
 {
+  public function getAttendingString() {
+    return myTools::yesNo($this->getAttending());
+  }
+
 }
