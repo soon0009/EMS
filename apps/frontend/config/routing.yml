@@ -11,6 +11,11 @@ sf_guard_password:
   url:   /request_password
   param: { module: sfGuardAuth, action: password }
 
+# Feed
+feed:
+  url: /feed
+  param: { module: feed, action: show }
+
 # Tags
 tag:
   url: /tag/:tag
@@ -20,6 +25,10 @@ tag:
 show_outside_event:
   url: /show/event/:slug
   param: { module: event, action: showOutside }
+
+add_outside_guest:
+  url: /etime/online/add_guest/:etime_id
+  param: { module: guest, action: createOutside }
 
 # Event
 add_event:
@@ -72,10 +81,6 @@ list_guests:
 add_guest:
   url: /etime/add_guest/:etime_id
   param: { module: guest, action: create }
-
-add_outside_guest:
-  url: /etime/online/add_guest/:etime_id
-  param: { module: guest, action: createOutside }
 
 excel:
   url: /etime/excel/:etime_id
