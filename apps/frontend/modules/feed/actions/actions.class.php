@@ -30,13 +30,19 @@ class feedActions extends sfActions
     $query = '
       SELECT *
       FROM %s
+      JOIN %s ON (%s = %s)
       WHERE
-        %s::date >= now()::date
+        %s = true
+        AND %s::date >= now()::date
       ORDER BY %s ASC
     ';
 
     $query = sprintf($query,
       EtimePeer::TABLE_NAME,
+      EventPeer::TABLE_NAME,
+      EtimePeer::EVENT_ID,
+      EventPeer::ID,
+      EventPeer::PUBLISHED,
       EtimePeer::START_DATE,
       EtimePeer::START_DATE
     );
@@ -47,12 +53,17 @@ class feedActions extends sfActions
 
     foreach ($etimes as $etime) {
       $item = new sfFeedItem();
-      $item->setTitle($etime->getEvent()->getTitle());
+      $item->setTitle($etime->getEvent()->getTitle().' - '.$etime->getTitle());
       $item->setLink('@show_outside_event?slug='.$etime->getEvent()->getSlug());
       $item->setAuthorName($etime->getOrganiser());
       $item->setPubdate($etime->getStartDate('U'));
       $item->setUniqueId($etime->getId());
-      $item->setDescription($etime->getDescription());
+      if ($etime->getDescription()) {
+        $item->setDescription($etime->getDescription());
+      }
+      else {
+        $item->setDescription($etime->getEvent()->getDescription());
+      }
 
       $feed->addItem($item);
     }

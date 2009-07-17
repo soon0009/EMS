@@ -63,7 +63,7 @@ Event:
     title: Contemplating thinking about thinking
     status_id: confirmed
     category_id: cat2
-    published: false
+    published: true
     description: |
       Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
       laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
@@ -96,7 +96,7 @@ Event:
     title: Trip to the moon
     status_id: tentative
     category_id: cat4
-    published: false
+    published: true
     description: |
       Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
       laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
@@ -129,7 +129,7 @@ Event:
     title: Setting up deck chairs on the Titanic
     status_id: cancelled
     category_id: cat3
-    published: false
+    published: true
     description: |
       Nulla dui purus, eleifend vel, consequat non, dictum porta, nulla. Duis ante mi,
       laoreet ut, commodo eleifend, cursus nec, lorem. Aenean eu est. Etiam imperdiet
