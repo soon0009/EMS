@@ -10,10 +10,26 @@
  */
 class guestActions extends sfActions
 {
-  public function executeList()
-  {
+  public function executeExcel() {
     $this->processSort();
+    $this->processFilters();
 
+    $this->etime = EtimePeer::retrieveByPk($this->getRequestParameter('etime_id'));
+    $this->forward404Unless($this->etime);
+
+    $this->form_fields = $this->getFormFields($this->etime->getEventId(), true);
+
+    $c = new Criteria();
+    $c->add(GuestPeer::ETIME_ID, $this->getRequestParameter('etime_id'));
+    $this->addSortCriteria($c);
+    $this->addFiltersCriteria($c);
+    $this->guests = GuestPeer::doSelect($c);
+
+    $this->getResponse()->setHttpHeader('Content-Disposition', 'inline; filename="guest_list.xls"');
+  }
+
+  public function executeList() {
+    $this->processSort();
     $this->processFilters();
 
     $this->etime = EtimePeer::retrieveByPk($this->getRequestParameter('etime_id'));

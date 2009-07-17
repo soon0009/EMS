@@ -77,6 +77,10 @@ add_outside_guest:
   url: /etime/online/add_guest/:etime_id
   param: { module: guest, action: createOutside }
 
+excel:
+  url: /etime/excel/:etime_id
+  param: { module: guest, action: excel }
+
 # default rules
 homepage:
   url:   /

@@ -1,6 +1,7 @@
 <?php use_helper('I18N', 'Date') ?>
 <ul>
   <li> <?php echo link_to('back to event', '@show_event?slug='.$etime->getEvent()->getSlug()); ?> </li>
+  <li> <?php echo link_to('export to excel', '@excel?etime_id='.$etime->getId()); ?> </li>
   <li> <?php echo link_to('add guest', '@add_guest?etime_id='.$etime->getId()); ?> </li>
 </ul>
 <table>

@@ -1,0 +1,5 @@
+excelSuccess:
+  http_metas:
+    content-type: application/msexcel
+
+  has_layout: false
