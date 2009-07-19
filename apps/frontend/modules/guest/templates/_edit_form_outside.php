@@ -1,4 +1,5 @@
 <?php echo input_hidden_tag('outside', true) ?>
+<?php if ($parent_id) { echo input_hidden_tag('parent_id', $parent_id); } ?>
 <?php if (in_array('title', $form_fields)): ?>
 <div class="form-row">
   <?php $required = ''; if (in_array('title', $required_form_fields)) { $required = 'class="required"'; } ?>

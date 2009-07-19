@@ -132,6 +132,12 @@ class guestActions extends sfActions
     $this->form_fields = $this->getFormFields($this->event_id, true);
     $this->required_form_fields = $this->getFormFields($this->event_id, false);
     $this->outside = $this->getOutside();
+    if ($this->getRequestParameter('parent_id')) {
+      $this->parent_id = $this->getRequestParameter('parent_id');
+    }
+    else {
+      $this->parent_id = 0;
+    }
 
     $this->updateGuestFromRequest();
 
@@ -168,12 +174,25 @@ class guestActions extends sfActions
 
     $this->form_fields = $this->getFormFields($this->event_id, true);
     $this->required_form_fields = $this->getFormFields($this->event_id, false);
+    if ($this->getRequestParameter('parent_id')) {
+      $this->parent_id = $this->getRequestParameter('parent_id');
+    }
+    else {
+      $this->parent_id = 0;
+    }
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateGuestFromRequest();
 
       $this->saveGuest($this->guest);
+
+      if ($this->getRequestParameter('parent_id')) {
+        $ag = new AdditionalGuest();
+        $ag->setParentGuestId($this->getRequestParameter('parent_id'));
+        $ag->setChildGuestId($this->guest->getId());
+        $ag->save();
+      }
 
       $this->setFlash('notice', 'Your registration has been saved');
 
@@ -185,7 +204,17 @@ class guestActions extends sfActions
       {
         return $this->redirect('guest/list');
       }
-      if ($this->getRequestParameter('save_outside'))
+      else if ($this->getRequestParameter('save_and_add_outside'))
+      {
+        if ($this->parent_id) {
+          $parent_id = $this->parent_id;
+        }
+        else {
+          $parent_id = $this->guest->getId();
+        }
+        return $this->redirect('guest/createOutside?etime_id='.$this->guest->getEtimeId().'&parent_id='.$parent_id);
+      }
+      else if ($this->getRequestParameter('save_outside'))
       {
         return $this->redirect('@show_outside_event?slug='.$this->guest->getEtime()->getEvent()->getSlug());
       }

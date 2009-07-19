@@ -12,7 +12,7 @@
   <?php if (!$outside): ?>
     <?php include_partial('edit_form_inside', array('guest' => $guest, 'form_fields'=>$form_fields, 'required_form_fields'=>$required_form_fields, 'labels'=>$labels)) ?>
   <?php endif; ?>
-  <?php include_partial('edit_form_outside', array('guest' => $guest, 'form_fields'=>$form_fields, 'required_form_fields'=>$required_form_fields, 'labels'=>$labels)) ?>
+  <?php include_partial('edit_form_outside', array('parent_id' => $parent_id, 'guest' => $guest, 'form_fields'=>$form_fields, 'required_form_fields'=>$required_form_fields, 'labels'=>$labels)) ?>
 </fieldset>
 
 <?php if ($outside): ?>
