@@ -3,3 +3,6 @@ excelSuccess:
     content-type: application/msexcel
 
   has_layout: false
+
+editSuccess:
+  layout: outside_layout
