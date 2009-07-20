@@ -185,6 +185,10 @@ class guestActions extends sfActions
     {
       $this->updateGuestFromRequest();
 
+      if ($this->outside) {
+        $this->guest->setAttending(true);
+      }
+
       $this->saveGuest($this->guest);
 
       if ($this->getRequestParameter('parent_id')) {

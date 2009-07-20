@@ -16,7 +16,7 @@
 </fieldset>
 
 <?php if ($outside): ?>
-  <?php include_partial('edit_actions_outside', array('guest' => $guest)) ?>
+  <?php include_partial('edit_actions_outside', array('guest' => $guest, 'parent_id' => $parent_id)) ?>
 <?php else: ?>
   <?php include_partial('edit_actions', array('guest' => $guest)) ?>
 <?php endif; ?>
