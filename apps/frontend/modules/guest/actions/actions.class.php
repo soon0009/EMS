@@ -10,6 +10,22 @@
  */
 class guestActions extends sfActions
 {
+  public function executeSummary() {
+    $this->forward404Unless($this->getRequestParameter('parent_id'));
+
+    $c = new Criteria();
+    $c->add(GuestPeer::ID, $this->getRequestParameter('parent_id'));
+    $this->rootGuest = GuestPeer::doSelectOne($c);
+
+    $c = new Criteria();
+    $c->add(AdditionalGuestPeer::PARENT_GUEST_ID, $this->getRequestParameter('parent_id'));
+    $c->addAscendingOrderByColumn(AdditionalGuestPeer::CHILD_GUEST_ID);
+    $this->guests = AdditionalGuestPeer::doSelect($c);
+
+    $this->forward404Unless($this->rootGuest);
+
+  }
+
   public function executeExcel() {
     $this->processSort();
     $this->processFilters();
@@ -191,11 +207,21 @@ class guestActions extends sfActions
 
       $this->saveGuest($this->guest);
 
+      $ag = new AdditionalGuest();
       if ($this->getRequestParameter('parent_id')) {
-        $ag = new AdditionalGuest();
         $ag->setParentGuestId($this->getRequestParameter('parent_id'));
-        $ag->setChildGuestId($this->guest->getId());
-        $ag->save();
+      }
+      else {
+        $ag->setParentGuestId($this->guest->getId());
+      }
+      $ag->setChildGuestId($this->guest->getId());
+      $ag->save();
+
+      if ($this->parent_id) {
+        $parent_id = $this->parent_id;
+      }
+      else {
+        $parent_id = $this->guest->getId();
       }
 
       $this->setFlash('notice', 'Your registration has been saved');
@@ -210,17 +236,12 @@ class guestActions extends sfActions
       }
       else if ($this->getRequestParameter('save_and_add_outside'))
       {
-        if ($this->parent_id) {
-          $parent_id = $this->parent_id;
-        }
-        else {
-          $parent_id = $this->guest->getId();
-        }
         return $this->redirect('guest/createOutside?etime_id='.$this->guest->getEtimeId().'&parent_id='.$parent_id);
       }
       else if ($this->getRequestParameter('save_outside'))
       {
-        return $this->redirect('@show_outside_event?slug='.$this->guest->getEtime()->getEvent()->getSlug());
+        return $this->redirect('@show_outside_summary?parent_id='.$parent_id);
+//        return $this->redirect('@show_outside_event?slug='.$this->guest->getEtime()->getEvent()->getSlug());
       }
       else
       {
@@ -289,6 +310,7 @@ class guestActions extends sfActions
     return array(
       'guest{etime_id}' => 'Etime:',
       'guest{attending}' => 'Attending:',
+      'guest{paid}' => 'Paid:',
       'guest{reg_date}' => 'Reg date:',
       'guest{extra_info}' => 'Extra info:',
       'guest{created_at}' => 'Created at:',
@@ -333,6 +355,7 @@ class guestActions extends sfActions
     $this->guest->setEtimeId($guest['etime_id'] ? $guest['etime_id'] : null);
     }
     $this->guest->setAttending(isset($guest['attending']) ? $guest['attending'] : 0);
+    $this->guest->setPaid(isset($guest['paid']) ? $guest['paid'] : 0);
     if (isset($guest['reg_date']))
     {
       if ($guest['reg_date'])

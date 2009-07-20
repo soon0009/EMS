@@ -204,6 +204,7 @@ Etime:
     notes: |
       Vivamus sit amet lorem posuere dui vulputate ornare.
     capacity: 100
+    additional_guests: 2
     has_fee: false
     organiser: it's not me
     interested_parties: ns@openradical.com

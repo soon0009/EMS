@@ -293,6 +293,7 @@ CREATE TABLE guest
 (
 	etime_id INTEGER,
 	attending BOOLEAN default 'f' NOT NULL,
+	paid BOOLEAN default 'f',
 	reg_date TIMESTAMP,
 	extra_info TEXT,
 	created_at TIMESTAMP,

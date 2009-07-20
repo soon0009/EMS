@@ -4,3 +4,5 @@ edit:
   is_secure: off
 save:
   is_secure: off
+summary:
+  is_secure: off

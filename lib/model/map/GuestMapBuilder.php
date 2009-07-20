@@ -38,6 +38,8 @@ class GuestMapBuilder {
 
 		$tMap->addColumn('ATTENDING', 'Attending', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
+		$tMap->addColumn('PAID', 'Paid', 'boolean', CreoleTypes::BOOLEAN, false, null);
+
 		$tMap->addColumn('REG_DATE', 'RegDate', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 		$tMap->addColumn('EXTRA_INFO', 'ExtraInfo', 'string', CreoleTypes::LONGVARCHAR, false, null);

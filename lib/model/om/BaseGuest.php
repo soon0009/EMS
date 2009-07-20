@@ -17,6 +17,10 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 
 	
+	protected $paid = false;
+
+
+	
 	protected $reg_date;
 
 
@@ -176,6 +180,13 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 	{
 
 		return $this->attending;
+	}
+
+	
+	public function getPaid()
+	{
+
+		return $this->paid;
 	}
 
 	
@@ -474,6 +485,16 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		if ($this->attending !== $v || $v === false) {
 			$this->attending = $v;
 			$this->modifiedColumns[] = GuestPeer::ATTENDING;
+		}
+
+	} 
+	
+	public function setPaid($v)
+	{
+
+		if ($this->paid !== $v || $v === false) {
+			$this->paid = $v;
+			$this->modifiedColumns[] = GuestPeer::PAID;
 		}
 
 	} 
@@ -1001,75 +1022,77 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 			$this->attending = $rs->getBoolean($startcol + 1);
 
-			$this->reg_date = $rs->getTimestamp($startcol + 2, null);
+			$this->paid = $rs->getBoolean($startcol + 2);
 
-			$this->extra_info = $rs->getString($startcol + 3);
+			$this->reg_date = $rs->getTimestamp($startcol + 3, null);
 
-			$this->created_at = $rs->getTimestamp($startcol + 4, null);
+			$this->extra_info = $rs->getString($startcol + 4);
 
-			$this->updated_at = $rs->getTimestamp($startcol + 5, null);
+			$this->created_at = $rs->getTimestamp($startcol + 5, null);
 
-			$this->title = $rs->getString($startcol + 6);
+			$this->updated_at = $rs->getTimestamp($startcol + 6, null);
 
-			$this->firstname = $rs->getString($startcol + 7);
+			$this->title = $rs->getString($startcol + 7);
 
-			$this->lastname = $rs->getString($startcol + 8);
+			$this->firstname = $rs->getString($startcol + 8);
 
-			$this->preferred_name = $rs->getString($startcol + 9);
+			$this->lastname = $rs->getString($startcol + 9);
 
-			$this->email = $rs->getString($startcol + 10);
+			$this->preferred_name = $rs->getString($startcol + 10);
 
-			$this->phone = $rs->getString($startcol + 11);
+			$this->email = $rs->getString($startcol + 11);
 
-			$this->mobile = $rs->getString($startcol + 12);
+			$this->phone = $rs->getString($startcol + 12);
 
-			$this->primary_address_line_1 = $rs->getString($startcol + 13);
+			$this->mobile = $rs->getString($startcol + 13);
 
-			$this->primary_address_line_2 = $rs->getString($startcol + 14);
+			$this->primary_address_line_1 = $rs->getString($startcol + 14);
 
-			$this->primary_address_line_3 = $rs->getString($startcol + 15);
+			$this->primary_address_line_2 = $rs->getString($startcol + 15);
 
-			$this->primary_address_city = $rs->getString($startcol + 16);
+			$this->primary_address_line_3 = $rs->getString($startcol + 16);
 
-			$this->primary_address_postcode = $rs->getString($startcol + 17);
+			$this->primary_address_city = $rs->getString($startcol + 17);
 
-			$this->primary_address_state = $rs->getString($startcol + 18);
+			$this->primary_address_postcode = $rs->getString($startcol + 18);
 
-			$this->primary_address_country = $rs->getString($startcol + 19);
+			$this->primary_address_state = $rs->getString($startcol + 19);
 
-			$this->secondary_address_line_1 = $rs->getString($startcol + 20);
+			$this->primary_address_country = $rs->getString($startcol + 20);
 
-			$this->secondary_address_line_2 = $rs->getString($startcol + 21);
+			$this->secondary_address_line_1 = $rs->getString($startcol + 21);
 
-			$this->secondary_address_line_3 = $rs->getString($startcol + 22);
+			$this->secondary_address_line_2 = $rs->getString($startcol + 22);
 
-			$this->secondary_address_city = $rs->getString($startcol + 23);
+			$this->secondary_address_line_3 = $rs->getString($startcol + 23);
 
-			$this->secondary_address_postcode = $rs->getString($startcol + 24);
+			$this->secondary_address_city = $rs->getString($startcol + 24);
 
-			$this->secondary_address_state = $rs->getString($startcol + 25);
+			$this->secondary_address_postcode = $rs->getString($startcol + 25);
 
-			$this->secondary_address_country = $rs->getString($startcol + 26);
+			$this->secondary_address_state = $rs->getString($startcol + 26);
 
-			$this->special_req = $rs->getString($startcol + 27);
+			$this->secondary_address_country = $rs->getString($startcol + 27);
 
-			$this->position = $rs->getString($startcol + 28);
+			$this->special_req = $rs->getString($startcol + 28);
 
-			$this->presenter = $rs->getString($startcol + 29);
+			$this->position = $rs->getString($startcol + 29);
 
-			$this->srn = $rs->getString($startcol + 30);
+			$this->presenter = $rs->getString($startcol + 30);
 
-			$this->fan = $rs->getString($startcol + 31);
+			$this->srn = $rs->getString($startcol + 31);
 
-			$this->aou = $rs->getString($startcol + 32);
+			$this->fan = $rs->getString($startcol + 32);
 
-			$this->id = $rs->getInt($startcol + 33);
+			$this->aou = $rs->getString($startcol + 33);
+
+			$this->id = $rs->getInt($startcol + 34);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 34; 
+						return $startcol + 35; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Guest object", $e);
 		}
@@ -1262,99 +1285,102 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				return $this->getAttending();
 				break;
 			case 2:
-				return $this->getRegDate();
+				return $this->getPaid();
 				break;
 			case 3:
-				return $this->getExtraInfo();
+				return $this->getRegDate();
 				break;
 			case 4:
-				return $this->getCreatedAt();
+				return $this->getExtraInfo();
 				break;
 			case 5:
-				return $this->getUpdatedAt();
+				return $this->getCreatedAt();
 				break;
 			case 6:
-				return $this->getTitle();
+				return $this->getUpdatedAt();
 				break;
 			case 7:
-				return $this->getFirstname();
+				return $this->getTitle();
 				break;
 			case 8:
-				return $this->getLastname();
+				return $this->getFirstname();
 				break;
 			case 9:
-				return $this->getPreferredName();
+				return $this->getLastname();
 				break;
 			case 10:
-				return $this->getEmail();
+				return $this->getPreferredName();
 				break;
 			case 11:
-				return $this->getPhone();
+				return $this->getEmail();
 				break;
 			case 12:
-				return $this->getMobile();
+				return $this->getPhone();
 				break;
 			case 13:
-				return $this->getPrimaryAddressLine1();
+				return $this->getMobile();
 				break;
 			case 14:
-				return $this->getPrimaryAddressLine2();
+				return $this->getPrimaryAddressLine1();
 				break;
 			case 15:
-				return $this->getPrimaryAddressLine3();
+				return $this->getPrimaryAddressLine2();
 				break;
 			case 16:
-				return $this->getPrimaryAddressCity();
+				return $this->getPrimaryAddressLine3();
 				break;
 			case 17:
-				return $this->getPrimaryAddressPostcode();
+				return $this->getPrimaryAddressCity();
 				break;
 			case 18:
-				return $this->getPrimaryAddressState();
+				return $this->getPrimaryAddressPostcode();
 				break;
 			case 19:
-				return $this->getPrimaryAddressCountry();
+				return $this->getPrimaryAddressState();
 				break;
 			case 20:
-				return $this->getSecondaryAddressLine1();
+				return $this->getPrimaryAddressCountry();
 				break;
 			case 21:
-				return $this->getSecondaryAddressLine2();
+				return $this->getSecondaryAddressLine1();
 				break;
 			case 22:
-				return $this->getSecondaryAddressLine3();
+				return $this->getSecondaryAddressLine2();
 				break;
 			case 23:
-				return $this->getSecondaryAddressCity();
+				return $this->getSecondaryAddressLine3();
 				break;
 			case 24:
-				return $this->getSecondaryAddressPostcode();
+				return $this->getSecondaryAddressCity();
 				break;
 			case 25:
-				return $this->getSecondaryAddressState();
+				return $this->getSecondaryAddressPostcode();
 				break;
 			case 26:
-				return $this->getSecondaryAddressCountry();
+				return $this->getSecondaryAddressState();
 				break;
 			case 27:
-				return $this->getSpecialReq();
+				return $this->getSecondaryAddressCountry();
 				break;
 			case 28:
-				return $this->getPosition();
+				return $this->getSpecialReq();
 				break;
 			case 29:
-				return $this->getPresenter();
+				return $this->getPosition();
 				break;
 			case 30:
-				return $this->getSrn();
+				return $this->getPresenter();
 				break;
 			case 31:
-				return $this->getFan();
+				return $this->getSrn();
 				break;
 			case 32:
-				return $this->getAou();
+				return $this->getFan();
 				break;
 			case 33:
+				return $this->getAou();
+				break;
+			case 34:
 				return $this->getId();
 				break;
 			default:
@@ -1369,38 +1395,39 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		$result = array(
 			$keys[0] => $this->getEtimeId(),
 			$keys[1] => $this->getAttending(),
-			$keys[2] => $this->getRegDate(),
-			$keys[3] => $this->getExtraInfo(),
-			$keys[4] => $this->getCreatedAt(),
-			$keys[5] => $this->getUpdatedAt(),
-			$keys[6] => $this->getTitle(),
-			$keys[7] => $this->getFirstname(),
-			$keys[8] => $this->getLastname(),
-			$keys[9] => $this->getPreferredName(),
-			$keys[10] => $this->getEmail(),
-			$keys[11] => $this->getPhone(),
-			$keys[12] => $this->getMobile(),
-			$keys[13] => $this->getPrimaryAddressLine1(),
-			$keys[14] => $this->getPrimaryAddressLine2(),
-			$keys[15] => $this->getPrimaryAddressLine3(),
-			$keys[16] => $this->getPrimaryAddressCity(),
-			$keys[17] => $this->getPrimaryAddressPostcode(),
-			$keys[18] => $this->getPrimaryAddressState(),
-			$keys[19] => $this->getPrimaryAddressCountry(),
-			$keys[20] => $this->getSecondaryAddressLine1(),
-			$keys[21] => $this->getSecondaryAddressLine2(),
-			$keys[22] => $this->getSecondaryAddressLine3(),
-			$keys[23] => $this->getSecondaryAddressCity(),
-			$keys[24] => $this->getSecondaryAddressPostcode(),
-			$keys[25] => $this->getSecondaryAddressState(),
-			$keys[26] => $this->getSecondaryAddressCountry(),
-			$keys[27] => $this->getSpecialReq(),
-			$keys[28] => $this->getPosition(),
-			$keys[29] => $this->getPresenter(),
-			$keys[30] => $this->getSrn(),
-			$keys[31] => $this->getFan(),
-			$keys[32] => $this->getAou(),
-			$keys[33] => $this->getId(),
+			$keys[2] => $this->getPaid(),
+			$keys[3] => $this->getRegDate(),
+			$keys[4] => $this->getExtraInfo(),
+			$keys[5] => $this->getCreatedAt(),
+			$keys[6] => $this->getUpdatedAt(),
+			$keys[7] => $this->getTitle(),
+			$keys[8] => $this->getFirstname(),
+			$keys[9] => $this->getLastname(),
+			$keys[10] => $this->getPreferredName(),
+			$keys[11] => $this->getEmail(),
+			$keys[12] => $this->getPhone(),
+			$keys[13] => $this->getMobile(),
+			$keys[14] => $this->getPrimaryAddressLine1(),
+			$keys[15] => $this->getPrimaryAddressLine2(),
+			$keys[16] => $this->getPrimaryAddressLine3(),
+			$keys[17] => $this->getPrimaryAddressCity(),
+			$keys[18] => $this->getPrimaryAddressPostcode(),
+			$keys[19] => $this->getPrimaryAddressState(),
+			$keys[20] => $this->getPrimaryAddressCountry(),
+			$keys[21] => $this->getSecondaryAddressLine1(),
+			$keys[22] => $this->getSecondaryAddressLine2(),
+			$keys[23] => $this->getSecondaryAddressLine3(),
+			$keys[24] => $this->getSecondaryAddressCity(),
+			$keys[25] => $this->getSecondaryAddressPostcode(),
+			$keys[26] => $this->getSecondaryAddressState(),
+			$keys[27] => $this->getSecondaryAddressCountry(),
+			$keys[28] => $this->getSpecialReq(),
+			$keys[29] => $this->getPosition(),
+			$keys[30] => $this->getPresenter(),
+			$keys[31] => $this->getSrn(),
+			$keys[32] => $this->getFan(),
+			$keys[33] => $this->getAou(),
+			$keys[34] => $this->getId(),
 		);
 		return $result;
 	}
@@ -1423,99 +1450,102 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				$this->setAttending($value);
 				break;
 			case 2:
-				$this->setRegDate($value);
+				$this->setPaid($value);
 				break;
 			case 3:
-				$this->setExtraInfo($value);
+				$this->setRegDate($value);
 				break;
 			case 4:
-				$this->setCreatedAt($value);
+				$this->setExtraInfo($value);
 				break;
 			case 5:
-				$this->setUpdatedAt($value);
+				$this->setCreatedAt($value);
 				break;
 			case 6:
-				$this->setTitle($value);
+				$this->setUpdatedAt($value);
 				break;
 			case 7:
-				$this->setFirstname($value);
+				$this->setTitle($value);
 				break;
 			case 8:
-				$this->setLastname($value);
+				$this->setFirstname($value);
 				break;
 			case 9:
-				$this->setPreferredName($value);
+				$this->setLastname($value);
 				break;
 			case 10:
-				$this->setEmail($value);
+				$this->setPreferredName($value);
 				break;
 			case 11:
-				$this->setPhone($value);
+				$this->setEmail($value);
 				break;
 			case 12:
-				$this->setMobile($value);
+				$this->setPhone($value);
 				break;
 			case 13:
-				$this->setPrimaryAddressLine1($value);
+				$this->setMobile($value);
 				break;
 			case 14:
-				$this->setPrimaryAddressLine2($value);
+				$this->setPrimaryAddressLine1($value);
 				break;
 			case 15:
-				$this->setPrimaryAddressLine3($value);
+				$this->setPrimaryAddressLine2($value);
 				break;
 			case 16:
-				$this->setPrimaryAddressCity($value);
+				$this->setPrimaryAddressLine3($value);
 				break;
 			case 17:
-				$this->setPrimaryAddressPostcode($value);
+				$this->setPrimaryAddressCity($value);
 				break;
 			case 18:
-				$this->setPrimaryAddressState($value);
+				$this->setPrimaryAddressPostcode($value);
 				break;
 			case 19:
-				$this->setPrimaryAddressCountry($value);
+				$this->setPrimaryAddressState($value);
 				break;
 			case 20:
-				$this->setSecondaryAddressLine1($value);
+				$this->setPrimaryAddressCountry($value);
 				break;
 			case 21:
-				$this->setSecondaryAddressLine2($value);
+				$this->setSecondaryAddressLine1($value);
 				break;
 			case 22:
-				$this->setSecondaryAddressLine3($value);
+				$this->setSecondaryAddressLine2($value);
 				break;
 			case 23:
-				$this->setSecondaryAddressCity($value);
+				$this->setSecondaryAddressLine3($value);
 				break;
 			case 24:
-				$this->setSecondaryAddressPostcode($value);
+				$this->setSecondaryAddressCity($value);
 				break;
 			case 25:
-				$this->setSecondaryAddressState($value);
+				$this->setSecondaryAddressPostcode($value);
 				break;
 			case 26:
-				$this->setSecondaryAddressCountry($value);
+				$this->setSecondaryAddressState($value);
 				break;
 			case 27:
-				$this->setSpecialReq($value);
+				$this->setSecondaryAddressCountry($value);
 				break;
 			case 28:
-				$this->setPosition($value);
+				$this->setSpecialReq($value);
 				break;
 			case 29:
-				$this->setPresenter($value);
+				$this->setPosition($value);
 				break;
 			case 30:
-				$this->setSrn($value);
+				$this->setPresenter($value);
 				break;
 			case 31:
-				$this->setFan($value);
+				$this->setSrn($value);
 				break;
 			case 32:
-				$this->setAou($value);
+				$this->setFan($value);
 				break;
 			case 33:
+				$this->setAou($value);
+				break;
+			case 34:
 				$this->setId($value);
 				break;
 		} 	}
@@ -1527,38 +1557,39 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 		if (array_key_exists($keys[0], $arr)) $this->setEtimeId($arr[$keys[0]]);
 		if (array_key_exists($keys[1], $arr)) $this->setAttending($arr[$keys[1]]);
-		if (array_key_exists($keys[2], $arr)) $this->setRegDate($arr[$keys[2]]);
-		if (array_key_exists($keys[3], $arr)) $this->setExtraInfo($arr[$keys[3]]);
-		if (array_key_exists($keys[4], $arr)) $this->setCreatedAt($arr[$keys[4]]);
-		if (array_key_exists($keys[5], $arr)) $this->setUpdatedAt($arr[$keys[5]]);
-		if (array_key_exists($keys[6], $arr)) $this->setTitle($arr[$keys[6]]);
-		if (array_key_exists($keys[7], $arr)) $this->setFirstname($arr[$keys[7]]);
-		if (array_key_exists($keys[8], $arr)) $this->setLastname($arr[$keys[8]]);
-		if (array_key_exists($keys[9], $arr)) $this->setPreferredName($arr[$keys[9]]);
-		if (array_key_exists($keys[10], $arr)) $this->setEmail($arr[$keys[10]]);
-		if (array_key_exists($keys[11], $arr)) $this->setPhone($arr[$keys[11]]);
-		if (array_key_exists($keys[12], $arr)) $this->setMobile($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setPrimaryAddressLine1($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setPrimaryAddressLine2($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setPrimaryAddressLine3($arr[$keys[15]]);
-		if (array_key_exists($keys[16], $arr)) $this->setPrimaryAddressCity($arr[$keys[16]]);
-		if (array_key_exists($keys[17], $arr)) $this->setPrimaryAddressPostcode($arr[$keys[17]]);
-		if (array_key_exists($keys[18], $arr)) $this->setPrimaryAddressState($arr[$keys[18]]);
-		if (array_key_exists($keys[19], $arr)) $this->setPrimaryAddressCountry($arr[$keys[19]]);
-		if (array_key_exists($keys[20], $arr)) $this->setSecondaryAddressLine1($arr[$keys[20]]);
-		if (array_key_exists($keys[21], $arr)) $this->setSecondaryAddressLine2($arr[$keys[21]]);
-		if (array_key_exists($keys[22], $arr)) $this->setSecondaryAddressLine3($arr[$keys[22]]);
-		if (array_key_exists($keys[23], $arr)) $this->setSecondaryAddressCity($arr[$keys[23]]);
-		if (array_key_exists($keys[24], $arr)) $this->setSecondaryAddressPostcode($arr[$keys[24]]);
-		if (array_key_exists($keys[25], $arr)) $this->setSecondaryAddressState($arr[$keys[25]]);
-		if (array_key_exists($keys[26], $arr)) $this->setSecondaryAddressCountry($arr[$keys[26]]);
-		if (array_key_exists($keys[27], $arr)) $this->setSpecialReq($arr[$keys[27]]);
-		if (array_key_exists($keys[28], $arr)) $this->setPosition($arr[$keys[28]]);
-		if (array_key_exists($keys[29], $arr)) $this->setPresenter($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setSrn($arr[$keys[30]]);
-		if (array_key_exists($keys[31], $arr)) $this->setFan($arr[$keys[31]]);
-		if (array_key_exists($keys[32], $arr)) $this->setAou($arr[$keys[32]]);
-		if (array_key_exists($keys[33], $arr)) $this->setId($arr[$keys[33]]);
+		if (array_key_exists($keys[2], $arr)) $this->setPaid($arr[$keys[2]]);
+		if (array_key_exists($keys[3], $arr)) $this->setRegDate($arr[$keys[3]]);
+		if (array_key_exists($keys[4], $arr)) $this->setExtraInfo($arr[$keys[4]]);
+		if (array_key_exists($keys[5], $arr)) $this->setCreatedAt($arr[$keys[5]]);
+		if (array_key_exists($keys[6], $arr)) $this->setUpdatedAt($arr[$keys[6]]);
+		if (array_key_exists($keys[7], $arr)) $this->setTitle($arr[$keys[7]]);
+		if (array_key_exists($keys[8], $arr)) $this->setFirstname($arr[$keys[8]]);
+		if (array_key_exists($keys[9], $arr)) $this->setLastname($arr[$keys[9]]);
+		if (array_key_exists($keys[10], $arr)) $this->setPreferredName($arr[$keys[10]]);
+		if (array_key_exists($keys[11], $arr)) $this->setEmail($arr[$keys[11]]);
+		if (array_key_exists($keys[12], $arr)) $this->setPhone($arr[$keys[12]]);
+		if (array_key_exists($keys[13], $arr)) $this->setMobile($arr[$keys[13]]);
+		if (array_key_exists($keys[14], $arr)) $this->setPrimaryAddressLine1($arr[$keys[14]]);
+		if (array_key_exists($keys[15], $arr)) $this->setPrimaryAddressLine2($arr[$keys[15]]);
+		if (array_key_exists($keys[16], $arr)) $this->setPrimaryAddressLine3($arr[$keys[16]]);
+		if (array_key_exists($keys[17], $arr)) $this->setPrimaryAddressCity($arr[$keys[17]]);
+		if (array_key_exists($keys[18], $arr)) $this->setPrimaryAddressPostcode($arr[$keys[18]]);
+		if (array_key_exists($keys[19], $arr)) $this->setPrimaryAddressState($arr[$keys[19]]);
+		if (array_key_exists($keys[20], $arr)) $this->setPrimaryAddressCountry($arr[$keys[20]]);
+		if (array_key_exists($keys[21], $arr)) $this->setSecondaryAddressLine1($arr[$keys[21]]);
+		if (array_key_exists($keys[22], $arr)) $this->setSecondaryAddressLine2($arr[$keys[22]]);
+		if (array_key_exists($keys[23], $arr)) $this->setSecondaryAddressLine3($arr[$keys[23]]);
+		if (array_key_exists($keys[24], $arr)) $this->setSecondaryAddressCity($arr[$keys[24]]);
+		if (array_key_exists($keys[25], $arr)) $this->setSecondaryAddressPostcode($arr[$keys[25]]);
+		if (array_key_exists($keys[26], $arr)) $this->setSecondaryAddressState($arr[$keys[26]]);
+		if (array_key_exists($keys[27], $arr)) $this->setSecondaryAddressCountry($arr[$keys[27]]);
+		if (array_key_exists($keys[28], $arr)) $this->setSpecialReq($arr[$keys[28]]);
+		if (array_key_exists($keys[29], $arr)) $this->setPosition($arr[$keys[29]]);
+		if (array_key_exists($keys[30], $arr)) $this->setPresenter($arr[$keys[30]]);
+		if (array_key_exists($keys[31], $arr)) $this->setSrn($arr[$keys[31]]);
+		if (array_key_exists($keys[32], $arr)) $this->setFan($arr[$keys[32]]);
+		if (array_key_exists($keys[33], $arr)) $this->setAou($arr[$keys[33]]);
+		if (array_key_exists($keys[34], $arr)) $this->setId($arr[$keys[34]]);
 	}
 
 	
@@ -1568,6 +1599,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 		if ($this->isColumnModified(GuestPeer::ETIME_ID)) $criteria->add(GuestPeer::ETIME_ID, $this->etime_id);
 		if ($this->isColumnModified(GuestPeer::ATTENDING)) $criteria->add(GuestPeer::ATTENDING, $this->attending);
+		if ($this->isColumnModified(GuestPeer::PAID)) $criteria->add(GuestPeer::PAID, $this->paid);
 		if ($this->isColumnModified(GuestPeer::REG_DATE)) $criteria->add(GuestPeer::REG_DATE, $this->reg_date);
 		if ($this->isColumnModified(GuestPeer::EXTRA_INFO)) $criteria->add(GuestPeer::EXTRA_INFO, $this->extra_info);
 		if ($this->isColumnModified(GuestPeer::CREATED_AT)) $criteria->add(GuestPeer::CREATED_AT, $this->created_at);
@@ -1633,6 +1665,8 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		$copyObj->setEtimeId($this->etime_id);
 
 		$copyObj->setAttending($this->attending);
+
+		$copyObj->setPaid($this->paid);
 
 		$copyObj->setRegDate($this->reg_date);
 

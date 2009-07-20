@@ -12,6 +12,19 @@
 </div>
 
 <div class="form-row">
+  <?php echo label_for('guest[paid]', $labels['guest{paid}'], '') ?>
+  <div class="content<?php if ($sf_request->hasError('guest{paid}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('guest{paid}')): ?>
+    <?php echo form_error('guest{paid}', array('class' => 'form-error-msg')) ?>
+  <?php endif; ?>
+
+  <?php $value = object_checkbox_tag($guest, 'getPaid', array (
+  'control_name' => 'guest[paid]',
+)); echo $value ? $value : '&nbsp;' ?>
+    </div>
+</div>
+
+<div class="form-row">
   <?php echo label_for('guest[extra_info]', $labels['guest{extra_info}'], '') ?>
   <div class="content<?php if ($sf_request->hasError('guest{extra_info}')): ?> form-error<?php endif; ?>">
   <?php if ($sf_request->hasError('guest{extra_info}')): ?>

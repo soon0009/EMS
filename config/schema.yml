@@ -89,6 +89,7 @@ propel:
     _attributes:                { phpName: Guest, idMethod: native }
     etime_id:                   { type: integer, foreignTable: etime, foreignReference: id, onDelete: cascade }
     attending:                  { type: boolean, required: true, default: false }
+    paid:                       { type: boolean, default: false }
     reg_date:                   { type: timestamp }
     extra_info:                 { type: longvarchar }
     created_at:                 ~
