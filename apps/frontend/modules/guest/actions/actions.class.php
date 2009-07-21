@@ -16,14 +16,18 @@ class guestActions extends sfActions
     $c = new Criteria();
     $c->add(GuestPeer::ID, $this->getRequestParameter('parent_id'));
     $this->rootGuest = GuestPeer::doSelectOne($c);
+    $this->forward404Unless($this->rootGuest);
 
     $c = new Criteria();
     $c->add(AdditionalGuestPeer::PARENT_GUEST_ID, $this->getRequestParameter('parent_id'));
     $c->addAscendingOrderByColumn(AdditionalGuestPeer::CHILD_GUEST_ID);
-    $this->guests = AdditionalGuestPeer::doSelect($c);
+    $this->additional_guests = AdditionalGuestPeer::doSelect($c);
+    $this->forward404Unless($this->additional_guests);
 
-    $this->forward404Unless($this->rootGuest);
+    $this->form_fields = $this->getFormFields($this->rootGuest->getEtime()->getEventId(), true);
+    $this->forward404Unless($this->form_fields);
 
+    $this->labels = $this->getLabels();
   }
 
   public function executeExcel() {

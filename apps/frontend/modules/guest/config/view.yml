@@ -6,3 +6,6 @@ excelSuccess:
 
 editSuccess:
   layout: outside_layout
+
+summarySuccess:
+  layout: outside_layout
