@@ -141,29 +141,38 @@ class guestActions extends sfActions
     return $this->forward('guest', 'edit');
   }
 
-  public function handleErrorEdit()
+  public function executeSavePublic()
   {
-    $this->preExecute();
+    return $this->forward('guest', 'editPublic');
+  }
 
+  private function prepareDataForEdit() {
     $this->forward404Unless($this->getRequestParameter('etime_id'));
     $this->guest = $this->getGuestOrCreate();
     $this->guest->setEtimeId($this->getRequestParameter('etime_id'));
     $this->event_id = $this->guest->getEtime()->getEventId();
     $this->form_fields = $this->getFormFields($this->event_id, true);
     $this->required_form_fields = $this->getFormFields($this->event_id, false);
-    $this->outside = $this->getOutside();
     if ($this->getRequestParameter('parent_id')) {
       $this->parent_id = $this->getRequestParameter('parent_id');
     }
     else {
       $this->parent_id = 0;
     }
+  }
 
+  public function handleErrorEdit()
+  {
+    $this->prepareDataForEdit();
     $this->updateGuestFromRequest();
-
     $this->labels = $this->getLabels();
 
     return sfView::SUCCESS;
+  }
+
+  public function handleErrorEditPublic()
+  {
+    return $this->handleErrorEdit();
   }
 
   protected function saveGuest($guest)
@@ -180,34 +189,18 @@ class guestActions extends sfActions
   public function executeCreateOutside()
   {
     $this->forward404Unless($this->getRequestParameter('etime_id'));
-    $this->setFlash('outside', true);
-    $this->forward('guest', 'edit');
+    $this->forward('guest', 'editPublic');
   }
 
-  public function executeEdit()
+  public function executeEditPublic()
   {
-    $this->forward404Unless($this->getRequestParameter('etime_id'));
-    $this->guest = $this->getGuestOrCreate();
-    $this->guest->setEtimeId($this->getRequestParameter('etime_id'));
-    $this->event_id = $this->guest->getEtime()->getEventId();
-    $this->outside = $this->getOutside();
-
-    $this->form_fields = $this->getFormFields($this->event_id, true);
-    $this->required_form_fields = $this->getFormFields($this->event_id, false);
-    if ($this->getRequestParameter('parent_id')) {
-      $this->parent_id = $this->getRequestParameter('parent_id');
-    }
-    else {
-      $this->parent_id = 0;
-    }
+    $this->prepareDataForEdit();
 
     if ($this->getRequest()->getMethod() == sfRequest::POST)
     {
       $this->updateGuestFromRequest();
 
-      if ($this->outside) {
-        $this->guest->setAttending(true);
-      }
+      $this->guest->setAttending(true);
 
       $this->saveGuest($this->guest);
 
@@ -219,7 +212,59 @@ class guestActions extends sfActions
         $ag->setParentGuestId($this->guest->getId());
       }
       $ag->setChildGuestId($this->guest->getId());
-      $ag->save();
+      if (!AdditionalGuestPeer::recordExists($ag)) {
+        $ag->save();
+      }
+
+      if ($this->parent_id) {
+        $parent_id = $this->parent_id;
+      }
+      else {
+        $parent_id = $this->guest->getId();
+      }
+
+      $this->setFlash('notice', 'Your registration has been saved');
+
+      if ($this->getRequestParameter('save_and_add_outside'))
+      {
+        return $this->redirect('guest/createOutside?etime_id='.$this->guest->getEtimeId().'&parent_id='.$parent_id);
+      }
+      else if ($this->getRequestParameter('save_outside'))
+      {
+        return $this->redirect('@show_outside_summary?parent_id='.$parent_id);
+      }
+      else
+      {
+        return $this->forward404();
+      }
+    }
+    else
+    {
+      $this->labels = $this->getLabels();
+    }
+  }
+
+  public function executeEdit()
+  {
+    $this->prepareDataForEdit();
+
+    if ($this->getRequest()->getMethod() == sfRequest::POST)
+    {
+      $this->updateGuestFromRequest();
+
+      $this->saveGuest($this->guest);
+
+      $ag = new AdditionalGuest();
+      if ($this->getRequestParameter('parent_id')) {
+        $ag->setParentGuestId($this->getRequestParameter('parent_id'));
+      }
+      else {
+        $ag->setParentGuestId($this->guest->getId());
+      }
+      $ag->setChildGuestId($this->guest->getId());
+      if (!AdditionalGuestPeer::recordExists($ag)) {
+        $ag->save();
+      }
 
       if ($this->parent_id) {
         $parent_id = $this->parent_id;
@@ -238,15 +283,6 @@ class guestActions extends sfActions
       {
         return $this->redirect('guest/list');
       }
-      else if ($this->getRequestParameter('save_and_add_outside'))
-      {
-        return $this->redirect('guest/createOutside?etime_id='.$this->guest->getEtimeId().'&parent_id='.$parent_id);
-      }
-      else if ($this->getRequestParameter('save_outside'))
-      {
-        return $this->redirect('@show_outside_summary?parent_id='.$parent_id);
-//        return $this->redirect('@show_outside_event?slug='.$this->guest->getEtime()->getEvent()->getSlug());
-      }
       else
       {
         return $this->redirect('guest/edit?id='.$this->guest->getId().'&etime_id='.$this->guest->getEtimeId());
@@ -255,18 +291,6 @@ class guestActions extends sfActions
     else
     {
       $this->labels = $this->getLabels();
-    }
-  }
-
-  protected function getOutside() {
-    if ($this->getRequestParameter('outside')) {
-      return $this->getRequestParameter('outside');
-    }
-    elseif ($this->getFlash('outside') && $this->getFlash('outside') == true) {
-      return true;
-    }
-    else {
-      return false;
     }
   }
 
@@ -556,6 +580,10 @@ class guestActions extends sfActions
     {
       $this->guest->setAou($guest['aou']);
     }
+  }
+
+  public function validateEditPublic() {
+    return $this->validateEdit();
   }
 
   public function validateEdit() {

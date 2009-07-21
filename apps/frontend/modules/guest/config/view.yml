@@ -4,7 +4,7 @@ excelSuccess:
 
   has_layout: false
 
-editSuccess:
+editPublicSuccess:
   layout: outside_layout
 
 summarySuccess:

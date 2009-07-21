@@ -12,7 +12,7 @@
 
 <div id="sf_admin_content">
 <?php include_partial('guest/edit_messages', array('guest' => $guest, 'labels' => $labels)) ?>
-<?php include_partial('guest/edit_form', array('parent_id' => $parent_id, 'guest' => $guest, 'event_id'=>$event_id, 'form_fields'=> $form_fields, 'required_form_fields'=> $required_form_fields, 'labels' => $labels)) ?>
+<?php include_partial('guest/edit_form_public', array('parent_id' => $parent_id, 'guest' => $guest, 'event_id'=>$event_id, 'form_fields'=> $form_fields, 'required_form_fields'=> $required_form_fields, 'labels' => $labels)) ?>
 </div>
 
 <div id="sf_admin_footer">

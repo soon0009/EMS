@@ -1,8 +1,8 @@
 createOutside:
   is_secure: off
-edit:
+editPublic:
   is_secure: off
-save:
+savePublic:
   is_secure: off
 summary:
   is_secure: off
