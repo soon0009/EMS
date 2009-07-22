@@ -366,10 +366,10 @@ class guestActions extends sfActions
       'guest{secondary_address_country}' => 'Secondary address country:',
       'guest{special_req}' => 'Special req:',
       'guest{position}' => 'Position:',
-      'guest{presenter}' => 'Presenter:',
-      'guest{srn}' => 'Srn:',
-      'guest{fan}' => 'Fan:',
-      'guest{aou}' => 'Aou:',
+      'guest{company}' => 'Company:',
+      'guest{srn}' => 'SRN:',
+      'guest{fan}' => 'FAN:',
+      'guest{aou}' => 'AOU:',
       'guest{id}' => 'Id:',
     );
   }
@@ -568,9 +568,9 @@ class guestActions extends sfActions
     {
       $this->guest->setPosition($guest['position']);
     }
-    if (isset($guest['presenter']))
+    if (isset($guest['company']))
     {
-      $this->guest->setPresenter($guest['presenter']);
+      $this->guest->setCompany($guest['company']);
     }
     if (isset($guest['srn']))
     {

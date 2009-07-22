@@ -374,7 +374,7 @@ RegField:
   field20: { name: secondary_address_country, label: 'Secondary address country', type: varchar }
   field21: { name: special_req, label: 'Special requirements', type: longvarchar }
   field22: { name: position, label: 'Position', type: varchar }
-  field23: { name: presenter, label: 'Company', type: varchar }
+  field23: { name: company, label: 'Company', type: varchar }
   field24: { name: srn, label: 'SRN', type: varchar }
   field25: { name: fan, label: 'FAN', type: varchar }
   field26: { name: aou, label: 'AOU', type: varchar }

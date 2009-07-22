@@ -390,18 +390,18 @@
 </div>
 <?php endif; ?>
 
-<?php if (in_array('presenter', $form_fields)): ?>
+<?php if (in_array('company', $form_fields)): ?>
 <div class="form-row">
-  <?php $required = ''; if (in_array('presenter', $required_form_fields)) { $required = 'class="required"'; } ?>
-  <?php echo label_for('guest[presenter]', $labels['guest{presenter}'], $required) ?>
-  <div class="content<?php if ($sf_request->hasError('guest{presenter}')): ?> form-error<?php endif; ?>">
-  <?php if ($sf_request->hasError('guest{presenter}')): ?>
-    <?php echo form_error('guest{presenter}', array('class' => 'form-error-msg')) ?>
+  <?php $required = ''; if (in_array('company', $required_form_fields)) { $required = 'class="required"'; } ?>
+  <?php echo label_for('guest[company]', $labels['guest{company}'], $required) ?>
+  <div class="content<?php if ($sf_request->hasError('guest{company}')): ?> form-error<?php endif; ?>">
+  <?php if ($sf_request->hasError('guest{company}')): ?>
+    <?php echo form_error('guest{company}', array('class' => 'form-error-msg')) ?>
   <?php endif; ?>
 
-  <?php $value = object_input_tag($guest, 'getPresenter', array (
+  <?php $value = object_input_tag($guest, 'getCompany', array (
   'size' => 80,
-  'control_name' => 'guest[presenter]',
+  'control_name' => 'guest[company]',
 )); echo $value ? $value : '&nbsp;' ?>
     </div>
 </div>

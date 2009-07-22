@@ -1,18 +1,24 @@
 <?php use_helper('Date'); ?>
+<?php $etime = $rootGuest->getEtime(); ?>
 <h1>
-<?php echo link_to($rootGuest->getEtime()->getEvent()->getTitle(),'@show_outside_event?slug='.$rootGuest->getEtime()->getEvent()->getSlug()); ?>
+<?php echo link_to($etime->getEvent()->getTitle(),'@show_outside_event?slug='.$etime->getEvent()->getSlug()); ?>
 </h1>
 
 <h3>
-<?php echo $rootGuest->getEtime()->getTitle(); ?>
+<?php echo $etime->getTitle(); ?>
 </h3>
 
+<p><?php print $etime->getDescription(); ?></p>
 <div>
-  <?php echo include_partial('etime/show_public', array('etime'=>$rootGuest->getEtime())); ?>
+  <?php echo include_partial('etime/show_public_summary', array('etime'=>$rootGuest->getEtime())); ?>
 </div>
 
-<?php foreach ($additional_guests as $additional_guest): ?>
+<?php $first = true; foreach ($additional_guests as $additional_guest): ?>
+  <?php if ($first): $first = false; ?>
+  <h4>Registrant</h4>
+  <?php else: ?>
   <h4>Guest details</h4>
+  <?php endif; ?>
   <?php $guest = $additional_guest->getGuestRelatedByChildGuestId(); ?>
 
   <?php if (in_array('title', $form_fields)): ?>
@@ -153,9 +159,9 @@
     <div class="clear_float"></div>
   <?php endif; ?>
   
-  <?php if (in_array('presenter', $form_fields)): ?>
-    <div class="label"><?php echo $labels['guest{presenter}']; ?></div>
-    <div class="value"><?php echo $guest->getPresenter(); ?></div>
+  <?php if (in_array('company', $form_fields)): ?>
+    <div class="label"><?php echo $labels['guest{company}']; ?></div>
+    <div class="value"><?php echo $guest->getCompany(); ?></div>
     <div class="clear_float"></div>
   <?php endif; ?>
   

@@ -1,21 +1,25 @@
+            <p><?php print $etime->getDescription(); ?></p>
             <div>
-              <div class="label">Location:</div>
-              <div class="value"><?php print $etime->getLocation(); ?></div>
+              <?php include_partial('etime/show_public_summary', array('etime' => $etime)); ?>
+              <div class="label">Audience:</div>
+              <div class="value">
+                <ul>
+                <?php foreach ($etime->getEtimeAudiences() as $audience): ?>
+                  <li><?php print $audience->getAudience(); ?></li>
+                <?php endforeach; ?>
+                </ul>
+              </div>
               <div class="clear_float"></div>
-              <div class="label">Date:</div>
-              <div class="value"><?php print myTools::oneDate($etime->getStartDate(), $etime->getEndDate()); ?></div>
+              <div class="label">RSVP:</div>
+              <div class="value">
+                <ul>
+                <?php foreach ($etime->getEtimeRsvps() as $rsvp): ?>
+                  <li><?php print $rsvp->getRsvp(); ?></li>
+                <?php endforeach; ?>
+                </ul>
+              </div>
               <div class="clear_float"></div>
-              <div class="label">Time:</div>
-              <div class="value"><?php print $etime->getStartTime(); ?> - <?php print $etime->getEndTime(); ?></div>
-              <div class="clear_float"></div>
-              <div class="label">All day:</div>
-              <div class="value"><?php print $etime->getAllDayString(); ?></div>
-              <div class="clear_float"></div>
-              <div class="label">Organiser:</div>
-              <div class="value"><?php print $etime->getOrganiser(); ?></div>
-              <div class="clear_float"></div>
-              <div class="label">Description:</div>
-              <div class="value"><?php print $etime->getDescription(); ?></div>
+              <div class="label">Fee:</div>
+              <div class="value"><?php print $etime->getHasFeeString(); ?></div>
               <div class="clear_float"></div>
             </div>
-

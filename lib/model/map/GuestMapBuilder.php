@@ -94,7 +94,7 @@ class GuestMapBuilder {
 
 		$tMap->addColumn('POSITION', 'Position', 'string', CreoleTypes::VARCHAR, false, 100);
 
-		$tMap->addColumn('PRESENTER', 'Presenter', 'string', CreoleTypes::VARCHAR, false, 100);
+		$tMap->addColumn('COMPANY', 'Company', 'string', CreoleTypes::VARCHAR, false, 100);
 
 		$tMap->addColumn('SRN', 'Srn', 'string', CreoleTypes::VARCHAR, false, 100);
 

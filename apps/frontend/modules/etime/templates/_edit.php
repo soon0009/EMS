@@ -1,7 +1,7 @@
 <?php echo object_input_hidden_tag($etime, 'getId') ?>
 
   <div class="long_form">
-    <label class="label" for="title">Etime title</label>
+    <label class="label" for="title">Sub event title</label>
     <div class="value">
       <?php echo object_input_tag($etime, 'getTitle', array ( 'id' => 'etime_title', 'name' => 'etime_title', 'class' => 'long',)) ?>
     </div>

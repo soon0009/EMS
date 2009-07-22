@@ -129,7 +129,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 
 	
-	protected $presenter;
+	protected $company;
 
 
 	
@@ -424,10 +424,10 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 	}
 
 	
-	public function getPresenter()
+	public function getCompany()
 	{
 
-		return $this->presenter;
+		return $this->company;
 	}
 
 	
@@ -934,7 +934,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setPresenter($v)
+	public function setCompany($v)
 	{
 
 		
@@ -943,9 +943,9 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 			$v = (string) $v; 
 		}
 
-		if ($this->presenter !== $v) {
-			$this->presenter = $v;
-			$this->modifiedColumns[] = GuestPeer::PRESENTER;
+		if ($this->company !== $v) {
+			$this->company = $v;
+			$this->modifiedColumns[] = GuestPeer::COMPANY;
 		}
 
 	} 
@@ -1078,7 +1078,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 			$this->position = $rs->getString($startcol + 29);
 
-			$this->presenter = $rs->getString($startcol + 30);
+			$this->company = $rs->getString($startcol + 30);
 
 			$this->srn = $rs->getString($startcol + 31);
 
@@ -1369,7 +1369,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				return $this->getPosition();
 				break;
 			case 30:
-				return $this->getPresenter();
+				return $this->getCompany();
 				break;
 			case 31:
 				return $this->getSrn();
@@ -1423,7 +1423,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 			$keys[27] => $this->getSecondaryAddressCountry(),
 			$keys[28] => $this->getSpecialReq(),
 			$keys[29] => $this->getPosition(),
-			$keys[30] => $this->getPresenter(),
+			$keys[30] => $this->getCompany(),
 			$keys[31] => $this->getSrn(),
 			$keys[32] => $this->getFan(),
 			$keys[33] => $this->getAou(),
@@ -1534,7 +1534,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 				$this->setPosition($value);
 				break;
 			case 30:
-				$this->setPresenter($value);
+				$this->setCompany($value);
 				break;
 			case 31:
 				$this->setSrn($value);
@@ -1585,7 +1585,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[27], $arr)) $this->setSecondaryAddressCountry($arr[$keys[27]]);
 		if (array_key_exists($keys[28], $arr)) $this->setSpecialReq($arr[$keys[28]]);
 		if (array_key_exists($keys[29], $arr)) $this->setPosition($arr[$keys[29]]);
-		if (array_key_exists($keys[30], $arr)) $this->setPresenter($arr[$keys[30]]);
+		if (array_key_exists($keys[30], $arr)) $this->setCompany($arr[$keys[30]]);
 		if (array_key_exists($keys[31], $arr)) $this->setSrn($arr[$keys[31]]);
 		if (array_key_exists($keys[32], $arr)) $this->setFan($arr[$keys[32]]);
 		if (array_key_exists($keys[33], $arr)) $this->setAou($arr[$keys[33]]);
@@ -1627,7 +1627,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(GuestPeer::SECONDARY_ADDRESS_COUNTRY)) $criteria->add(GuestPeer::SECONDARY_ADDRESS_COUNTRY, $this->secondary_address_country);
 		if ($this->isColumnModified(GuestPeer::SPECIAL_REQ)) $criteria->add(GuestPeer::SPECIAL_REQ, $this->special_req);
 		if ($this->isColumnModified(GuestPeer::POSITION)) $criteria->add(GuestPeer::POSITION, $this->position);
-		if ($this->isColumnModified(GuestPeer::PRESENTER)) $criteria->add(GuestPeer::PRESENTER, $this->presenter);
+		if ($this->isColumnModified(GuestPeer::COMPANY)) $criteria->add(GuestPeer::COMPANY, $this->company);
 		if ($this->isColumnModified(GuestPeer::SRN)) $criteria->add(GuestPeer::SRN, $this->srn);
 		if ($this->isColumnModified(GuestPeer::FAN)) $criteria->add(GuestPeer::FAN, $this->fan);
 		if ($this->isColumnModified(GuestPeer::AOU)) $criteria->add(GuestPeer::AOU, $this->aou);
@@ -1722,7 +1722,7 @@ abstract class BaseGuest extends BaseObject  implements Persistent {
 
 		$copyObj->setPosition($this->position);
 
-		$copyObj->setPresenter($this->presenter);
+		$copyObj->setCompany($this->company);
 
 		$copyObj->setSrn($this->srn);
 

@@ -117,7 +117,7 @@ propel:
     secondary_address_country:  { type: varchar(100) }
     special_req:                { type: longvarchar }
     position:                   { type: varchar(100) }
-    presenter:                  { type: varchar(100) }
+    company:                    { type: varchar(100) }
     srn:                        { type: varchar(100) }
     fan:                        { type: varchar(8) }
     aou:                        { type: varchar(100) }

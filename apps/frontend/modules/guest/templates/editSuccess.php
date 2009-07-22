@@ -4,7 +4,7 @@
 
 <div id="sf_admin_container">
 
-<h1><?php echo 'guest information'; ?></h1>
+<h1><?php if (!$parent_id) { echo 'Registration form'; } else { echo 'Guest information'; } ?></h1>
 
 <div id="sf_admin_header">
 <?php include_partial('guest/edit_header', array('guest' => $guest)) ?>

@@ -321,7 +321,7 @@ CREATE TABLE guest
 	secondary_address_country VARCHAR(100),
 	special_req TEXT,
 	position VARCHAR(100),
-	presenter VARCHAR(100),
+	company VARCHAR(100),
 	srn VARCHAR(100),
 	fan VARCHAR(8),
 	aou VARCHAR(100),
