@@ -376,14 +376,18 @@ class guestActions extends sfActions
 
   protected function updateGuestFromRequest()
   {
+    if (!$this->getRequestParameter('guest')) {
+      return;
+    }
+
     $guest = $this->getRequestParameter('guest');
 
     if (isset($guest['etime_id']))
     {
     $this->guest->setEtimeId($guest['etime_id'] ? $guest['etime_id'] : null);
     }
-    $this->guest->setAttending(isset($guest['attending']) ? $guest['attending'] : 0);
-    $this->guest->setPaid(isset($guest['paid']) ? $guest['paid'] : 0);
+    $this->guest->setAttending(isset($guest['attending']) ? true : false);
+    $this->guest->setPaid(isset($guest['paid']) ? true : false);
     if (isset($guest['reg_date']))
     {
       if ($guest['reg_date'])
