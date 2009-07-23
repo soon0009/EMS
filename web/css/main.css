@@ -146,3 +146,41 @@ th, td {
 .align_right {
   text-align: right;
 }
+
+.form-errors
+{
+  margin-bottom: 10px;
+  border: 1px solid #f33;
+  background-color: #ffc;
+}
+
+.form-errors h2
+{
+  padding: 5px 20px 5px 25px;
+  font-size: 11px;
+  color: #fff;
+  background: #f33 url(../images/error.png) no-repeat 5px 2px;
+  margin: 0;
+}
+
+.form-errors dl
+{
+  padding: 5px;
+}
+
+.form-errors dt
+{
+  font-weight: bold;
+  float: left;
+  padding-right: 5px;
+}
+
+.form-errors dd
+{
+  margin: 0;
+}
+
+.form-error
+{
+  color: #f33;
+}

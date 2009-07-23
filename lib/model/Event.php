@@ -34,4 +34,19 @@ class Event extends BaseEvent
     return $r;
   }
 
+  public function regFormOk() {
+    $online = false;
+    foreach ($this->getEtimes() as $et) {
+      foreach ($et->getEtimeRsvps() as $rsvp) {
+        if ($rsvp->getRsvp() == "Online") {
+          $online = true;
+        } 
+      }
+    }
+    if ($online && !$this->getRegForms()) {
+      return false;
+    }
+    return true;
+  }
+
 }

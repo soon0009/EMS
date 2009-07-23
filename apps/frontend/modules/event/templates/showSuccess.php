@@ -1,5 +1,8 @@
 <?php use_helper('Date'); ?>
 <div id="event_details">
+
+  <?php include_partial('show_messages', array('event'=>$event)); ?>
+
   <div id="event_heading" class="light_border_bottom">
     <h2 id="event_title">
       <?php print $event->getTitle(); ?>
