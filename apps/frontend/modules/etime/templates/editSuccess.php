@@ -26,6 +26,6 @@
   &nbsp;<?php echo link_to('delete', 'etime/delete?id='.$etime->getId(), 'post=true&confirm=Are you sure?') ?>
   &nbsp;<?php echo link_to('cancel', '@show_event?slug='.$etime->getEvent()->getSlug()) ?>
 <?php else: ?>
-  &nbsp;<?php echo link_to('cancel', 'event/list') ?>
+  &nbsp;<?php echo link_to('cancel', '@show_event?slug='.$etime->getEvent()->getSlug()) ?>
 <?php endif; ?>
 </form>

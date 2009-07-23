@@ -22,22 +22,21 @@ class etimeActions extends sfActions
 
   public function executeCreate()
   {
+    $this->forward404Unless($this->getRequestParameter('event_id'));
     $this->etime = new Etime();
+    $this->etime->setEventId($this->getRequestParameter('event_id'));
 
     $this->setTemplate('edit');
   }
 
   public function executeEdit() {
     if ($this->getRequest()->getMethod() != sfRequest::POST) {
-      if (!$this->getRequestParameter('id')) {
-        $this->forward404();
-      }
-      else {
+      if ($this->getRequestParameter('id')) {
         $c = new Criteria();
         $c->add(EtimePeer::ID, $this->getRequestParameter('id'));
         $this->etime = EtimePeer::doSelectOne($c);
-        $this->forward404Unless($this->etime);
       }
+      $this->forward404Unless($this->etime);
     }
     else {
       if (!$this->getRequestParameter('id'))

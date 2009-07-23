@@ -4,6 +4,7 @@
     <h2 id="event_title">
       <?php print $event->getTitle(); ?>
     </h2>
+    <div class="align_right"><?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?></div>
     <div id="add_button">
       <?php // link_to('Add time', ); ?>
     </div>

@@ -143,3 +143,6 @@ th, td {
 .tr_bg_1 {
   background-color: #ABC8E2;
 }
+.align_right {
+  text-align: right;
+}
