@@ -53,13 +53,6 @@
 
     <div class="clear_float"></div>
 
-    <label class="label" for="published">Published</label>
-    <div class="value">
-      <?php echo object_checkbox_tag($event, 'getPublished', array ()) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
     <label class="label" for="status">Category</label>
     <div class="value">
       <?php echo object_select_tag($event, 'getCategoryId', array ( 'related_class' => 'Category', 'include_blank' => true,)) ?>

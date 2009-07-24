@@ -7,7 +7,10 @@
     <h2 id="event_title">
       <?php print $event->getTitle(); ?>
     </h2>
-    <div class="align_right"><?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?></div>
+    <div id="publish" class="align_right">
+      <div id="published_indicator"></div>
+      <div id="publish_button">Publish</div>
+    </div>
     <div id="add_button">
       <?php // link_to('Add time', ); ?>
     </div>
@@ -31,9 +34,6 @@
             <div class="clear_float"></div>
             <div class="label">Status:</div>
             <div class="value"><?php print $event->getStatus(); ?></div>
-            <div class="clear_float"></div>
-            <div class="label">Published:</div>
-            <div class="value"><?php print $event->getPublishedString(); ?></div>
             <div class="clear_float"></div>
             <div class="label">Category:</div>
             <div class="value"><?php print $event->getCategory(); ?></div>
@@ -61,6 +61,9 @@
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
+            <div>
+              <?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?>
+            </div>
             <?php if ($event->getRegForms()): ?>
             <?php echo link_to('Registration form', '@show_reg_form?slug='.$event->getSlug()) ?>
             <?php else: ?>
