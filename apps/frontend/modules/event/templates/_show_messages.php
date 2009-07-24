@@ -7,3 +7,16 @@
       </dl>
     </div>
   <?php endif; ?>
+  <?php if (count($other_events = $event->getEventsOnSameDay())): ?>
+<pre>
+</pre>
+    <div class="form-warning">
+      <h2>Other events occuring during this event</h2>
+      <dl>
+        <?php foreach ($other_events as $oe): ?>
+        <dt>Event:</dt>
+        <dd><?php echo link_to($oe->getTitle(), '@show_event?slug='.$oe->getSlug()); ?></dd>
+        <?php endforeach; ?>
+      </dl>
+    </div>
+  <?php endif; ?>

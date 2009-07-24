@@ -49,4 +49,40 @@ class Event extends BaseEvent
     return true;
   }
 
+  public function getEventsOnSameDay() {
+    $other_events = array();
+    if (!$this->getEtimes()) {
+      return $other_events;
+    }
+
+    $where = "";
+    foreach ($this->getEtimes() as $etime) {
+      if ($where == "") {
+        $where = "AND (";
+        $where .= " etime.start_date::date = '{$etime->getStartDate()}'::date";
+      }
+      else {
+        $where .= " OR etime.start_date::date = '{$etime->getStartDate()}'::date";
+      }
+      $where .= " OR etime.end_date::date = '{$etime->getEndDate()}'::date";
+    }
+    $where .= ") ";
+
+    $conn = Propel::getConnection();
+    $query = "SELECT DISTINCT ON (event.title) * " .
+             "FROM event " .
+             "JOIN etime ON (event.id = etime.event_id) " .
+             "WHERE " .
+             "event.id != {$this->getId()} " .
+             "AND event.published = true " .
+             "$where" .
+             "ORDER BY event.title " .
+             "";
+    $stmt = $conn->prepareStatement($query);
+    $resultset = $stmt->executeQuery(ResultSet::FETCHMODE_NUM);
+		$other_events = EventPeer::populateObjects($resultset);
+
+
+    return $other_events;
+  }
 }

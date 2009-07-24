@@ -147,14 +147,19 @@ th, td {
   text-align: right;
 }
 
-.form-errors
+.form-errors, .form-warning
 {
   margin-bottom: 10px;
   border: 1px solid #f33;
   background-color: #ffc;
 }
 
-.form-errors h2
+.form-warning
+{
+  border: 1px solid #F76D0A;
+}
+
+.form-errors h2, .form-warning h2
 {
   padding: 5px 20px 5px 25px;
   font-size: 11px;
@@ -163,19 +168,24 @@ th, td {
   margin: 0;
 }
 
-.form-errors dl
+.form-warning h2
+{
+background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
+}
+
+.form-errors dl, .form-warning dl
 {
   padding: 5px;
 }
 
-.form-errors dt
+.form-errors dt, .form-warning dt
 {
   font-weight: bold;
   float: left;
   padding-right: 5px;
 }
 
-.form-errors dd
+.form-errors dd, .form-warning dd
 {
   margin: 0;
 }
