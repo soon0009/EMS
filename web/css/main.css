@@ -206,7 +206,8 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
   z-index: 900;
   background: url(/images/indicator.gif) no-repeat right 0;
   float: left;
-  width: 85%
+  width: 85%;
+  display: none;
 }
 #publish_button {
   width: auto;

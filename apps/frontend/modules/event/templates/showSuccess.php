@@ -8,11 +8,7 @@
       <?php print $event->getTitle(); ?>
     </h2>
     <div id="publish" class="align_right">
-      <div id="published_indicator"></div>
-      <div id="publish_button">Publish</div>
-    </div>
-    <div id="add_button">
-      <?php // link_to('Add time', ); ?>
+      <?php include_partial('publish_button', array('event'=>$event)); ?>
     </div>
     <div class="clear_float"></div>
   </div>

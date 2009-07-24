@@ -19,6 +19,14 @@ class eventActions extends sfActions
     return $this->forward('event', 'list');
   }
 
+  public function executePublish() {
+    $this->event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($this->event);
+
+    $this->event->setPublished(!$this->event->getPublished());
+    $this->event->save();
+  }
+
   public function executeShowOutside() {
     $c = new Criteria();
     $c->add(EventPeer::SLUG, $this->getRequestParameter('slug'));

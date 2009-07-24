@@ -1,2 +1,4 @@
 showOutsideSuccess:
   layout: outside_layout
+publishSuccess:
+  has_layout: off
