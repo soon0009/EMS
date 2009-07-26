@@ -1,4 +1,4 @@
-<?php use_helper('Date'); ?>
+<?php use_helper('Date', 'People'); ?>
 <div id="event_details">
 
   <?php include_partial('show_messages', array('event'=>$event)); ?>
@@ -12,12 +12,13 @@
     </div>
     <div class="clear_float"></div>
   </div>
-
       <div id="event">
         <div class="yui-gc">
           <div class="yui-u first">
-            <div class="label">Organiser:</div>
-            <div class="value"><?php print $event->getEventPeoples(); ?></div>
+            <div class="label">Organisers:</div>
+            <div class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'Organiser'); ?>
+            </div>
             <div class="clear_float"></div>
             <div class="label">Description:</div>
             <div class="value"><?php print $event->getDescription(); ?></div>
@@ -37,8 +38,14 @@
             <div class="label">Media potential:</div>
             <div class="value"><?php print $event->getMediaPotentialString(); ?></div>
             <div class="clear_float"></div>
+            <div class="label">Contacts:</div>
+            <div class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'contact'); ?>
+            </div>
             <div class="label">Interested parties:</div>
-            <div class="value"><?php print $event->getEventPeoples(); ?></div>
+            <div class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'interested party'); ?>
+            </div>
             <div class="clear_float"></div>
             <div class="label">Tags:</div>
             <div class="value">

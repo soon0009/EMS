@@ -274,8 +274,14 @@ EventPeople:
     name: Katherine R
     email: kr@flinders.edu.au
     phone: 555 54321
-    person_type_id: contact
+    person_type_id: organiser
   ep1_3:
+    event_id: e1
+    name: Katherine R
+    email: kr@flinders.edu.au
+    phone: 555 54321
+    person_type_id: contact
+  ep1_4:
     event_id: e1
     name: Nigel
     email: nigel.soon@flinders.edu.au

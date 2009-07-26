@@ -9,4 +9,7 @@
  */ 
 class PersonType extends BasePersonType
 {
+  public function __toString() {
+    return $this->getName();
+  }
 }
