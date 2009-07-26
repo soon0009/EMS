@@ -28,6 +28,6 @@ fillin:
   enabled: true
   param:
     converters:
-      htmlentities: [title, organiser, description, notes, imageurl]
+      htmlentities: [title, description, notes, imageurl]
       htmlspecialchars: [description, notes]
 

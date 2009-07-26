@@ -1,3 +1,11 @@
+PersonType:
+  organiser:
+    name: Organiser
+  contact:
+    name: Contact
+  interested_party:
+    name: Interested party
+
 Status:
   confirmed:
     status: Confirmed
@@ -89,8 +97,6 @@ Event:
       Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
       erat libero, scelerisque et, porttitor et, varius a, leo.
     image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
-    organiser: School of FU
-    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
 
   e2:
     title: Trip to the moon
@@ -122,8 +128,6 @@ Event:
       Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
       erat libero, scelerisque et, porttitor et, varius a, leo.
     image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
-    organiser: School of FU
-    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
 
   e3:
     title: Setting up deck chairs on the Titanic
@@ -155,8 +159,6 @@ Event:
       Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
       erat libero, scelerisque et, porttitor et, varius a, leo.
     image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
-    organiser: School of FU
-    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
 
   e4:
     title: Puppet show
@@ -188,8 +190,6 @@ Event:
       Sed a massa. Duis dignissim euismod quam. Nullam euismod metus ut orci. Vestibulum
       erat libero, scelerisque et, porttitor et, varius a, leo.
     image_url: 'http://www.flinders.edu.au/fms/public-files/images/glasses.jpg'
-    organiser: School of FU
-    interested_parties: soon0009@flinders.edu.au, nigel.soon@flinders.edu.au
 
 Etime:
   et1:
@@ -206,8 +206,6 @@ Etime:
     capacity: 100
     additional_guests: 2
     has_fee: false
-    organiser: it's not me
-    interested_parties: ns@openradical.com
 
   et2:
     event_id: e2
@@ -222,8 +220,6 @@ Etime:
       Vivamus sit amet lorem posuere dui vulputate ornare.
     capacity:
     has_fee: true
-    organiser: NASA
-    interested_parties: ns@openradical.com
 
   et3:
     event_id: e2
@@ -238,8 +234,6 @@ Etime:
       Vivamus sit amet lorem posuere dui vulputate ornare.
     capacity: 4
     has_fee: false
-    organiser: The other guy
-    interested_parties: ns@openradical.com
 
   et4:
     event_id: e3
@@ -254,8 +248,6 @@ Etime:
       Vivamus sit amet lorem posuere dui vulputate ornare.
     capacity: 100
     has_fee: false
-    organiser: captain Ishmal
-    interested_parties: ns@openradical.com
 
   et5:
     event_id: e4
@@ -269,8 +261,46 @@ Etime:
       Vivamus sit amet lorem posuere dui vulputate ornare.
     capacity: 999
     has_fee: false
-    organiser: The master of puppets
-    interested_parties: ns@openradical.com
+
+EventPeople:
+  ep1_1:
+    event_id: e1
+    name: School of Fu
+    email: fuschool@flinders.edu.au
+    phone: 555 12345
+    person_type_id: organiser
+  ep1_2:
+    event_id: e1
+    name: Katherine R
+    email: kr@flinders.edu.au
+    phone: 555 54321
+    person_type_id: contact
+  ep1_3:
+    event_id: e1
+    name: Nigel
+    email: nigel.soon@flinders.edu.au
+    phone: 555 54321
+    person_type_id: interested_party
+
+EtimePeople:
+  etp1_1:
+    etime_id: et2
+    name: School of Fu
+    email: fuschool@flinders.edu.au
+    phone: 555 12345
+    person_type_id: organiser
+  etp1_2:
+    etime_id: et2
+    name: Katherine R
+    email: kr@flinders.edu.au
+    phone: 555 54321
+    person_type_id: contact
+  etp1_2:
+    etime_id: et2
+    name: Nigel
+    email: nigel.soon@flinders.edu.au
+    phone: 555 54321
+    person_type_id: interested_party
 
 EtimeAudience:
   a1:

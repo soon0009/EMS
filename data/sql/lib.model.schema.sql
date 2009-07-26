@@ -22,8 +22,6 @@ CREATE TABLE event
 	description TEXT,
 	notes TEXT,
 	image_url VARCHAR(255),
-	organiser TEXT,
-	interested_parties TEXT,
 	updated_at TIMESTAMP,
 	PRIMARY KEY (id),
 	CONSTRAINT unique_slug UNIQUE (slug)
@@ -82,6 +80,58 @@ COMMENT ON TABLE category IS '';
 
 SET search_path TO public;
 -----------------------------------------------------------------------------
+-- event_people
+-----------------------------------------------------------------------------
+
+DROP TABLE event_people CASCADE;
+
+DROP SEQUENCE event_people_seq;
+
+CREATE SEQUENCE event_people_seq;
+
+
+CREATE TABLE event_people
+(
+	id INTEGER  NOT NULL,
+	event_id INTEGER  NOT NULL,
+	name VARCHAR(100),
+	email VARCHAR(100),
+	phone VARCHAR(100),
+	person_type_id INTEGER,
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE event_people IS '';
+
+
+SET search_path TO public;
+ALTER TABLE event_people ADD CONSTRAINT event_people_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
+
+ALTER TABLE event_people ADD CONSTRAINT event_people_FK_2 FOREIGN KEY (person_type_id) REFERENCES person_type (id);
+
+-----------------------------------------------------------------------------
+-- person_type
+-----------------------------------------------------------------------------
+
+DROP TABLE person_type CASCADE;
+
+DROP SEQUENCE person_type_seq;
+
+CREATE SEQUENCE person_type_seq;
+
+
+CREATE TABLE person_type
+(
+	id INTEGER  NOT NULL,
+	name VARCHAR(100),
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE person_type IS '';
+
+
+SET search_path TO public;
+-----------------------------------------------------------------------------
 -- etime
 -----------------------------------------------------------------------------
 
@@ -107,8 +157,6 @@ CREATE TABLE etime
 	additional_guests INTEGER default 0 NOT NULL,
 	has_fee BOOLEAN default 'f' NOT NULL,
 	audio_visual_support BOOLEAN default 'f' NOT NULL,
-	organiser TEXT,
-	interested_parties TEXT,
 	updated_at TIMESTAMP,
 	PRIMARY KEY (id)
 );
@@ -118,6 +166,36 @@ COMMENT ON TABLE etime IS '';
 
 SET search_path TO public;
 ALTER TABLE etime ADD CONSTRAINT etime_FK_1 FOREIGN KEY (event_id) REFERENCES event (id) ON DELETE CASCADE;
+
+-----------------------------------------------------------------------------
+-- etime_people
+-----------------------------------------------------------------------------
+
+DROP TABLE etime_people CASCADE;
+
+DROP SEQUENCE etime_people_seq;
+
+CREATE SEQUENCE etime_people_seq;
+
+
+CREATE TABLE etime_people
+(
+	id INTEGER  NOT NULL,
+	etime_id INTEGER  NOT NULL,
+	name VARCHAR(100),
+	email VARCHAR(100),
+	phone VARCHAR(100),
+	person_type_id INTEGER,
+	PRIMARY KEY (id)
+);
+
+COMMENT ON TABLE etime_people IS '';
+
+
+SET search_path TO public;
+ALTER TABLE etime_people ADD CONSTRAINT etime_people_FK_1 FOREIGN KEY (etime_id) REFERENCES etime (id) ON DELETE CASCADE;
+
+ALTER TABLE etime_people ADD CONSTRAINT etime_people_FK_2 FOREIGN KEY (person_type_id) REFERENCES person_type (id);
 
 -----------------------------------------------------------------------------
 -- audience

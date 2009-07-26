@@ -32,6 +32,6 @@ fillin:
   enabled: true
   param:
     converters:
-      htmlentities: [title, organiser, description, notes]
+      htmlentities: [title, description, notes]
       htmlspecialchars: [description, notes]
 

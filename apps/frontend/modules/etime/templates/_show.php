@@ -42,7 +42,7 @@
               <div class="value"><?php print $etime->getAudioVisualSupportString(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Organiser:</div>
-              <div class="value"><?php print $etime->getOrganiser(); ?></div>
+              <div class="value"><?php print $etime->getEtimePeoples(); ?></div>
               <div class="clear_float"></div>
               <div class="label">Description:</div>
               <div class="value"><?php print $etime->getDescription(); ?></div>

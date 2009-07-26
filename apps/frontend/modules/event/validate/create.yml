@@ -43,6 +43,6 @@ fillin:
   enabled: true
   param:
     converters:
-      htmlentities: [title, etime_title, organiser, etime_organiser, description, etime_description, notes, etime_notes, imageurl]
+      htmlentities: [title, etime_title, description, etime_description, notes, etime_notes, imageurl]
       htmlspecialchars: [description, etime_description, notes, etime_notes]
 

@@ -60,10 +60,6 @@ class EtimeMapBuilder {
 
 		$tMap->addColumn('AUDIO_VISUAL_SUPPORT', 'AudioVisualSupport', 'boolean', CreoleTypes::BOOLEAN, true, null);
 
-		$tMap->addColumn('ORGANISER', 'Organiser', 'string', CreoleTypes::LONGVARCHAR, false, null);
-
-		$tMap->addColumn('INTERESTED_PARTIES', 'InterestedParties', 'string', CreoleTypes::LONGVARCHAR, false, null);
-
 		$tMap->addColumn('UPDATED_AT', 'UpdatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 	} 

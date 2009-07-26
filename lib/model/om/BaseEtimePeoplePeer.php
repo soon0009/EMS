@@ -1,56 +1,41 @@
 <?php
 
 
-abstract class BaseEventPeer {
+abstract class BaseEtimePeoplePeer {
 
 	
 	const DATABASE_NAME = 'propel';
 
 	
-	const TABLE_NAME = 'event';
+	const TABLE_NAME = 'etime_people';
 
 	
-	const CLASS_DEFAULT = 'lib.model.Event';
+	const CLASS_DEFAULT = 'lib.model.EtimePeople';
 
 	
-	const NUM_COLUMNS = 11;
+	const NUM_COLUMNS = 6;
 
 	
 	const NUM_LAZY_LOAD_COLUMNS = 0;
 
 
 	
-	const ID = 'event.ID';
+	const ID = 'etime_people.ID';
 
 	
-	const TITLE = 'event.TITLE';
+	const ETIME_ID = 'etime_people.ETIME_ID';
 
 	
-	const SLUG = 'event.SLUG';
+	const NAME = 'etime_people.NAME';
 
 	
-	const STATUS_ID = 'event.STATUS_ID';
+	const EMAIL = 'etime_people.EMAIL';
 
 	
-	const CATEGORY_ID = 'event.CATEGORY_ID';
+	const PHONE = 'etime_people.PHONE';
 
 	
-	const PUBLISHED = 'event.PUBLISHED';
-
-	
-	const MEDIA_POTENTIAL = 'event.MEDIA_POTENTIAL';
-
-	
-	const DESCRIPTION = 'event.DESCRIPTION';
-
-	
-	const NOTES = 'event.NOTES';
-
-	
-	const IMAGE_URL = 'event.IMAGE_URL';
-
-	
-	const UPDATED_AT = 'event.UPDATED_AT';
+	const PERSON_TYPE_ID = 'etime_people.PERSON_TYPE_ID';
 
 	
 	private static $phpNameMap = null;
@@ -58,31 +43,31 @@ abstract class BaseEventPeer {
 
 	
 	private static $fieldNames = array (
-		BasePeer::TYPE_PHPNAME => array ('Id', 'Title', 'Slug', 'StatusId', 'CategoryId', 'Published', 'MediaPotential', 'Description', 'Notes', 'ImageUrl', 'UpdatedAt', ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID, EventPeer::TITLE, EventPeer::SLUG, EventPeer::STATUS_ID, EventPeer::CATEGORY_ID, EventPeer::PUBLISHED, EventPeer::MEDIA_POTENTIAL, EventPeer::DESCRIPTION, EventPeer::NOTES, EventPeer::IMAGE_URL, EventPeer::UPDATED_AT, ),
-		BasePeer::TYPE_FIELDNAME => array ('id', 'title', 'slug', 'status_id', 'category_id', 'published', 'media_potential', 'description', 'notes', 'image_url', 'updated_at', ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id', 'EtimeId', 'Name', 'Email', 'Phone', 'PersonTypeId', ),
+		BasePeer::TYPE_COLNAME => array (EtimePeoplePeer::ID, EtimePeoplePeer::ETIME_ID, EtimePeoplePeer::NAME, EtimePeoplePeer::EMAIL, EtimePeoplePeer::PHONE, EtimePeoplePeer::PERSON_TYPE_ID, ),
+		BasePeer::TYPE_FIELDNAME => array ('id', 'etime_id', 'name', 'email', 'phone', 'person_type_id', ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	private static $fieldKeys = array (
-		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'Title' => 1, 'Slug' => 2, 'StatusId' => 3, 'CategoryId' => 4, 'Published' => 5, 'MediaPotential' => 6, 'Description' => 7, 'Notes' => 8, 'ImageUrl' => 9, 'UpdatedAt' => 10, ),
-		BasePeer::TYPE_COLNAME => array (EventPeer::ID => 0, EventPeer::TITLE => 1, EventPeer::SLUG => 2, EventPeer::STATUS_ID => 3, EventPeer::CATEGORY_ID => 4, EventPeer::PUBLISHED => 5, EventPeer::MEDIA_POTENTIAL => 6, EventPeer::DESCRIPTION => 7, EventPeer::NOTES => 8, EventPeer::IMAGE_URL => 9, EventPeer::UPDATED_AT => 10, ),
-		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'title' => 1, 'slug' => 2, 'status_id' => 3, 'category_id' => 4, 'published' => 5, 'media_potential' => 6, 'description' => 7, 'notes' => 8, 'image_url' => 9, 'updated_at' => 10, ),
-		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, )
+		BasePeer::TYPE_PHPNAME => array ('Id' => 0, 'EtimeId' => 1, 'Name' => 2, 'Email' => 3, 'Phone' => 4, 'PersonTypeId' => 5, ),
+		BasePeer::TYPE_COLNAME => array (EtimePeoplePeer::ID => 0, EtimePeoplePeer::ETIME_ID => 1, EtimePeoplePeer::NAME => 2, EtimePeoplePeer::EMAIL => 3, EtimePeoplePeer::PHONE => 4, EtimePeoplePeer::PERSON_TYPE_ID => 5, ),
+		BasePeer::TYPE_FIELDNAME => array ('id' => 0, 'etime_id' => 1, 'name' => 2, 'email' => 3, 'phone' => 4, 'person_type_id' => 5, ),
+		BasePeer::TYPE_NUM => array (0, 1, 2, 3, 4, 5, )
 	);
 
 	
 	public static function getMapBuilder()
 	{
-		include_once 'lib/model/map/EventMapBuilder.php';
-		return BasePeer::getMapBuilder('lib.model.map.EventMapBuilder');
+		include_once 'lib/model/map/EtimePeopleMapBuilder.php';
+		return BasePeer::getMapBuilder('lib.model.map.EtimePeopleMapBuilder');
 	}
 	
 	public static function getPhpNameMap()
 	{
 		if (self::$phpNameMap === null) {
-			$map = EventPeer::getTableMap();
+			$map = EtimePeoplePeer::getTableMap();
 			$columns = $map->getColumns();
 			$nameMap = array();
 			foreach ($columns as $column) {
@@ -116,39 +101,29 @@ abstract class BaseEventPeer {
 	
 	public static function alias($alias, $column)
 	{
-		return str_replace(EventPeer::TABLE_NAME.'.', $alias.'.', $column);
+		return str_replace(EtimePeoplePeer::TABLE_NAME.'.', $alias.'.', $column);
 	}
 
 	
 	public static function addSelectColumns(Criteria $criteria)
 	{
 
-		$criteria->addSelectColumn(EventPeer::ID);
+		$criteria->addSelectColumn(EtimePeoplePeer::ID);
 
-		$criteria->addSelectColumn(EventPeer::TITLE);
+		$criteria->addSelectColumn(EtimePeoplePeer::ETIME_ID);
 
-		$criteria->addSelectColumn(EventPeer::SLUG);
+		$criteria->addSelectColumn(EtimePeoplePeer::NAME);
 
-		$criteria->addSelectColumn(EventPeer::STATUS_ID);
+		$criteria->addSelectColumn(EtimePeoplePeer::EMAIL);
 
-		$criteria->addSelectColumn(EventPeer::CATEGORY_ID);
+		$criteria->addSelectColumn(EtimePeoplePeer::PHONE);
 
-		$criteria->addSelectColumn(EventPeer::PUBLISHED);
-
-		$criteria->addSelectColumn(EventPeer::MEDIA_POTENTIAL);
-
-		$criteria->addSelectColumn(EventPeer::DESCRIPTION);
-
-		$criteria->addSelectColumn(EventPeer::NOTES);
-
-		$criteria->addSelectColumn(EventPeer::IMAGE_URL);
-
-		$criteria->addSelectColumn(EventPeer::UPDATED_AT);
+		$criteria->addSelectColumn(EtimePeoplePeer::PERSON_TYPE_ID);
 
 	}
 
-	const COUNT = 'COUNT(event.ID)';
-	const COUNT_DISTINCT = 'COUNT(DISTINCT event.ID)';
+	const COUNT = 'COUNT(etime_people.ID)';
+	const COUNT_DISTINCT = 'COUNT(DISTINCT etime_people.ID)';
 
 	
 	public static function doCount(Criteria $criteria, $distinct = false, $con = null)
@@ -157,9 +132,9 @@ abstract class BaseEventPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -167,7 +142,7 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -179,7 +154,7 @@ abstract class BaseEventPeer {
 	{
 		$critcopy = clone $criteria;
 		$critcopy->setLimit(1);
-		$objects = EventPeer::doSelect($critcopy, $con);
+		$objects = EtimePeoplePeer::doSelect($critcopy, $con);
 		if ($objects) {
 			return $objects[0];
 		}
@@ -188,7 +163,7 @@ abstract class BaseEventPeer {
 	
 	public static function doSelect(Criteria $criteria, $con = null)
 	{
-		return EventPeer::populateObjects(EventPeer::doSelectRS($criteria, $con));
+		return EtimePeoplePeer::populateObjects(EtimePeoplePeer::doSelectRS($criteria, $con));
 	}
 	
 	public static function doSelectRS(Criteria $criteria, $con = null)
@@ -199,7 +174,7 @@ abstract class BaseEventPeer {
 
 		if (!$criteria->getSelectColumns()) {
 			$criteria = clone $criteria;
-			EventPeer::addSelectColumns($criteria);
+			EtimePeoplePeer::addSelectColumns($criteria);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -211,7 +186,7 @@ abstract class BaseEventPeer {
 	{
 		$results = array();
 	
-				$cls = EventPeer::getOMClass();
+				$cls = EtimePeoplePeer::getOMClass();
 		$cls = Propel::import($cls);
 				while($rs->next()) {
 		
@@ -224,15 +199,15 @@ abstract class BaseEventPeer {
 	}
 
 	
-	public static function doCountJoinStatus(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinEtime(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -240,9 +215,9 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -252,15 +227,15 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doCountJoinCategory(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinPersonType(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -268,9 +243,9 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -280,7 +255,7 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doSelectJoinStatus(Criteria $c, $con = null)
+	public static function doSelectJoinEtime(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -288,23 +263,23 @@ abstract class BaseEventPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		EventPeer::addSelectColumns($c);
-		$startcol = (EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		StatusPeer::addSelectColumns($c);
+		EtimePeoplePeer::addSelectColumns($c);
+		$startcol = (EtimePeoplePeer::NUM_COLUMNS - EtimePeoplePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		EtimePeer::addSelectColumns($c);
 
-		$c->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$c->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while($rs->next()) {
 
-			$omClass = EventPeer::getOMClass();
+			$omClass = EtimePeoplePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = StatusPeer::getOMClass();
+			$omClass = EtimePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
@@ -312,14 +287,14 @@ abstract class BaseEventPeer {
 
 			$newObject = true;
 			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getStatus(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getEtime(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-										$temp_obj2->addEvent($obj1); 					break;
+										$temp_obj2->addEtimePeople($obj1); 					break;
 				}
 			}
 			if ($newObject) {
-				$obj2->initEvents();
-				$obj2->addEvent($obj1); 			}
+				$obj2->initEtimePeoples();
+				$obj2->addEtimePeople($obj1); 			}
 			$results[] = $obj1;
 		}
 		return $results;
@@ -327,7 +302,7 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doSelectJoinCategory(Criteria $c, $con = null)
+	public static function doSelectJoinPersonType(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -335,23 +310,23 @@ abstract class BaseEventPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		EventPeer::addSelectColumns($c);
-		$startcol = (EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
-		CategoryPeer::addSelectColumns($c);
+		EtimePeoplePeer::addSelectColumns($c);
+		$startcol = (EtimePeoplePeer::NUM_COLUMNS - EtimePeoplePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		PersonTypePeer::addSelectColumns($c);
 
-		$c->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while($rs->next()) {
 
-			$omClass = EventPeer::getOMClass();
+			$omClass = EtimePeoplePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = PersonTypePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj2 = new $cls();
@@ -359,14 +334,14 @@ abstract class BaseEventPeer {
 
 			$newObject = true;
 			foreach($results as $temp_obj1) {
-				$temp_obj2 = $temp_obj1->getCategory(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getPersonType(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-										$temp_obj2->addEvent($obj1); 					break;
+										$temp_obj2->addEtimePeople($obj1); 					break;
 				}
 			}
 			if ($newObject) {
-				$obj2->initEvents();
-				$obj2->addEvent($obj1); 			}
+				$obj2->initEtimePeoples();
+				$obj2->addEtimePeople($obj1); 			}
 			$results[] = $obj1;
 		}
 		return $results;
@@ -380,9 +355,9 @@ abstract class BaseEventPeer {
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -390,11 +365,11 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 
-		$criteria->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -412,25 +387,25 @@ abstract class BaseEventPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		EventPeer::addSelectColumns($c);
-		$startcol2 = (EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		EtimePeoplePeer::addSelectColumns($c);
+		$startcol2 = (EtimePeoplePeer::NUM_COLUMNS - EtimePeoplePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		StatusPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + StatusPeer::NUM_COLUMNS;
+		EtimePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + EtimePeer::NUM_COLUMNS;
 
-		CategoryPeer::addSelectColumns($c);
-		$startcol4 = $startcol3 + CategoryPeer::NUM_COLUMNS;
+		PersonTypePeer::addSelectColumns($c);
+		$startcol4 = $startcol3 + PersonTypePeer::NUM_COLUMNS;
 
-		$c->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$c->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 
-		$c->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 
 		$rs = BasePeer::doSelect($c, $con);
 		$results = array();
 
 		while($rs->next()) {
 
-			$omClass = EventPeer::getOMClass();
+			$omClass = EtimePeoplePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -439,7 +414,7 @@ abstract class BaseEventPeer {
 
 
 					
-			$omClass = StatusPeer::getOMClass();
+			$omClass = EtimePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -449,20 +424,20 @@ abstract class BaseEventPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getStatus(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getEtime(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-					$temp_obj2->addEvent($obj1); 					break;
+					$temp_obj2->addEtimePeople($obj1); 					break;
 				}
 			}
 
 			if ($newObject) {
-				$obj2->initEvents();
-				$obj2->addEvent($obj1);
+				$obj2->initEtimePeoples();
+				$obj2->addEtimePeople($obj1);
 			}
 
 
 					
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = PersonTypePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -472,15 +447,15 @@ abstract class BaseEventPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj3 = $temp_obj1->getCategory(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
+				$temp_obj3 = $temp_obj1->getPersonType(); 				if ($temp_obj3->getPrimaryKey() === $obj3->getPrimaryKey()) {
 					$newObject = false;
-					$temp_obj3->addEvent($obj1); 					break;
+					$temp_obj3->addEtimePeople($obj1); 					break;
 				}
 			}
 
 			if ($newObject) {
-				$obj3->initEvents();
-				$obj3->addEvent($obj1);
+				$obj3->initEtimePeoples();
+				$obj3->addEtimePeople($obj1);
 			}
 
 			$results[] = $obj1;
@@ -490,15 +465,15 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doCountJoinAllExceptStatus(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinAllExceptEtime(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -506,9 +481,9 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -518,15 +493,15 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doCountJoinAllExceptCategory(Criteria $criteria, $distinct = false, $con = null)
+	public static function doCountJoinAllExceptPersonType(Criteria $criteria, $distinct = false, $con = null)
 	{
 				$criteria = clone $criteria;
 
 				$criteria->clearSelectColumns()->clearOrderByColumns();
 		if ($distinct || in_array(Criteria::DISTINCT, $criteria->getSelectModifiers())) {
-			$criteria->addSelectColumn(EventPeer::COUNT_DISTINCT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT_DISTINCT);
 		} else {
-			$criteria->addSelectColumn(EventPeer::COUNT);
+			$criteria->addSelectColumn(EtimePeoplePeer::COUNT);
 		}
 
 				foreach($criteria->getGroupByColumns() as $column)
@@ -534,9 +509,9 @@ abstract class BaseEventPeer {
 			$criteria->addSelectColumn($column);
 		}
 
-		$criteria->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$criteria->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 
-		$rs = EventPeer::doSelectRS($criteria, $con);
+		$rs = EtimePeoplePeer::doSelectRS($criteria, $con);
 		if ($rs->next()) {
 			return $rs->getInt(1);
 		} else {
@@ -546,7 +521,7 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doSelectJoinAllExceptStatus(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptEtime(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -554,13 +529,13 @@ abstract class BaseEventPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		EventPeer::addSelectColumns($c);
-		$startcol2 = (EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		EtimePeoplePeer::addSelectColumns($c);
+		$startcol2 = (EtimePeoplePeer::NUM_COLUMNS - EtimePeoplePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		CategoryPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + CategoryPeer::NUM_COLUMNS;
+		PersonTypePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + PersonTypePeer::NUM_COLUMNS;
 
-		$c->addJoin(EventPeer::CATEGORY_ID, CategoryPeer::ID);
+		$c->addJoin(EtimePeoplePeer::PERSON_TYPE_ID, PersonTypePeer::ID);
 
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -568,13 +543,13 @@ abstract class BaseEventPeer {
 
 		while($rs->next()) {
 
-			$omClass = EventPeer::getOMClass();
+			$omClass = EtimePeoplePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = CategoryPeer::getOMClass();
+			$omClass = PersonTypePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -584,16 +559,16 @@ abstract class BaseEventPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getCategory(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getPersonType(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-					$temp_obj2->addEvent($obj1);
+					$temp_obj2->addEtimePeople($obj1);
 					break;
 				}
 			}
 
 			if ($newObject) {
-				$obj2->initEvents();
-				$obj2->addEvent($obj1);
+				$obj2->initEtimePeoples();
+				$obj2->addEtimePeople($obj1);
 			}
 
 			$results[] = $obj1;
@@ -603,7 +578,7 @@ abstract class BaseEventPeer {
 
 
 	
-	public static function doSelectJoinAllExceptCategory(Criteria $c, $con = null)
+	public static function doSelectJoinAllExceptPersonType(Criteria $c, $con = null)
 	{
 		$c = clone $c;
 
@@ -611,13 +586,13 @@ abstract class BaseEventPeer {
 			$c->setDbName(self::DATABASE_NAME);
 		}
 
-		EventPeer::addSelectColumns($c);
-		$startcol2 = (EventPeer::NUM_COLUMNS - EventPeer::NUM_LAZY_LOAD_COLUMNS) + 1;
+		EtimePeoplePeer::addSelectColumns($c);
+		$startcol2 = (EtimePeoplePeer::NUM_COLUMNS - EtimePeoplePeer::NUM_LAZY_LOAD_COLUMNS) + 1;
 
-		StatusPeer::addSelectColumns($c);
-		$startcol3 = $startcol2 + StatusPeer::NUM_COLUMNS;
+		EtimePeer::addSelectColumns($c);
+		$startcol3 = $startcol2 + EtimePeer::NUM_COLUMNS;
 
-		$c->addJoin(EventPeer::STATUS_ID, StatusPeer::ID);
+		$c->addJoin(EtimePeoplePeer::ETIME_ID, EtimePeer::ID);
 
 
 		$rs = BasePeer::doSelect($c, $con);
@@ -625,13 +600,13 @@ abstract class BaseEventPeer {
 
 		while($rs->next()) {
 
-			$omClass = EventPeer::getOMClass();
+			$omClass = EtimePeoplePeer::getOMClass();
 
 			$cls = Propel::import($omClass);
 			$obj1 = new $cls();
 			$obj1->hydrate($rs);
 
-			$omClass = StatusPeer::getOMClass();
+			$omClass = EtimePeer::getOMClass();
 
 
 			$cls = Propel::import($omClass);
@@ -641,16 +616,16 @@ abstract class BaseEventPeer {
 			$newObject = true;
 			for ($j=0, $resCount=count($results); $j < $resCount; $j++) {
 				$temp_obj1 = $results[$j];
-				$temp_obj2 = $temp_obj1->getStatus(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
+				$temp_obj2 = $temp_obj1->getEtime(); 				if ($temp_obj2->getPrimaryKey() === $obj2->getPrimaryKey()) {
 					$newObject = false;
-					$temp_obj2->addEvent($obj1);
+					$temp_obj2->addEtimePeople($obj1);
 					break;
 				}
 			}
 
 			if ($newObject) {
-				$obj2->initEvents();
-				$obj2->addEvent($obj1);
+				$obj2->initEtimePeoples();
+				$obj2->addEtimePeople($obj1);
 			}
 
 			$results[] = $obj1;
@@ -667,7 +642,7 @@ abstract class BaseEventPeer {
 	
 	public static function getOMClass()
 	{
-		return EventPeer::CLASS_DEFAULT;
+		return EtimePeoplePeer::CLASS_DEFAULT;
 	}
 
 	
@@ -681,7 +656,7 @@ abstract class BaseEventPeer {
 			$criteria = clone $values; 		} else {
 			$criteria = $values->buildCriteria(); 		}
 
-		$criteria->remove(EventPeer::ID); 
+		$criteria->remove(EtimePeoplePeer::ID); 
 
 				$criteria->setDbName(self::DATABASE_NAME);
 
@@ -708,8 +683,8 @@ abstract class BaseEventPeer {
 
 		if ($values instanceof Criteria) {
 			$criteria = clone $values; 
-			$comparison = $criteria->getComparison(EventPeer::ID);
-			$selectCriteria->add(EventPeer::ID, $criteria->remove(EventPeer::ID), $comparison);
+			$comparison = $criteria->getComparison(EtimePeoplePeer::ID);
+			$selectCriteria->add(EtimePeoplePeer::ID, $criteria->remove(EtimePeoplePeer::ID), $comparison);
 
 		} else { 			$criteria = $values->buildCriteria(); 			$selectCriteria = $values->buildPkeyCriteria(); 		}
 
@@ -726,7 +701,7 @@ abstract class BaseEventPeer {
 		}
 		$affectedRows = 0; 		try {
 									$con->begin();
-			$affectedRows += BasePeer::doDeleteAll(EventPeer::TABLE_NAME, $con);
+			$affectedRows += BasePeer::doDeleteAll(EtimePeoplePeer::TABLE_NAME, $con);
 			$con->commit();
 			return $affectedRows;
 		} catch (PropelException $e) {
@@ -739,16 +714,16 @@ abstract class BaseEventPeer {
 	 public static function doDelete($values, $con = null)
 	 {
 		if ($con === null) {
-			$con = Propel::getConnection(EventPeer::DATABASE_NAME);
+			$con = Propel::getConnection(EtimePeoplePeer::DATABASE_NAME);
 		}
 
 		if ($values instanceof Criteria) {
-			$criteria = clone $values; 		} elseif ($values instanceof Event) {
+			$criteria = clone $values; 		} elseif ($values instanceof EtimePeople) {
 
 			$criteria = $values->buildPkeyCriteria();
 		} else {
 						$criteria = new Criteria(self::DATABASE_NAME);
-			$criteria->add(EventPeer::ID, (array) $values, Criteria::IN);
+			$criteria->add(EtimePeoplePeer::ID, (array) $values, Criteria::IN);
 		}
 
 				$criteria->setDbName(self::DATABASE_NAME);
@@ -767,13 +742,13 @@ abstract class BaseEventPeer {
 	}
 
 	
-	public static function doValidate(Event $obj, $cols = null)
+	public static function doValidate(EtimePeople $obj, $cols = null)
 	{
 		$columns = array();
 
 		if ($cols) {
-			$dbMap = Propel::getDatabaseMap(EventPeer::DATABASE_NAME);
-			$tableMap = $dbMap->getTable(EventPeer::TABLE_NAME);
+			$dbMap = Propel::getDatabaseMap(EtimePeoplePeer::DATABASE_NAME);
+			$tableMap = $dbMap->getTable(EtimePeoplePeer::TABLE_NAME);
 
 			if (! is_array($cols)) {
 				$cols = array($cols);
@@ -789,11 +764,11 @@ abstract class BaseEventPeer {
 
 		}
 
-		$res =  BasePeer::doValidate(EventPeer::DATABASE_NAME, EventPeer::TABLE_NAME, $columns);
+		$res =  BasePeer::doValidate(EtimePeoplePeer::DATABASE_NAME, EtimePeoplePeer::TABLE_NAME, $columns);
     if ($res !== true) {
         $request = sfContext::getInstance()->getRequest();
         foreach ($res as $failed) {
-            $col = EventPeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
+            $col = EtimePeoplePeer::translateFieldname($failed->getColumn(), BasePeer::TYPE_COLNAME, BasePeer::TYPE_PHPNAME);
             $request->setError($col, $failed->getMessage());
         }
     }
@@ -808,12 +783,12 @@ abstract class BaseEventPeer {
 			$con = Propel::getConnection(self::DATABASE_NAME);
 		}
 
-		$criteria = new Criteria(EventPeer::DATABASE_NAME);
+		$criteria = new Criteria(EtimePeoplePeer::DATABASE_NAME);
 
-		$criteria->add(EventPeer::ID, $pk);
+		$criteria->add(EtimePeoplePeer::ID, $pk);
 
 
-		$v = EventPeer::doSelect($criteria, $con);
+		$v = EtimePeoplePeer::doSelect($criteria, $con);
 
 		return !empty($v) > 0 ? $v[0] : null;
 	}
@@ -830,8 +805,8 @@ abstract class BaseEventPeer {
 			$objs = array();
 		} else {
 			$criteria = new Criteria();
-			$criteria->add(EventPeer::ID, $pks, Criteria::IN);
-			$objs = EventPeer::doSelect($criteria, $con);
+			$criteria->add(EtimePeoplePeer::ID, $pks, Criteria::IN);
+			$objs = EtimePeoplePeer::doSelect($criteria, $con);
 		}
 		return $objs;
 	}
@@ -839,11 +814,11 @@ abstract class BaseEventPeer {
 } 
 if (Propel::isInit()) {
 			try {
-		BaseEventPeer::getMapBuilder();
+		BaseEtimePeoplePeer::getMapBuilder();
 	} catch (Exception $e) {
 		Propel::log('Could not initialize Peer: ' . $e->getMessage(), Propel::LOG_ERR);
 	}
 } else {
-			require_once 'lib/model/map/EventMapBuilder.php';
-	Propel::registerMapBuilder('lib.model.map.EventMapBuilder');
+			require_once 'lib/model/map/EtimePeopleMapBuilder.php';
+	Propel::registerMapBuilder('lib.model.map.EtimePeopleMapBuilder');
 }

@@ -10,13 +10,6 @@
 
     <div class="clear_float"></div>
 
-    <label class="label" for="organiser">Organiser</label>
-    <div class="value">
-      <?php echo object_input_tag($event, 'getOrganiser', array ( 'class' => 'long',)) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
     <label class="label" for="description">Description</label>
     <div class="value">
       <?php echo object_textarea_tag($event, 'getDescription', array ( 'size' => '30x3',)) ?>
@@ -63,13 +56,6 @@
     <label class="label" for="media_potential">Media potential</label>
     <div class="value">
       <?php echo object_checkbox_tag($event, 'getMediaPotential', array ()) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
-    <label class="label" for="organiser">Interested parties</label>
-    <div class="value">
-      <?php echo object_input_tag($event, 'getInterestedParties', array ( 'class' => 'long',)) ?>
     </div>
 
     <div class="clear_float"></div>

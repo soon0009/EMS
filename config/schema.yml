@@ -13,8 +13,6 @@ propel:
     description:        { type: longvarchar }
     notes:              { type: longvarchar }
     image_url:          { type: varchar(255) }
-    organiser:          { type: longvarchar }
-    interested_parties: { type: longvarchar }
     updated_at:         ~
     _uniques: { unique_slug: [slug] }
 
@@ -27,6 +25,20 @@ propel:
     _attributes: { phpName: Category, idMethod: native }
     id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
     name:        { type: varchar(32) }
+
+  event_people:
+    _attributes:    { phpName: EventPeople, idMethod: native }
+    id:             { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    event_id:       { type: integer, foreignTable: event, foreignReference: id, required: true, onDelete: cascade }
+    name:           { type: varchar(100) }
+    email:          { type: varchar(100) }
+    phone:          { type: varchar(100) }
+    person_type_id: { type: integer, foreignTable: person_type, foreignReference: id }
+
+  person_type:
+    _attributes: { phpName: PersonType, idMethod: native }
+    id:          { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    name:        { type: varchar(100) }
 
   etime: 
     _attributes:          { phpName: Etime, idMethod: native }
@@ -43,9 +55,16 @@ propel:
     additional_guests:    { type: integer, required: true, default: 0 }
     has_fee:              { type: boolean, required: true, default: false }
     audio_visual_support: { type: boolean, required: true, default: false }
-    organiser:            { type: longvarchar }
-    interested_parties:   { type: longvarchar }
     updated_at:           ~
+
+  etime_people:
+    _attributes:    { phpName: EtimePeople, idMethod: native }
+    id:             { type: integer, required: true, primaryKey: true, autoIncrement: true }
+    etime_id:       { type: integer, foreignTable: etime, foreignReference: id, required: true, onDelete: cascade }
+    name:           { type: varchar(100) }
+    email:          { type: varchar(100) }
+    phone:          { type: varchar(100) }
+    person_type_id: { type: integer, foreignTable: person_type, foreignReference: id }
 
   audience:
     _attributes: { phpName: Audience, idMethod: native }

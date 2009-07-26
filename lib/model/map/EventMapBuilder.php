@@ -54,10 +54,6 @@ class EventMapBuilder {
 
 		$tMap->addColumn('IMAGE_URL', 'ImageUrl', 'string', CreoleTypes::VARCHAR, false, 255);
 
-		$tMap->addColumn('ORGANISER', 'Organiser', 'string', CreoleTypes::LONGVARCHAR, false, null);
-
-		$tMap->addColumn('INTERESTED_PARTIES', 'InterestedParties', 'string', CreoleTypes::LONGVARCHAR, false, null);
-
 		$tMap->addColumn('UPDATED_AT', 'UpdatedAt', 'int', CreoleTypes::TIMESTAMP, false, null);
 
 	} 

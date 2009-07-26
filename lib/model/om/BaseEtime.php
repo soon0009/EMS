@@ -61,18 +61,16 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 
 	
-	protected $organiser;
-
-
-	
-	protected $interested_parties;
-
-
-	
 	protected $updated_at;
 
 	
 	protected $aEvent;
+
+	
+	protected $collEtimePeoples;
+
+	
+	protected $lastEtimePeopleCriteria = null;
 
 	
 	protected $collEtimeAudiences;
@@ -223,20 +221,6 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 	{
 
 		return $this->audio_visual_support;
-	}
-
-	
-	public function getOrganiser()
-	{
-
-		return $this->organiser;
-	}
-
-	
-	public function getInterestedParties()
-	{
-
-		return $this->interested_parties;
 	}
 
 	
@@ -458,38 +442,6 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 	} 
 	
-	public function setOrganiser($v)
-	{
-
-		
-		
-		if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->organiser !== $v) {
-			$this->organiser = $v;
-			$this->modifiedColumns[] = EtimePeer::ORGANISER;
-		}
-
-	} 
-	
-	public function setInterestedParties($v)
-	{
-
-		
-		
-		if ($v !== null && !is_string($v)) {
-			$v = (string) $v; 
-		}
-
-		if ($this->interested_parties !== $v) {
-			$this->interested_parties = $v;
-			$this->modifiedColumns[] = EtimePeer::INTERESTED_PARTIES;
-		}
-
-	} 
-	
 	public function setUpdatedAt($v)
 	{
 
@@ -537,17 +489,13 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 			$this->audio_visual_support = $rs->getBoolean($startcol + 12);
 
-			$this->organiser = $rs->getString($startcol + 13);
-
-			$this->interested_parties = $rs->getString($startcol + 14);
-
-			$this->updated_at = $rs->getTimestamp($startcol + 15, null);
+			$this->updated_at = $rs->getTimestamp($startcol + 13, null);
 
 			$this->resetModified();
 
 			$this->setNew(false);
 
-						return $startcol + 16; 
+						return $startcol + 14; 
 		} catch (Exception $e) {
 			throw new PropelException("Error populating Etime object", $e);
 		}
@@ -629,6 +577,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				}
 				$this->resetModified(); 			}
 
+			if ($this->collEtimePeoples !== null) {
+				foreach($this->collEtimePeoples as $referrerFK) {
+					if (!$referrerFK->isDeleted()) {
+						$affectedRows += $referrerFK->save($con);
+					}
+				}
+			}
+
 			if ($this->collEtimeAudiences !== null) {
 				foreach($this->collEtimeAudiences as $referrerFK) {
 					if (!$referrerFK->isDeleted()) {
@@ -709,6 +665,14 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				$failureMap = array_merge($failureMap, $retval);
 			}
 
+
+				if ($this->collEtimePeoples !== null) {
+					foreach($this->collEtimePeoples as $referrerFK) {
+						if (!$referrerFK->validate($columns)) {
+							$failureMap = array_merge($failureMap, $referrerFK->getValidationFailures());
+						}
+					}
+				}
 
 				if ($this->collEtimeAudiences !== null) {
 					foreach($this->collEtimeAudiences as $referrerFK) {
@@ -800,12 +764,6 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				return $this->getAudioVisualSupport();
 				break;
 			case 13:
-				return $this->getOrganiser();
-				break;
-			case 14:
-				return $this->getInterestedParties();
-				break;
-			case 15:
 				return $this->getUpdatedAt();
 				break;
 			default:
@@ -831,9 +789,7 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 			$keys[10] => $this->getAdditionalGuests(),
 			$keys[11] => $this->getHasFee(),
 			$keys[12] => $this->getAudioVisualSupport(),
-			$keys[13] => $this->getOrganiser(),
-			$keys[14] => $this->getInterestedParties(),
-			$keys[15] => $this->getUpdatedAt(),
+			$keys[13] => $this->getUpdatedAt(),
 		);
 		return $result;
 	}
@@ -889,12 +845,6 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 				$this->setAudioVisualSupport($value);
 				break;
 			case 13:
-				$this->setOrganiser($value);
-				break;
-			case 14:
-				$this->setInterestedParties($value);
-				break;
-			case 15:
 				$this->setUpdatedAt($value);
 				break;
 		} 	}
@@ -917,9 +867,7 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if (array_key_exists($keys[10], $arr)) $this->setAdditionalGuests($arr[$keys[10]]);
 		if (array_key_exists($keys[11], $arr)) $this->setHasFee($arr[$keys[11]]);
 		if (array_key_exists($keys[12], $arr)) $this->setAudioVisualSupport($arr[$keys[12]]);
-		if (array_key_exists($keys[13], $arr)) $this->setOrganiser($arr[$keys[13]]);
-		if (array_key_exists($keys[14], $arr)) $this->setInterestedParties($arr[$keys[14]]);
-		if (array_key_exists($keys[15], $arr)) $this->setUpdatedAt($arr[$keys[15]]);
+		if (array_key_exists($keys[13], $arr)) $this->setUpdatedAt($arr[$keys[13]]);
 	}
 
 	
@@ -940,8 +888,6 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 		if ($this->isColumnModified(EtimePeer::ADDITIONAL_GUESTS)) $criteria->add(EtimePeer::ADDITIONAL_GUESTS, $this->additional_guests);
 		if ($this->isColumnModified(EtimePeer::HAS_FEE)) $criteria->add(EtimePeer::HAS_FEE, $this->has_fee);
 		if ($this->isColumnModified(EtimePeer::AUDIO_VISUAL_SUPPORT)) $criteria->add(EtimePeer::AUDIO_VISUAL_SUPPORT, $this->audio_visual_support);
-		if ($this->isColumnModified(EtimePeer::ORGANISER)) $criteria->add(EtimePeer::ORGANISER, $this->organiser);
-		if ($this->isColumnModified(EtimePeer::INTERESTED_PARTIES)) $criteria->add(EtimePeer::INTERESTED_PARTIES, $this->interested_parties);
 		if ($this->isColumnModified(EtimePeer::UPDATED_AT)) $criteria->add(EtimePeer::UPDATED_AT, $this->updated_at);
 
 		return $criteria;
@@ -997,15 +943,15 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 
 		$copyObj->setAudioVisualSupport($this->audio_visual_support);
 
-		$copyObj->setOrganiser($this->organiser);
-
-		$copyObj->setInterestedParties($this->interested_parties);
-
 		$copyObj->setUpdatedAt($this->updated_at);
 
 
 		if ($deepCopy) {
 									$copyObj->setNew(false);
+
+			foreach($this->getEtimePeoples() as $relObj) {
+				$copyObj->addEtimePeople($relObj->copy($deepCopy));
+			}
 
 			foreach($this->getEtimeAudiences() as $relObj) {
 				$copyObj->addEtimeAudience($relObj->copy($deepCopy));
@@ -1075,6 +1021,111 @@ abstract class BaseEtime extends BaseObject  implements Persistent {
 			
 		}
 		return $this->aEvent;
+	}
+
+	
+	public function initEtimePeoples()
+	{
+		if ($this->collEtimePeoples === null) {
+			$this->collEtimePeoples = array();
+		}
+	}
+
+	
+	public function getEtimePeoples($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimePeoplePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEtimePeoples === null) {
+			if ($this->isNew()) {
+			   $this->collEtimePeoples = array();
+			} else {
+
+				$criteria->add(EtimePeoplePeer::ETIME_ID, $this->getId());
+
+				EtimePeoplePeer::addSelectColumns($criteria);
+				$this->collEtimePeoples = EtimePeoplePeer::doSelect($criteria, $con);
+			}
+		} else {
+						if (!$this->isNew()) {
+												
+
+				$criteria->add(EtimePeoplePeer::ETIME_ID, $this->getId());
+
+				EtimePeoplePeer::addSelectColumns($criteria);
+				if (!isset($this->lastEtimePeopleCriteria) || !$this->lastEtimePeopleCriteria->equals($criteria)) {
+					$this->collEtimePeoples = EtimePeoplePeer::doSelect($criteria, $con);
+				}
+			}
+		}
+		$this->lastEtimePeopleCriteria = $criteria;
+		return $this->collEtimePeoples;
+	}
+
+	
+	public function countEtimePeoples($criteria = null, $distinct = false, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimePeoplePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		$criteria->add(EtimePeoplePeer::ETIME_ID, $this->getId());
+
+		return EtimePeoplePeer::doCount($criteria, $distinct, $con);
+	}
+
+	
+	public function addEtimePeople(EtimePeople $l)
+	{
+		$this->collEtimePeoples[] = $l;
+		$l->setEtime($this);
+	}
+
+
+	
+	public function getEtimePeoplesJoinPersonType($criteria = null, $con = null)
+	{
+				include_once 'lib/model/om/BaseEtimePeoplePeer.php';
+		if ($criteria === null) {
+			$criteria = new Criteria();
+		}
+		elseif ($criteria instanceof Criteria)
+		{
+			$criteria = clone $criteria;
+		}
+
+		if ($this->collEtimePeoples === null) {
+			if ($this->isNew()) {
+				$this->collEtimePeoples = array();
+			} else {
+
+				$criteria->add(EtimePeoplePeer::ETIME_ID, $this->getId());
+
+				$this->collEtimePeoples = EtimePeoplePeer::doSelectJoinPersonType($criteria, $con);
+			}
+		} else {
+									
+			$criteria->add(EtimePeoplePeer::ETIME_ID, $this->getId());
+
+			if (!isset($this->lastEtimePeopleCriteria) || !$this->lastEtimePeopleCriteria->equals($criteria)) {
+				$this->collEtimePeoples = EtimePeoplePeer::doSelectJoinPersonType($criteria, $con);
+			}
+		}
+		$this->lastEtimePeopleCriteria = $criteria;
+
+		return $this->collEtimePeoples;
 	}
 
 	

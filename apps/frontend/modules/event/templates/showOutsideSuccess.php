@@ -21,7 +21,7 @@
           <div class="yui-u first">
             <p><?php print $event->getDescription(); ?></p>
             <div class="label">Organiser:</div>
-            <div class="value"><?php print $event->getOrganiser(); ?></div>
+            <div class="value"><?php print $event->getEventPeoples(); ?></div>
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">

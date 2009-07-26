@@ -55,7 +55,7 @@ class feedActions extends sfActions
       $item = new sfFeedItem();
       $item->setTitle($etime->getEvent()->getTitle().' - '.$etime->getTitle());
       $item->setLink('@show_outside_event?slug='.$etime->getEvent()->getSlug());
-      $item->setAuthorName($etime->getOrganiser());
+      $item->setAuthorName($etime->getEtimePeoples());
       $item->setPubdate($etime->getStartDate('U'));
       $item->setUniqueId($etime->getId());
       if ($etime->getDescription()) {

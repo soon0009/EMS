@@ -117,18 +117,4 @@
 
     <div class="clear_float"></div>
 
-    <label class="label" for="organiser">Organiser</label>
-    <div class="value">
-      <?php echo object_input_tag($etime, 'getOrganiser', array ( 'id' => 'etime_organiser', 'name' => 'etime_organiser', 'class' => 'long',)) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
-    <label class="label" for="interested_parties">Interested parties</label>
-    <div class="value">
-      <?php echo object_input_tag($etime, 'getInterestedParties', array ( 'id' => 'etime_interested_parties', 'name' => 'etime_interested_parties', 'class' => 'long',)) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
   </div>

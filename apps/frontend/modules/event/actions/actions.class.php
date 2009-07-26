@@ -75,8 +75,8 @@ class eventActions extends sfActions
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));
       $event->setImageUrl($this->getRequestParameter('image_url'));
-      $event->setOrganiser($this->getRequestParameter('organiser'));
-      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
+//      $event->setOrganiser($this->getRequestParameter('organiser'));
+//      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
   
       $event->save();
 
@@ -94,8 +94,8 @@ class eventActions extends sfActions
       $etime->setAdditionalGuests($this->getRequestParameter('additional_guests')? $this->getRequestParameter('additional_guests') : 0);
       $etime->setHasFee($this->getRequestParameter('has_fee') ? $this->getRequestParameter('has_fee') : false);
       $etime->setAudioVisualSupport($this->getRequestParameter('audio_visual_support') ? $this->getRequestParameter('audio_visual_support') : false);
-      $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
-      $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
+//      $etime->setOrganiser($this->getRequestParameter('etime_organiser'));
+//      $etime->setInterestedParties($this->getRequestParameter('etime_interested_parties'));
 
       $etime->save();
 
@@ -185,8 +185,8 @@ class eventActions extends sfActions
       $event->setDescription($this->getRequestParameter('description'));
       $event->setNotes($this->getRequestParameter('notes'));
       $event->setImageUrl($this->getRequestParameter('image_url'));
-      $event->setOrganiser($this->getRequestParameter('organiser'));
-      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
+//      $event->setOrganiser($this->getRequestParameter('organiser'));
+//      $event->setInterestedParties($this->getRequestParameter('interested_parties'));
   
       $event->save();
 
