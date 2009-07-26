@@ -12,7 +12,7 @@ function link_to_publish($event) {
   return link_to_remote($publish, array(
     'url'      => 'event/publish?id='.$event->getId(),
     'update'   => array('success' => 'publish'),
-    'loading'  => "Element.show('indicator')",
-    'complete' => "Element.hide('indicator');".visual_effect('highlight', 'publish_button'),
+    'loading'  => "Element.show('published_indicator')",
+    'complete' => "Element.hide('published_indicator');".visual_effect('highlight', 'publish_button'),
   ));
 }
