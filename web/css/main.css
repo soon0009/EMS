@@ -194,6 +194,18 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 {
   color: #f33;
 }
+.form-row
+{
+  clear: both;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.form-row .content
+{
+  padding-left: 9em;
+}
+
 #publish {
   width: 50%;
   float: left;
@@ -210,7 +222,4 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 }
 #publish_button {
   width: auto;
-}
-.person_item table {
-  margin-top: 0;
 }

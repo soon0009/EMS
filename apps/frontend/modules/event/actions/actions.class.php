@@ -19,6 +19,43 @@ class eventActions extends sfActions
     return $this->forward('event', 'list');
   }
 
+  public function executeAddPerson() {
+    $this->forward404Unless($this->type = $this->getRequestParameter('type'));
+    $this->forward404Unless($this->event_id = $this->getRequestParameter('event_id'));
+    if ($this->getRequest()->getMethod() == sfRequest::POST) {
+      $c = new Criteria();
+      $c->setIgnoreCase(true);
+      $c->add(PersonTypePeer::NAME, $this->getRequestParameter('type'));
+      $person_type = PersonTypePeer::doSelectOne($c);
+      $this->forward404Unless($person_type);
+
+      $event_person = new EventPeople();
+      $event_person->setEventId($this->getRequestParameter('event_id'));
+      $event_person->setName($this->getRequestParameter('person_name'));
+      $event_person->setEmail($this->getRequestParameter('email'));
+      $event_person->setPhone($this->getRequestParameter('phone'));
+      $event_person->setPersonTypeId($person_type->getId());
+
+      $event_person->save();
+
+      $event = EventPeer::retrieveByPk($this->getRequestParameter('event_id'));
+      return $this->redirect($this->getRequestParameter('referer', '@homepage'));
+ 
+    }
+
+    $this->getRequest()->getParameterHolder()->set('referer', $this->getRequest()->getReferer());
+    return sfView::SUCCESS;
+
+  }
+
+  public function handleErrorAddPerson() {
+    $this->forward404Unless($this->type = $this->getRequestParameter('type'));
+    $this->forward404Unless($this->event_id = $this->getRequestParameter('event_id'));
+    $event = EventPeer::retrieveByPk($this->getRequestParameter('event_id'));
+    $this->getRequest()->getParameterHolder()->set('slug', $event->getSlug());
+    return $this->forward('event', 'show');
+  }
+
   public function executePublish() {
     $this->event = EventPeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($this->event);

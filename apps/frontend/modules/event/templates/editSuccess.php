@@ -1,4 +1,4 @@
-<?php use_helper('Object', 'ObjectAdmin', 'Validation', 'People') ?>
+<?php use_helper('Object', 'ObjectAdmin', 'Validation') ?>
 
 <?php echo form_tag('event/edit', array(
   'multipart' => true,

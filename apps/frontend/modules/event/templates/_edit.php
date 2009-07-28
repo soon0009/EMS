@@ -9,12 +9,6 @@
     </div>
     <div class="clear_float"></div>
 
-    <label class="label">Organisers</label>
-    <div class="value">
-      <?php echo people_tag($event, 'getEventPeoples', 'Organiser') ?>
-    </div>
-    <div class="clear_float"></div>
-
     <label class="label" for="description">Description</label>
     <div class="value">
       <?php echo object_textarea_tag($event, 'getDescription', array ( 'size' => '30x3',)) ?>

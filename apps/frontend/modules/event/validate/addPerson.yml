@@ -1,0 +1,12 @@
+fields:
+  person_name:
+    required:
+      msg: Required
+  email:
+    required: 
+      msg: Required
+    sfEmailValidator:
+      email_error: The email is invalid
+
+fillin:
+  enabled: true
