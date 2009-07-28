@@ -211,3 +211,6 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 #publish_button {
   width: auto;
 }
+.person_item table {
+  margin-top: 0;
+}

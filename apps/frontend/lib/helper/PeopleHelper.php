@@ -2,10 +2,14 @@
 use_helper('Javascript');
 
 function person_item($type, $name="", $email="", $phone="") {
-  $tag = "<li>\n";
-  $tag .= "Name: <input type='text' name='event[$type][name][]' value='$name' />";
-  $tag .= "<br>Email: <input type='text' name='event[$type][email][]' value='$email' />";
-  $tag .= "<br>Phone: <input type='text' name='event[$type][phone][]' value='$phone' />";
+  $id = "person_item_".myTools::randString();
+  $tag = "<li id='$id' class='person_item'>\n";
+  $tag .= "<table>";
+  $tag .= "<tr><td colspan='2'>".link_to_function("Remove this $type", "alert('clicked remove $id')")."</td></tr>";
+  $tag .= "<tr><td>Name:</td><td><input type='text' name='event[$type][name][]' value='$name' /></td></tr>";
+  $tag .= "<tr><td>Email:</td><td><input type='text' name='event[$type][email][]' value='$email' /></td></tr>";
+  $tag .= "<tr><td>Phone:</td><td><input type='text' name='event[$type][phone][]' value='$phone' /></td></tr>";
+  $tag .= "</table>";
   $tag .= "</li>\n";
   return $tag;
 }
