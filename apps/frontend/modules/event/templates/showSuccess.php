@@ -67,14 +67,9 @@
             <div> <?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?> </div>
             <div> 
               <div>
-                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'add_organiser', array('duration' => 0.5))); ?>
+                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'add_person_type', array('duration' => 0.5))); ?>
               </div>
-              <?php echo form_tag('event/addPerson') ?>
-              <?php use_helper('Validation'); ?>
-                <div id="add_organiser" <?php if (!form_has_error('person_name') && !form_has_error('email')) { echo 'style="display:none"'; }?> >
-                  <?php echo include_partial('add_person', array('type' => 'organiser', 'event_id' => $event->getId(), )); ?>
-                </div>
-              </form>
+              <?php echo include_partial('add_person', array('type' => 'organiser', 'event_id' => $event->getId(), )); ?>
             </div>
             <?php if ($event->getRegForms()): ?>
             <?php echo link_to('Registration form', '@show_reg_form?slug='.$event->getSlug()) ?>
