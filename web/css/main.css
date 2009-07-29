@@ -223,9 +223,9 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 #publish_button {
   width: auto;
 }
-#add_person_type {
+.add_person_type {
   margin: 1em 0 1em 0;
 }
-#add_person_type table {
+.add_person_type table {
   margin-top: 0;
 }

@@ -67,9 +67,17 @@
             <div> <?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?> </div>
             <div> 
               <div>
-                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'add_person_type', array('duration' => 0.5))); ?>
+                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'add_person_organiser', array('duration' => 0.5))); ?>
               </div>
               <?php echo include_partial('add_person', array('type' => 'organiser', 'event_id' => $event->getId(), )); ?>
+              <div>
+                <?php echo link_to_function('Add contact', visual_effect('blind_down', 'add_person_contact', array('duration' => 0.5))); ?>
+              </div>
+              <?php echo include_partial('add_person', array('type' => 'contact', 'event_id' => $event->getId(), )); ?>
+              <div>
+                <?php echo link_to_function('Add intersted party', visual_effect('blind_down', 'add_person_interested', array('duration' => 0.5))); ?>
+              </div>
+              <?php echo include_partial('add_person', array('type' => 'interested', 'event_id' => $event->getId(), )); ?>
             </div>
             <?php if ($event->getRegForms()): ?>
             <?php echo link_to('Registration form', '@show_reg_form?slug='.$event->getSlug()) ?>
