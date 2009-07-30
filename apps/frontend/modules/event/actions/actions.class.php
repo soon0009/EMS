@@ -31,8 +31,8 @@ class eventActions extends sfActions
 
       $event_person = new EventPeople();
       $event_person->setEventId($this->getRequestParameter('event_id'));
-      $event_person->setName($this->getRequestParameter('person_name_'.$this->type));
-      $event_person->setEmail($this->getRequestParameter('email_'.$this->type));
+      $event_person->setName($this->getRequestParameter('event_person_name_'.$this->type));
+      $event_person->setEmail($this->getRequestParameter('event_email_'.$this->type));
       $event_person->setPhone($this->getRequestParameter('phone_'.$this->type));
       $event_person->setPersonTypeId($person_type->getId());
 
@@ -60,24 +60,24 @@ class eventActions extends sfActions
     $has_errors  = false;
     $msg         = "Required";
     $type        = $this->getRequestParameter('type');
-    $person_name = $this->getRequestParameter('person_name_'.$type);
-    $email       = $this->getRequestParameter('email_'.$type); 
+    $person_name = $this->getRequestParameter('event_person_name_'.$type);
+    $email       = $this->getRequestParameter('event_email_'.$type); 
 
     $validator = new sfStringValidator();
     $validator->initialize($this->getContext(), array('min'=>1,));
     $email_validator = new sfEmailValidator();
     $email_validator->initialize($this->getContext());
     if (!$validator->execute($person_name, $msg)) {
-      $this->getRequest()->setError('person_name_'.$type, 'Required');
+      $this->getRequest()->setError('event_person_name_'.$type, 'Required');
       $has_errors = true;
     }
     elseif (!$email_validator->execute($email, $msg)) {
-      $this->getRequest()->setError('email_'.$type, 'Invalid email address');
+      $this->getRequest()->setError('event_email_'.$type, 'Invalid email address');
       $has_errors = true;
     }
 
     if (!$validator->execute($email, $msg)) {
-      $this->getRequest()->setError('email_'.$type, 'Required');
+      $this->getRequest()->setError('event_email_'.$type, 'Required');
       $has_errors = true;
     }
 

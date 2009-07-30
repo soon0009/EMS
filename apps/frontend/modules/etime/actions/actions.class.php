@@ -20,6 +20,72 @@ class etimeActions extends sfActions
     $this->forward404Unless($this->etimes);
   }
 
+  public function executeAddPerson() {
+    $this->forward404Unless($this->type = $this->getRequestParameter('type'));
+    $this->forward404Unless($this->etime_id = $this->getRequestParameter('etime_id'));
+    if ($this->getRequest()->getMethod() == sfRequest::POST) {
+      $c = new Criteria();
+      $c->setIgnoreCase(true);
+      $c->add(PersonTypePeer::NAME, '%'.$this->getRequestParameter('type').'%', Criteria::LIKE);
+      $person_type = PersonTypePeer::doSelectOne($c);
+      $this->forward404Unless($person_type);
+
+      $etime_person = new EtimePeople();
+      $etime_person->setEtimeId($this->getRequestParameter('etime_id'));
+      $etime_person->setName($this->getRequestParameter('etime_person_name_'.$this->type));
+      $etime_person->setEmail($this->getRequestParameter('etime_email_'.$this->type));
+      $etime_person->setPhone($this->getRequestParameter('etime_phone_'.$this->type));
+      $etime_person->setPersonTypeId($person_type->getId());
+
+      $etime_person->save();
+
+      return $this->redirect($this->getRequestParameter('referer', '@homepage'));
+ 
+    }
+
+    $this->getRequest()->getParameterHolder()->set('referer', $this->getRequest()->getReferer());
+    return sfView::SUCCESS;
+
+  }
+
+  public function handleErrorAddPerson() {
+    $this->forward404Unless($this->getRequestParameter('type'));
+    $this->forward404Unless($this->getRequestParameter('etime_id'));
+    $etime = EtimePeer::retrieveByPk($this->getRequestParameter('etime_id'));
+    $this->getRequest()->getParameterHolder()->set('slug', $etime->getEvent()->getSlug());
+    return $this->forward('event', 'show');
+  }
+  public function validateAddPerson() {
+    $has_errors  = false;
+    $msg         = "Required";
+    $type        = $this->getRequestParameter('type');
+    $person_name = $this->getRequestParameter('etime_person_name_'.$type);
+    $email       = $this->getRequestParameter('etime_email_'.$type); 
+
+    $validator = new sfStringValidator();
+    $validator->initialize($this->getContext(), array('min'=>1,));
+    $email_validator = new sfEmailValidator();
+    $email_validator->initialize($this->getContext());
+    if (!$validator->execute($person_name, $msg)) {
+      $this->getRequest()->setError('etime_person_name_'.$type, 'Required');
+      $has_errors = true;
+    }
+    elseif (!$email_validator->execute($email, $msg)) {
+      $this->getRequest()->setError('etime_email_'.$type, 'Invalid email address');
+      $has_errors = true;
+    }
+
+    if (!$validator->execute($email, $msg)) {
+      $this->getRequest()->setError('etime_email_'.$type, 'Required');
+      $has_errors = true;
+    }
+
+    if ($has_errors) {
+      return false;
+    }
+    return true;
+  }
+
   public function executeCreate()
   {
     $this->forward404Unless($this->getRequestParameter('event_id'));

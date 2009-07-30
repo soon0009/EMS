@@ -42,6 +42,7 @@
             <div class="value">
               <?php echo list_people($event, 'getEventPeoples', 'contact'); ?>
             </div>
+            <div class="clear_float"></div>
             <div class="label">Interested parties:</div>
             <div class="value">
               <?php echo list_people($event, 'getEventPeoples', 'interested party'); ?>
@@ -67,17 +68,17 @@
             <div> <?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?> </div>
             <div> 
               <div>
-                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'add_person_organiser', array('duration' => 0.5))); ?>
+                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'event_add_person_organiser', array('duration' => 0.5))); ?>
               </div>
-              <?php echo include_partial('add_person', array('type' => 'organiser', 'event_id' => $event->getId(), )); ?>
+              <?php echo include_partial('add_person', array('etime_id' => null, 'obj_type' => 'event', 'type' => 'organiser', 'event_id' => $event->getId(), )); ?>
               <div>
-                <?php echo link_to_function('Add contact', visual_effect('blind_down', 'add_person_contact', array('duration' => 0.5))); ?>
+                <?php echo link_to_function('Add contact', visual_effect('blind_down', 'event_add_person_contact', array('duration' => 0.5))); ?>
               </div>
-              <?php echo include_partial('add_person', array('type' => 'contact', 'event_id' => $event->getId(), )); ?>
+              <?php echo include_partial('add_person', array('etime_id' => null, 'obj_type' => 'event', 'type' => 'contact', 'event_id' => $event->getId(), )); ?>
               <div>
-                <?php echo link_to_function('Add intersted party', visual_effect('blind_down', 'add_person_interested', array('duration' => 0.5))); ?>
+                <?php echo link_to_function('Add intersted party', visual_effect('blind_down', 'event_add_person_interested', array('duration' => 0.5))); ?>
               </div>
-              <?php echo include_partial('add_person', array('type' => 'interested', 'event_id' => $event->getId(), )); ?>
+              <?php echo include_partial('add_person', array('etime_id' => null, 'obj_type' => 'event', 'type' => 'interested', 'event_id' => $event->getId(), )); ?>
             </div>
             <?php if ($event->getRegForms()): ?>
             <?php echo link_to('Registration form', '@show_reg_form?slug='.$event->getSlug()) ?>
@@ -88,7 +89,7 @@
         </div> <!-- end yui-g -->
       </div>
       <div id="when">
-        <h3 id="times_heading" class="light_border_bottom">Times</h3>
+        <h3 id="times_heading" class="light_border_bottom">Sessions</h3>
         <?php foreach ($event->getEtimes() as $etime): ?>
         <h4><?php print $etime->getTitle(); ?></h4>
         <div class="yui-gc when_item">
@@ -99,6 +100,20 @@
             <?php if ($event->getRegForms()): ?>
               <?php echo link_to('Guest list', '@list_guests?etime_id='.$etime->getId()) ?>
             <?php endif; ?>
+            <div> 
+              <div>
+                <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'etime_add_person_organiser', array('duration' => 0.5))); ?>
+              </div>
+              <?php echo include_partial('add_person', array('etime_id' => $etime->getId(), 'obj_type' => 'etime', 'type' => 'organiser', 'event_id' => $event->getId(), )); ?>
+              <div>
+                <?php echo link_to_function('Add contact', visual_effect('blind_down', 'etime_add_person_contact', array('duration' => 0.5))); ?>
+              </div>
+              <?php echo include_partial('add_person', array('etime_id' => $etime->getId(), 'obj_type' => 'etime', 'type' => 'contact', 'event_id' => $event->getId(), )); ?>
+              <div>
+                <?php echo link_to_function('Add intersted party', visual_effect('blind_down', 'etime_add_person_interested', array('duration' => 0.5))); ?>
+              </div>
+              <?php echo include_partial('add_person', array('etime_id' => $etime->getId(), 'obj_type' => 'etime', 'type' => 'interested', 'event_id' => $event->getId(), )); ?>
+            </div>
           </div> <!-- end yui-u -->
         </div> <!-- end yui-g -->
         <?php endforeach; ?>

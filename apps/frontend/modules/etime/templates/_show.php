@@ -1,4 +1,9 @@
             <div>
+              <div class="label">Organisers:</div>
+              <div class="value">
+                <?php echo list_people($etime, 'getEtimePeoples', 'Organiser'); ?>
+              </div>
+              <div class="clear_float"></div>
               <div class="label">Location:</div>
               <div class="value"><?php print $etime->getLocation(); ?></div>
               <div class="clear_float"></div>
@@ -50,6 +55,16 @@
               <div class="label">Notes:</div>
               <div class="value"><?php print $etime->getNotes(); ?></div>
               <div class="clear_float"></div>
+              <div class="label">Contacts:</div>
+              <div class="value">
+                <?php echo list_people($etime, 'getEtimePeoples', 'contact'); ?>
+              </div>
+              <div class="clear_float"></div>
+              <div class="label">Interested parties:</div>
+              <div class="value">
+                <?php echo list_people($etime, 'getEtimePeoples', 'interested party'); ?>
+              </div>
+              <div class="clear_float"></div>
               <div class="label">Tags:</div>
               <div class="value">
                 <ul>
@@ -59,7 +74,7 @@
                 </ul>
               </div>
               <div class="label"></div>
-              <div class="value update"> <?php echo link_to('Update event time details', '@edit_etime?id='.$etime->getId()) ?> </div>
+              <div class="value update"> <?php echo link_to('Update session details', '@edit_etime?id='.$etime->getId()) ?> </div>
               <div class="clear_float"></div>
             </div>
 
