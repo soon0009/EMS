@@ -65,7 +65,7 @@
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
-            <div> <?php echo link_to('Add sub event', '@add_etime?event_id='.$event->getId()); ?> </div>
+            <div> <?php echo link_to('Add session', '@add_etime?event_id='.$event->getId()); ?> </div>
             <div> 
               <div>
                 <?php echo link_to_function('Add organiser', visual_effect('blind_down', 'event_add_person_organiser', array('duration' => 0.5))); ?>
