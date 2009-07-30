@@ -1,7 +1,7 @@
             <div>
               <div class="label">Organisers:</div>
               <div class="value">
-                <?php echo list_people($etime, 'getEtimePeoples', 'Organiser'); ?>
+                <?php echo list_people($etime, 'getEtimePeoples', 'Organiser', 'etime'); ?>
               </div>
               <div class="clear_float"></div>
               <div class="label">Location:</div>
@@ -57,12 +57,12 @@
               <div class="clear_float"></div>
               <div class="label">Contacts:</div>
               <div class="value">
-                <?php echo list_people($etime, 'getEtimePeoples', 'contact'); ?>
+                <?php echo list_people($etime, 'getEtimePeoples', 'contact', 'etime'); ?>
               </div>
               <div class="clear_float"></div>
               <div class="label">Interested parties:</div>
               <div class="value">
-                <?php echo list_people($etime, 'getEtimePeoples', 'interested party'); ?>
+                <?php echo list_people($etime, 'getEtimePeoples', 'interested party', 'etime'); ?>
               </div>
               <div class="clear_float"></div>
               <div class="label">Tags:</div>

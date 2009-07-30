@@ -2,3 +2,5 @@ showOutsideSuccess:
   layout: outside_layout
 publishSuccess:
   has_layout: off
+deletePersonSuccess:
+  has_layout: off

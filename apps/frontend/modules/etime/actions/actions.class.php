@@ -20,6 +20,13 @@ class etimeActions extends sfActions
     $this->forward404Unless($this->etimes);
   }
 
+  public function executeDeletePerson() {
+    $person = EtimePeoplePeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($person);
+
+    $person->delete();
+  }
+
   public function executeAddPerson() {
     $this->forward404Unless($this->type = $this->getRequestParameter('type'));
     $this->forward404Unless($this->etime_id = $this->getRequestParameter('etime_id'));

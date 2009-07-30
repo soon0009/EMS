@@ -16,8 +16,8 @@
         <div class="yui-gc">
           <div class="yui-u first">
             <div class="label">Organisers:</div>
-            <div class="value">
-              <?php echo list_people($event, 'getEventPeoples', 'Organiser'); ?>
+            <div id="event_organiser" class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'organiser', 'event'); ?>
             </div>
             <div class="clear_float"></div>
             <div class="label">Description:</div>
@@ -39,13 +39,13 @@
             <div class="value"><?php print $event->getMediaPotentialString(); ?></div>
             <div class="clear_float"></div>
             <div class="label">Contacts:</div>
-            <div class="value">
-              <?php echo list_people($event, 'getEventPeoples', 'contact'); ?>
+            <div id="event_contact" class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'contact', 'event'); ?>
             </div>
             <div class="clear_float"></div>
             <div class="label">Interested parties:</div>
-            <div class="value">
-              <?php echo list_people($event, 'getEventPeoples', 'interested party'); ?>
+            <div id="event_interested-party" class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'interested party', 'event'); ?>
             </div>
             <div class="clear_float"></div>
             <div class="label">Tags:</div>

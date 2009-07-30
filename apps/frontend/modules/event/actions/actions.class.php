@@ -19,6 +19,15 @@ class eventActions extends sfActions
     return $this->forward('event', 'list');
   }
 
+  public function executeDeletePerson() {
+    $person = EventPeoplePeer::retrieveByPk($this->getRequestParameter('id'));
+    $this->forward404Unless($person);
+    $this->event = $person->getEvent();
+    $this->type = strtolower($person->getPersonType());
+
+    $person->delete();
+  }
+
   public function executeAddPerson() {
     $this->forward404Unless($this->type = $this->getRequestParameter('type'));
     $this->forward404Unless($this->event_id = $this->getRequestParameter('event_id'));
