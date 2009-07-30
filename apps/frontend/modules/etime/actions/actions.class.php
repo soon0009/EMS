@@ -23,6 +23,8 @@ class etimeActions extends sfActions
   public function executeDeletePerson() {
     $person = EtimePeoplePeer::retrieveByPk($this->getRequestParameter('id'));
     $this->forward404Unless($person);
+    $this->etime = $person->getEtime();
+    $this->type = strtolower($person->getPersonType());
 
     $person->delete();
   }
