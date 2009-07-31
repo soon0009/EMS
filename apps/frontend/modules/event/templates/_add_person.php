@@ -1,4 +1,4 @@
-<div id="add_person">
+<div class="add_person">
   <?php echo form_tag($obj_type.'/addPerson') ?>
     <?php use_helper('Validation'); ?>
     <div id="<?php echo $obj_type; ?>_add_person_<?php echo $type; ?>" class="add_person_type" <?php if (!form_has_error($obj_type.'_person_name_'.$type) && !form_has_error($obj_type.'_email_'.$type)) { echo 'style="display:none"'; }?> >
