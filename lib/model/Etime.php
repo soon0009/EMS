@@ -60,4 +60,11 @@ class Etime extends BaseEtime
     return $r;
   }
 
+  public function getStartDateDayString() {
+    if ($this->getStartDate()) {
+      return date('D, j M Y', strtotime($this->getStartDate()));
+    }
+    return date('D, j M Y', time());
+  }
+
 }

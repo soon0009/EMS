@@ -31,6 +31,9 @@ textarea {
 input.long {
   width: 25em;
 }
+input.medium {
+  width: 10em;
+}
 input.short {
   width: 6em;
 }

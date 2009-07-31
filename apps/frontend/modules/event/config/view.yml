@@ -2,3 +2,7 @@ showOutsideSuccess:
   layout: outside_layout
 publishSuccess:
   has_layout: off
+createSuccess:
+  javascripts:    ["etime_datetime.js"]
+editSuccess:
+  javascripts:    ["etime_datetime.js"]

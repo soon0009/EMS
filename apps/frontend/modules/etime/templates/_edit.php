@@ -9,9 +9,12 @@
     <div class="clear_float"></div>
 
     <?php echo form_error('start_date'); ?>
-    <label class="label" for="start_date">Start date</label>
+    <label class="label" for="start_date">Data/time</label>
     <div class="value">
-      <?php echo select_datetime_tag('start_date', $etime->getStartDate()) ?>
+      <?php echo object_input_tag($etime, 'getStartDateDayString', array('name'=>'start_date',
+        'id'=>'startdate',
+        'class'=>'medium')
+      ); ?>
     </div>
 
     <div class="clear_float"></div>
