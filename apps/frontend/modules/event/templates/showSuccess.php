@@ -18,6 +18,10 @@
             <div class="label">Organisers:</div>
             <div id="event_organiser" class="value">
               <?php echo list_people($event, 'getEventPeoples', 'organiser', 'event'); ?>
+            </div>
+            <div class="label">
+            </div>
+            <div class="value">
               <div class="add_person_link">
                 <?php echo link_to_function(image_tag('add', array('alt'=>'add')).' Add an organiser', visual_effect('blind_down', 'event_add_person_organiser', array('duration' => 0.5))); ?>
               </div>
@@ -45,6 +49,10 @@
             <div class="label">Contacts:</div>
             <div id="event_contact" class="value">
               <?php echo list_people($event, 'getEventPeoples', 'contact', 'event'); ?>
+            </div>
+            <div class="label">
+            </div>
+            <div class="value">
               <div class="add_person_link">
                 <?php echo link_to_function(image_tag('add', array('alt'=>'add')).' Add a contact', visual_effect('blind_down', 'event_add_person_contact', array('duration' => 0.5))); ?>
               </div>
@@ -54,6 +62,10 @@
             <div class="label">Interested parties:</div>
             <div id="event_interested-party" class="value">
               <?php echo list_people($event, 'getEventPeoples', 'interested party', 'event'); ?>
+            </div>
+            <div class="label">
+            </div>
+            <div class="value">
               <div class="add_person_link">
                 <?php echo link_to_function(image_tag('add', array('alt'=>'add')).' Add an intersted party', visual_effect('blind_down', 'event_add_person_interested', array('duration' => 0.5))); ?>
               </div>
