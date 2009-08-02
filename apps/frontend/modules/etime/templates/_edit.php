@@ -15,6 +15,10 @@
         'id'=>'startdate',
         'class'=>'medium')
       ); ?>
+      <?php echo object_input_tag($etime, 'getStartDateTimeString', array('name'=>'start_date_time',
+        'id'=>'startdatetime',
+        'class'=>'medium')
+      ); ?>
     </div>
 
     <div class="clear_float"></div>
@@ -22,7 +26,14 @@
     <?php echo form_error('end_date'); ?>
     <label class="label" for="end_date">End date</label>
     <div class="value">
-      <?php echo select_datetime_tag('end_date', $etime->getEndDate()) ?>
+      <?php echo object_input_tag($etime, 'getEndDateDayString', array('name'=>'end_date',
+        'id'=>'enddate',
+        'class'=>'medium')
+      ); ?>
+      <?php echo object_input_tag($etime, 'getEndDateTimeString', array('name'=>'end_date_time',
+        'id'=>'enddatetime',
+        'class'=>'medium')
+      ); ?>
     </div>
 
     <div class="clear_float"></div>

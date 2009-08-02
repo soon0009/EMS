@@ -1,6 +1,6 @@
 <div class="long_form">
 <table>
-  <thead>
+  <thead class="blue">
     <th> Required </th>
     <th> Include </th>
     <th> Field </th>

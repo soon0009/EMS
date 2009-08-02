@@ -67,4 +67,25 @@ class Etime extends BaseEtime
     return date('D, j M Y', time());
   }
 
+  public function getStartDateTimeString() {
+    if ($this->getStartDate()) {
+      return date('h:iA', strtotime($this->getStartDate()));
+    }
+    return date('h:iA', time());
+  }
+
+  public function getEndDateDayString() {
+    if ($this->getEndDate()) {
+      return date('D, j M Y', strtotime($this->getEndDate()));
+    }
+    return date('D, j M Y', time());
+  }
+
+  public function getEndDateTimeString() {
+    if ($this->getEndDate()) {
+      return date('h:iA', strtotime($this->getEndDate()));
+    }
+    return date('h:iA', time());
+  }
+
 }

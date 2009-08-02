@@ -127,10 +127,7 @@ ul.header_buttons li {
   margin-left: 0.2em;
 }
 
-table {
-  margin: 1em;
-}
-thead, thead a {
+thead.blue, thead.blue a {
   background-color: #183152;
   color: #FFFFFF;
 }
@@ -213,4 +210,8 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 }
 #publish_button {
   width: auto;
+}
+.ui-datepicker {
+  width: 14em;
+  font-size: 90%
 }

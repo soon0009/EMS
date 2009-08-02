@@ -5,7 +5,7 @@
   <li> <?php echo link_to('add guest', '@add_guest?etime_id='.$etime->getId()); ?> </li>
 </ul>
 <table>
-  <thead>
+  <thead class="blue">
     <?php include_partial('list_th_tabular', array('etime'=>$etime, 'form_fields'=>$form_fields)) ?>
   </thead>
   <tfoot>
