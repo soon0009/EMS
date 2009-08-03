@@ -3,6 +3,5 @@ showOutsideSuccess:
 publishSuccess:
   has_layout: off
 createSuccess:
-  javascripts:    ["etime_datetime.js"]
-editSuccess:
-  javascripts:    ["etime_datetime.js"]
+  stylesheets: [jquery.timeentry]
+  javascripts: ["jquery-ui-1.7.2.custom/jquery.timeentry.package-1.4.5/jquery.timeentry.min.js", "etime_datetime.js"]
