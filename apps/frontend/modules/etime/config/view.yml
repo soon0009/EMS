@@ -1,0 +1,3 @@
+editSuccess:
+  stylesheets: [jquery.timeentry]
+  javascripts: ["jquery-ui-1.7.2.custom/jquery.timeentry.package-1.4.5/jquery.timeentry.min.js", "etime_datetime.js"]

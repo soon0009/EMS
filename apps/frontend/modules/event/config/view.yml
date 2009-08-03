@@ -4,3 +4,6 @@ publishSuccess:
   has_layout: off
 deletePersonSuccess:
   has_layout: off
+createSuccess:
+  stylesheets: [jquery.timeentry]
+  javascripts: ["jquery-ui-1.7.2.custom/jquery.timeentry.package-1.4.5/jquery.timeentry.min.js", "etime_datetime.js"]

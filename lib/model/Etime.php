@@ -33,14 +33,14 @@ class Etime extends BaseEtime
     if ($this->getAllday()) {
       return '';
     }
-    return date('H:i', strtotime($this->getStartDate()));
+    return date('h:iA', strtotime($this->getStartDate()));
   }
 
   public function getEndTime() {
     if ($this->getAllday()) {
       return '';
     }
-    return date('H:i', strtotime($this->getEndDate()));
+    return date('h:iA', strtotime($this->getEndDate()));
   }
 
   public function timeSpan() {
@@ -58,6 +58,34 @@ class Etime extends BaseEtime
       $r .= '"'. $tag->getTag() . '" ';
     }
     return $r;
+  }
+
+  public function getStartDateDayString() {
+    if ($this->getStartDate()) {
+      return date('D, j M Y', strtotime($this->getStartDate()));
+    }
+    return date('D, j M Y', time());
+  }
+
+  public function getStartDateTimeString() {
+    if ($this->getStartDate()) {
+      return date('h:iA', strtotime($this->getStartDate()));
+    }
+    return date('h:iA', time());
+  }
+
+  public function getEndDateDayString() {
+    if ($this->getEndDate()) {
+      return date('D, j M Y', strtotime($this->getEndDate()));
+    }
+    return date('D, j M Y', time());
+  }
+
+  public function getEndDateTimeString() {
+    if ($this->getEndDate()) {
+      return date('h:iA', strtotime($this->getEndDate()));
+    }
+    return date('h:iA', time());
   }
 
 }

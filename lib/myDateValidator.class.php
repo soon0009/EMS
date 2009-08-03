@@ -12,12 +12,18 @@ class myDateValidator extends sfValidator
   }
 
   public function execute(&$value, &$error) {
-    $start_date_param = $this->getParameter('start_date'); 
-
-    $start_date = $this->getContext()->getRequest()->getParameter($start_date_param); 
+    $start_date = $this->getContext()->getRequest()->getParameter($this->getParameter('start_date')); 
+    $start_date_time = $this->getContext()->getRequest()->getParameter($this->getParameter('start_date_time')); 
     $end_date   = $value;
+    $end_date_time = $this->getContext()->getRequest()->getParameter($this->getParameter('end_date_time')); 
+    $all_day = $this->getContext()->getRequest()->getParameter($this->getParameter('all_day')); 
 
-    if (strtotime($start_date['year'].'-'.$start_date['month'].'-'.$start_date['day'].' '.$start_date['hour'].':'.$start_date['minute']) > strtotime($end_date['year'].'-'.$end_date['month'].'-'.$end_date['day'].' '.$end_date['hour'].':'.$end_date['minute'])) {
+    if ($all_day) {
+      $start_date_time = "";
+      $end_date_time = "";
+    }
+
+    if (strtotime($start_date.' '.$start_date_time) > strtotime($end_date.' '.$end_date_time)) {
       $error = $this->getParameter('date_error');
       return false;
     }

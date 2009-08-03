@@ -159,10 +159,8 @@ class eventActions extends sfActions
 
       $etime->setEventId($event->getId());
       $etime->setTitle($this->getRequestParameter('etime_title'));
-      $start_date = $this->getRequestParameter('start_date');
-      $etime->setStartDate($start_date['year'].'-'.$start_date['month'].'-'.$start_date['day'].' '.$start_date['hour'].':'.$start_date['minute']);
-      $end_date = $this->getRequestParameter('end_date');
-      $etime->setEndDate($end_date['year'].'-'.$end_date['month'].'-'.$end_date['day'].' '.$end_date['hour'].':'.$end_date['minute']);
+      $etime->setStartDate(strtotime($this->getRequestParameter('start_date').' '.$this->getRequestParameter('start_date_time')));
+      $etime->setEndDate(strtotime($this->getRequestParameter('end_date').' '.$this->getRequestParameter('end_date_time')));
       $etime->setAllDay($this->getRequestParameter('all_day') ? $this->getRequestParameter('all_day') : false);
       $etime->setLocation($this->getRequestParameter('location'));
       $etime->setDescription($this->getRequestParameter('etime_description'));

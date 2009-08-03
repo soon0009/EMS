@@ -9,9 +9,9 @@ default:
     keywords:     Flinders University, events
     language:     en
 
-  stylesheets:    ["http://www.flinders.edu.au/flinders/app_templates/flinderstemplates/yui/2.6.0/build/reset-fonts-grids/reset-fonts-grids.css", main, dashboard]
+  stylesheets:    ["http://www.flinders.edu.au/flinders/app_templates/flinderstemplates/yui/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css", "overcast/jquery-ui-1.7.2.custom.css", main, dashboard]
 
-  javascripts:    []
+  javascripts:    ["jquery-ui-1.7.2.custom/js/jquery-1.3.2.min.js", "jquery-ui-1.7.2.custom/js/jquery-ui-1.7.2.custom.min.js"]
 
   has_layout:     on
   layout:         layout

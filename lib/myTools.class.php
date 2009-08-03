@@ -28,10 +28,10 @@ class myTools
   }
 
   public static function oneDate($start_date, $finish_date) {
-    if ($start_date == $finish_date) {
-      return format_date($start_date);
+    if (format_date($start_date) == format_date($finish_date)) {
+      return date('D, j M Y', strtotime($start_date));
     }
-    return format_date($start_date)." - ".format_date($finish_date);
+    return date('D, j M Y', strtotime($start_date))." - ".date('D, j M Y', strtotime($finish_date));
   }
 
   public static function randString($l=20, $u=false) {

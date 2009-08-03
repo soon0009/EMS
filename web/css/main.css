@@ -31,6 +31,9 @@ textarea {
 input.long {
   width: 25em;
 }
+input.medium {
+  width: 10em;
+}
 input.short {
   width: 6em;
 }
@@ -124,10 +127,7 @@ ul.header_buttons li {
   margin-left: 0.2em;
 }
 
-table {
-  margin: 1em;
-}
-thead, thead a {
+thead.blue, thead.blue a {
   background-color: #183152;
   color: #FFFFFF;
 }
@@ -228,4 +228,8 @@ background: #F76D0A url(../images/error.png) no-repeat 5px 2px;
 }
 .add_person_type table {
   margin-top: 0;
+}
+.ui-datepicker {
+  width: 14em;
+  font-size: 90%
 }

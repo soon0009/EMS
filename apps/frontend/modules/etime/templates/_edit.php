@@ -9,24 +9,35 @@
     <div class="clear_float"></div>
 
     <?php echo form_error('start_date'); ?>
-    <label class="label" for="start_date">Start date</label>
-    <div class="value">
-      <?php echo select_datetime_tag('start_date', $etime->getStartDate()) ?>
-    </div>
-
-    <div class="clear_float"></div>
-
     <?php echo form_error('end_date'); ?>
-    <label class="label" for="end_date">End date</label>
+    <label class="label" for="start_date">Data/time</label>
     <div class="value">
-      <?php echo select_datetime_tag('end_date', $etime->getEndDate()) ?>
+      <?php echo object_input_tag($etime, 'getStartDateDayString', array('name'=>'start_date',
+        'id'=>'startdate',
+        'class'=>'medium')
+      ); ?>
+      <?php echo object_input_tag($etime, 'getStartDateTimeString', array('name'=>'start_date_time',
+        'id'=>'startdatetime',
+        'class'=>'short')
+      ); ?>
+
+      &nbsp;to&nbsp;
+
+      <?php echo object_input_tag($etime, 'getEndDateTimeString', array('name'=>'end_date_time',
+        'id'=>'enddatetime',
+        'class'=>'short')
+      ); ?>
+      <?php echo object_input_tag($etime, 'getEndDateDayString', array('name'=>'end_date',
+        'id'=>'enddate',
+        'class'=>'medium')
+      ); ?>
     </div>
 
     <div class="clear_float"></div>
 
     <label class="label" for="all_day">All day</label>
     <div class="value">
-      <?php echo object_checkbox_tag($etime, 'getAllDay', array ()) ?>
+      <?php echo object_checkbox_tag($etime, 'getAllDay', array ('id'=>'all_day')) ?>
     </div>
 
     <div class="clear_float"></div>
