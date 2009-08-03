@@ -100,7 +100,7 @@ $.extend(TimeEntry.prototype, {
 		var spinner = (!spinnerImage ? null : 
 			$('<span class="timeEntry_control" style="display: inline-block; ' +
 			'background: url(\'' + spinnerImage + '\') 0 0 no-repeat; ' +
-			'width: ' + spinnerSize[0] + 'px; height: ' + spinnerSize[1] + 'px;' +
+			'height: ' + spinnerSize[1] + 'px;' +
 			($.browser.mozilla && $.browser.version < '1.9' ? // FF 2- (Win)
 			' padding-left: ' + spinnerSize[0] + 'px; padding-bottom: ' +
 			(spinnerSize[1] - 18) + 'px;' : '') + '"></span>'));

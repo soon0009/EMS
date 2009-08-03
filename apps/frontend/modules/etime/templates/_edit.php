@@ -9,6 +9,7 @@
     <div class="clear_float"></div>
 
     <?php echo form_error('start_date'); ?>
+    <?php echo form_error('end_date'); ?>
     <label class="label" for="start_date">Data/time</label>
     <div class="value">
       <?php echo object_input_tag($etime, 'getStartDateDayString', array('name'=>'start_date',
@@ -17,21 +18,17 @@
       ); ?>
       <?php echo object_input_tag($etime, 'getStartDateTimeString', array('name'=>'start_date_time',
         'id'=>'startdatetime',
-        'class'=>'medium')
+        'class'=>'short')
       ); ?>
-    </div>
 
-    <div class="clear_float"></div>
+      &nbsp;to&nbsp;
 
-    <?php echo form_error('end_date'); ?>
-    <label class="label" for="end_date">End date</label>
-    <div class="value">
-      <?php echo object_input_tag($etime, 'getEndDateDayString', array('name'=>'end_date',
-        'id'=>'enddate',
-        'class'=>'medium')
-      ); ?>
       <?php echo object_input_tag($etime, 'getEndDateTimeString', array('name'=>'end_date_time',
         'id'=>'enddatetime',
+        'class'=>'short')
+      ); ?>
+      <?php echo object_input_tag($etime, 'getEndDateDayString', array('name'=>'end_date',
+        'id'=>'enddate',
         'class'=>'medium')
       ); ?>
     </div>

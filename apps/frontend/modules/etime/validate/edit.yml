@@ -10,6 +10,8 @@ validators:
     class: myDateValidator
     param:
       start_date: start_date
+      start_date_time: start_date_time
+      end_date_time: end_date_time
       date_error: Please check your start and end times
   
 fields:
