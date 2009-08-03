@@ -37,7 +37,7 @@
 
     <label class="label" for="all_day">All day</label>
     <div class="value">
-      <?php echo object_checkbox_tag($etime, 'getAllDay', array ()) ?>
+      <?php echo object_checkbox_tag($etime, 'getAllDay', array ('id'=>'all_day')) ?>
     </div>
 
     <div class="clear_float"></div>
