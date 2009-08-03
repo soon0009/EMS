@@ -33,14 +33,14 @@ class Etime extends BaseEtime
     if ($this->getAllday()) {
       return '';
     }
-    return date('H:i', strtotime($this->getStartDate()));
+    return date('h:iA', strtotime($this->getStartDate()));
   }
 
   public function getEndTime() {
     if ($this->getAllday()) {
       return '';
     }
-    return date('H:i', strtotime($this->getEndDate()));
+    return date('h:iA', strtotime($this->getEndDate()));
   }
 
   public function timeSpan() {
