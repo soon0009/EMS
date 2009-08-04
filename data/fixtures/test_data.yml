@@ -59,10 +59,10 @@ Audience:
     name: Other
 
 Rsvp:
-  email:
-    name: Email
   online:
     name: Online
+  email:
+    name: Email
   phone:
     name: Phone
 

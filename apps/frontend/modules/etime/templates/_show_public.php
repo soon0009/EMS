@@ -14,12 +14,17 @@
               <div class="value">
                 <ul>
                 <?php foreach ($etime->getEtimeRsvps() as $rsvp): ?>
-                  <li><?php print $rsvp->getRsvp(); ?></li>
+                  <li><?php print $etime->linkRsvp($rsvp->getRsvp()); ?></li>
                 <?php endforeach; ?>
                 </ul>
               </div>
               <div class="clear_float"></div>
               <div class="label">Fee:</div>
               <div class="value"><?php print $etime->getHasFeeString(); ?></div>
+              <div class="clear_float"></div>
+              <div class="label">Contact(s):</div>
+              <div id="etime_contact" class="value">
+                <?php echo list_people($etime, 'getEtimePeoples', 'contact', 'etime', true); ?>
+              </div>
               <div class="clear_float"></div>
             </div>

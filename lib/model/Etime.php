@@ -87,5 +87,53 @@ class Etime extends BaseEtime
     }
     return date('h:iA', time());
   }
+  public function emailContacts() {
+    $email_contact = "";
+    $etime_people = $this->getEtimePeoplesJoinPersonType();
+    foreach ($etime_people as $person) {
+      if (strtolower($person->getPersonType()->getName()) == "contact" && trim($person->getEmail()) != "") {
+        if ($email_contact == "") {
+          $email_contact = $person->getName()." <a href='mailto:".$person->getEmail()."?subject=RSVP:".$this->getTitle()."'>".$person->getEmail()."</a>";
+        }
+        else {
+          $email_contact .= ", ".$person->getName()." <a href='mailto:".$person->getEmail()."?subject=RSVP: ".$this->getTitle()."'>".$person->getEmail()."</a>";
+        }
+      }
+    }
+    return $email_contact ? "By email - ".$email_contact : false;
+  }
+
+  public function phoneContacts() {
+    $phone_contact = "";
+    $etime_people = $this->getEtimePeoplesJoinPersonType();
+    foreach ($etime_people as $person) {
+      if (strtolower($person->getPersonType()->getName()) == "contact" && trim($person->getPhone()) != "") {
+        if ($phone_contact == "") {
+          $phone_contact = $person->getName()." ".$person->getPhone();
+        }
+        else {
+          $phone_contact .= ", ".$person->getName()." ".$person->getPhone();
+        }
+      }
+    }
+    return $phone_contact ? "By phone - ".$phone_contact : false;
+  }
+
+  public function linkRsvp($rsvp) {
+    switch (strtolower($rsvp)) {
+      case 'email':
+        return $this->emailContacts() ? $this->emailContacts() : $rsvp;
+        break;
+      case 'phone':
+        return $this->phoneContacts() ? $this->phoneContacts() : $rsvp;
+        break;
+      case 'online':
+        return 'Online - '.link_to('Register', '@add_outside_guest?etime_id='.$this->getId());
+        break;
+      default:
+        return $rsvp;
+    }
+    return $rsvp;
+  }
 
 }

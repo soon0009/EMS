@@ -1,5 +1,5 @@
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
-<?php use_helper('Date'); ?>
+<?php use_helper('Date', 'People'); ?>
 <?php if ($sf_flash->has('notice')): ?>
   <div id="sf_admin_container">
     <div class="save-ok">
@@ -20,8 +20,10 @@
         <div class="yui-gc">
           <div class="yui-u first">
             <p><?php print $event->getDescription(); ?></p>
-            <div class="label">Organiser:</div>
-            <div class="value"><?php print $event->getEventPeoples(); ?></div>
+            <div class="label">Contact(s):</div>
+            <div class="value">
+              <?php echo list_people($event, 'getEventPeoples', 'contact', 'event', true); ?>
+            </div>
             <div class="clear_float"></div>
           </div> <!-- end yui-u -->
           <div class="yui-u">
