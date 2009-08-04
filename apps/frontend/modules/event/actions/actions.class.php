@@ -42,7 +42,7 @@ class eventActions extends sfActions
       $event_person->setEventId($this->getRequestParameter('event_id'));
       $event_person->setName($this->getRequestParameter('event_person_name_'.$this->type));
       $event_person->setEmail($this->getRequestParameter('event_email_'.$this->type));
-      $event_person->setPhone($this->getRequestParameter('phone_'.$this->type));
+      $event_person->setPhone($this->getRequestParameter('event_phone_'.$this->type));
       $event_person->setPersonTypeId($person_type->getId());
 
       $event_person->save();
