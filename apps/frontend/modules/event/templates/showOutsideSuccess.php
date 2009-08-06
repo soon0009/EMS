@@ -39,7 +39,7 @@
           <div><?php print link_to_ics_generator("Add to calendar"); ?></div>
           <div class="yui-gc when_item">
             <div class="yui-u first">
-              <?php echo include_partial('etime/show_public', array('etime'=>$etime, 'event'=>$event)); ?>
+              <?php echo include_partial('etime/show_public', array('etime'=>$etime)); ?>
               <?php
                 foreach ($etime->getEtimeRsvps() as $rsvp) {
                   if ($rsvp->getRsvp() == "Online") {

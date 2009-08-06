@@ -1,4 +1,4 @@
-            <p><abbr class="description" title="<?php if (!$etime->getDescription()) print $event->getDescription(); else print $etime->getDescription(); ?>"><?php print $etime->getDescription(); ?></abbr></p>
+            <p><abbr class="description" title="<?php print $etime->getEtimeOrEventDescription();?>"><?php print $etime->getDescription(); ?></abbr></p>
             <div>
               <?php include_partial('etime/show_public_summary', array('etime' => $etime)); ?>
               <div class="label">Audience:</div>

@@ -88,4 +88,8 @@ class Etime extends BaseEtime
     return date('h:iA', time());
   }
 
+  public function getEtimeOrEventDescription() {
+    return $this->getDescription() ? $this->getDescription() : $this->getEvent()->getDescription(); 
+  }
+
 }
