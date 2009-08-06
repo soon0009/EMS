@@ -1,5 +1,5 @@
 <?php use_stylesheet('/sf/sf_admin/css/main') ?>
-<?php use_helper('Date'); ?>
+<?php use_helper('Date', 'Ical'); ?>
 <?php if ($sf_flash->has('notice')): ?>
   <div id="sf_admin_container">
     <div class="save-ok">
@@ -34,21 +34,24 @@
       <div id="when">
         <h3 id="times_heading" class="light_border_bottom">Sessions</h3>
         <?php foreach ($event->getEtimes() as $etime): ?>
-        <h4><?php print $etime->getTitle(); ?></h4>
-        <div class="yui-gc when_item">
-          <div class="yui-u first">
-            <?php echo include_partial('etime/show_public', array('etime'=>$etime)); ?>
-            <?php
-              foreach ($etime->getEtimeRsvps() as $rsvp) {
-                if ($rsvp->getRsvp() == "Online") {
-                  echo link_to('Register for this event', '@add_outside_guest?etime_id='.$etime->getId());
+        <div class="vevent">
+          <h4><abbr class="summary" title="<?php print $event->getTitle()." - ".$etime->getTitle(); ?>"><?php print $etime->getTitle(); ?></abbr></h4>
+          <div><?php print link_to_ics_generator("Add to calendar"); ?></div>
+          <div class="yui-gc when_item">
+            <div class="yui-u first">
+              <?php echo include_partial('etime/show_public', array('etime'=>$etime, 'event'=>$event)); ?>
+              <?php
+                foreach ($etime->getEtimeRsvps() as $rsvp) {
+                  if ($rsvp->getRsvp() == "Online") {
+                    echo link_to('Register for this event', '@add_outside_guest?etime_id='.$etime->getId());
+                  }
                 }
-              }
-            ?>
-          </div> <!-- end yui-u -->
-          <div class="yui-u">
-          </div> <!-- end yui-u -->
-        </div> <!-- end yui-g -->
+              ?>
+            </div> <!-- end yui-u -->
+            <div class="yui-u">
+            </div> <!-- end yui-u -->
+          </div> <!-- end yui-g -->
+        </div>
         <?php endforeach; ?>
       </div>
     </div>
