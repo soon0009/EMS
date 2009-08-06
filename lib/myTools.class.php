@@ -40,4 +40,12 @@ class myTools
     else for ($i = 0, $z = strlen($c)-1, $s = $c{rand(0,$z)}, $i = 1; $i != $l; $x = rand(0,$z), $s .= $c{$x}, $s = ($s{$i} == $s{$i-1} ? substr($s,0,-1) : $s), $i=strlen($s));
     return $s;
   }
+
+  public static function dateIso8601($date, $all_day=false, $end_date=false) {
+    $add_seconds = 0;
+    if ($end_date) {
+      $add_seconds = 24 * 60 * 60;
+    }
+    return $all_day ? date('Ymd', strtotime($date) + $add_seconds) : date('Ymd\TH:i:00', strtotime($date));
+  }
 } 

@@ -136,4 +136,8 @@ class Etime extends BaseEtime
     return $rsvp;
   }
 
+  public function getEtimeOrEventDescription() {
+    return $this->getDescription() ? $this->getDescription() : $this->getEvent()->getDescription(); 
+  }
+
 }
