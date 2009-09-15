@@ -1,4 +1,4 @@
-<?php use_helper('Date','etime'); ?>
+<?php use_helper('Date','Etime'); ?>
 <h1>Event Times</h1>
 
 <div id="dashboard" class="yui-skin-sam">
