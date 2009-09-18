@@ -38,7 +38,7 @@ class Event extends BaseEvent
     $online = false;
     foreach ($this->getEtimes() as $et) {
       foreach ($et->getEtimeRsvps() as $rsvp) {
-        if ($rsvp->getRsvp() == "Online") {
+        if ($rsvp->getRsvp()->getName() == "Online") {
           $online = true;
         } 
       }

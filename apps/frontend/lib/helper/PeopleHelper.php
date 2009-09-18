@@ -6,7 +6,7 @@ function list_people($object, $method, $type, $obj_type, $outside=false) {
   $people = call_user_func(array($object, $method));
   $list .= "<ul>\n";
   foreach ($people as $person) {
-    if (strtolower($person->getPersonType()) == strtolower($type)) {
+    if (strtolower($person->getPersonType()->getName()) == strtolower($type)) {
       $list .= "<li>\n";
       $list .= $person->getName();
       $list .= "&nbsp;".$person->getEmail();
